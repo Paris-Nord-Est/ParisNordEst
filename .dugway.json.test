@@ -1,0 +1,16 @@
+{
+    "store": {
+        "subdomain": "paris-nord-est"
+    },
+    "customization": {
+        "logo": {
+            "url": "http://placehold.it/200x50/000000/ffffff&text=My+Logo",
+            "width": 200,
+            "height": 50
+        },
+        "featured_products": 4,
+        "background_color": "#CCCCCC",
+        "show_search": true,
+        "twitter_username": "bigcartel"
+    }
+}
