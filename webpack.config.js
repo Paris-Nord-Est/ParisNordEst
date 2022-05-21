@@ -21,9 +21,15 @@ module.exports = {
                 },
             },
             {
-                test: /\.css$/i,
+                test: /\.(css|html)$/i,
                 include: path.resolve(__dirname, "src"),
                 use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+            },
+            {
+                test: /\.(woff(2)?|ttf|otf|eot)$/,
+                generator: {
+                    filename: "fonts/[name][ext]",
+                },
             },
         ],
     },
@@ -35,6 +41,7 @@ module.exports = {
     ],
     devServer: {
         static: path.resolve(__dirname, "source/dist"),
+        watchFiles: ["source/**/*"],
         port: 9292,
         open: false,
         hot: true,
