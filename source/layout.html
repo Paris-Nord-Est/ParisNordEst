@@ -44,7 +44,9 @@
             {% if theme.images.header != blank %}
               <img class="store-logo" srcset="{{ theme.images.header.url | constrain: 1068, 200 }}, {{ theme.images.header.url | constrain: 2136, 400 }} 2x" src="{{ theme.images.header.url | constrain: 1068, 200 }}" alt="{{ store.name }} Home">
             {% else %}
-              <div class="store-header">{{ store.name }}</div>
+              <div class="store-header">
+                <img src="https://potherca-blog.github.io/StackOverflow/question.13808020.include-an-svg-hosted-on-github-in-markdown/controllers_brief.svg">
+              </div>
             {% endif %}
           </a>
         </div>
