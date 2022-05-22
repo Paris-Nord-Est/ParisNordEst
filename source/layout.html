@@ -26,7 +26,7 @@
         </button>
       </aside>
     {% endif %}
-    <header>
+    <header class="border-b border-black border-solid">
       <div class="wrapper">
         <nav class="header-nav" role="navigation" aria-label="Main">
           <ul>
@@ -45,7 +45,7 @@
               <img class="store-logo" srcset="{{ theme.images.header.url | constrain: 1068, 200 }}, {{ theme.images.header.url | constrain: 2136, 400 }} 2x" src="{{ theme.images.header.url | constrain: 1068, 200 }}" alt="{{ store.name }} Home">
             {% else %}
               <div class="store-header">
-                <img src="https://potherca-blog.github.io/StackOverflow/question.13808020.include-an-svg-hosted-on-github-in-markdown/controllers_brief.svg">
+                <img src="https://raw.githubusercontent.com/Baldrani/ParisNordEst/main/source/images/logo.svg">
               </div>
             {% endif %}
           </a>
@@ -65,7 +65,7 @@
         </ul>
       </nav>
     </header>
-    <main class="main" id="main">
+    <main class="main bg-white" id="main">
       <div class="fade-in wrapper">
         {% if errors != blank %}
           <ul class="errors {{ page.permalink }}-errors">

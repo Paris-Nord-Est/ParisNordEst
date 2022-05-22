@@ -1,0 +1,1 @@
+(()=>{"use strict";var o={belleville:"https://www.carnets-de-traverse.com/blog/wp-content/uploads/2014/10/Photo24_22A.jpg"};Product.findAll({},(function(e){var l;console.log(o[(l=e,l.toLowercase().replace(" ","_"))]),console.log("I found "+e.length+" products!")}))})();
