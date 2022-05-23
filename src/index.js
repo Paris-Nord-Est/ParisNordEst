@@ -1,5 +1,7 @@
 import "./style.css";
 
+import "./vuemain.js";
+
 const nameToString = string => string.toLowercase().replace(" ", "_");
 
 const productsEnhance = {
