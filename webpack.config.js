@@ -1,5 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = {
     mode: "production",
@@ -10,6 +11,10 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.vue$/,
+                loader: "vue-loader",
+            },
             {
                 test: /\.js$/i,
                 include: path.resolve(__dirname, "src"),
@@ -38,6 +43,7 @@ module.exports = {
             filename: "[name].css",
             chunkFilename: "[id].css",
         }),
+        new VueLoaderPlugin(),
     ],
     devServer: {
         static: path.resolve(__dirname, "source/dist"),

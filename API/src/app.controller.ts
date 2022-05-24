@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getCoucou(): { [key: string]: string } {
+  getHome(): { [key: string]: string } {
     return this.appService.getProductsConf();
   }
 }
