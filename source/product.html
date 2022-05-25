@@ -8,6 +8,9 @@
 		{% assign product_status = 'Coming soon' %}
 {% endcase %}
 <div class="product-page">
+
+  <div id="vue"></div>
+
   <div class="product-page-headings">
     {% if product_status != blank %}<span class="product-status">{{ product_status }}</span>{% endif %}
     <h1 class="product-title has-dash">{{ product.name }}</h1>
@@ -18,9 +21,6 @@
         {{ product.default_price | money: theme.money_format }}
       {% endif %}
     </div>
-  </div>
-
-  <div id="vue">
   </div>
 
   <div class="product-images{% if product.images.size > 1 %} product-images-slideshow{% endif %}">

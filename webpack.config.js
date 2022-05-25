@@ -36,6 +36,12 @@ module.exports = {
                     filename: "fonts/[name][ext]",
                 },
             },
+            {
+                test: /\.(svg)$/,
+                generator: {
+                    filename: "assets/[name][ext]",
+                },
+            },
         ],
     },
     plugins: [

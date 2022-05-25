@@ -1,17 +1,12 @@
 <template>
-    <Test/>
+    <Product/>
 </template>
 <script>
-import Test from "./components/Test.vue";
+import Product from "./components/Product.vue";
 
 export default {
   components: {
-    Test
+    Product
   }
-//   methods: {
-//     toggleModalState() {
-//       this.modalOpen = !this.modalOpen;
-//     }
-//   }
 };
 </script>
