@@ -422,6 +422,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hidden {
   display: none;
 }
+.h-\[100px\] {
+  height: 100px;
+}
 .w-\[200px\] {
   width: 200px;
 }

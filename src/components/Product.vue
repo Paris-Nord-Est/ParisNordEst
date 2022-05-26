@@ -28,6 +28,7 @@ const fetchDataFromContentFull = async () => {
 
 onMounted(() => {
   fetchDataFromContentFull()
+  console.log('Vue mounted in theory')
 });
 </script>
 

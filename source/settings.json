@@ -132,7 +132,7 @@
       "label": "Maximum products per row",
       "type": "select",
       "options": "1..4",
-      "default": 3,
+      "default": 2,
       "description": "The number of products displayed per row"
     },
     {
