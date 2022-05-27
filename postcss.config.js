@@ -1,4 +1,4 @@
 const tailwindcss = require("tailwindcss");
 module.exports = {
-    plugins: [tailwindcss],
+    plugins: [require("tailwindcss/nesting"), tailwindcss],
 };
