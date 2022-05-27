@@ -26,9 +26,9 @@ module.exports = {
                 },
             },
             {
-                test: /\.(css|html)$/i,
+                test: /\.(css|html|scss)$/i,
                 include: path.resolve(__dirname, "src"),
-                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", "postcss-loader"],
             },
             {
                 test: /\.(woff(2)?|ttf|otf|eot)$/,
