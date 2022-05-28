@@ -2,7 +2,7 @@
 <div class="cart-container{% if cart.item_count == 0 %} empty-cart{% endif %}">
   <div class="empty-cart-message">
     <p class="empty-cart-message centered-message">
-      Your cart is empty! Sounds like a good time to <a href="/products" title="Start shopping">start shopping</a>.
+      Votre panier est vide! Cela semble être le bon moment pour <a href="/products" title="Visiter la boutique">visiter la boutique!</a>.
     </p>
   </div>
   {% if cart.items != blank %}
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="cart-item-details-unit-price"></div>
-                <button class="remove-item-button cart-item-remove-text minimal-button" type="button" aria-label="Remove item: {{ item.product.name | escape }}">Remove</button>
+                <button class="remove-item-button cart-item-remove-text minimal-button" type="button" aria-label="Remove item: {{ item.product.name | escape }}">Enlever</button>
               </div>
               <div class="cart-item-quantity-price">
                 <div class="cart-item-quantity-holder" data-item-id="{{ item.id }}">
@@ -47,12 +47,12 @@
         <div class="cart-footer">
           <div class="cart-totals">
             <div class="cart-subtotal cart-total" aria-live="polite" aria-atomic="true">
-              Subtotal <span class="cart-subtotal-amount">{{ cart.total | money: theme.money_format }}</span>
+              Sous-total <span class="cart-subtotal-amount">{{ cart.total | money: theme.money_format }}</span>
             </div>
           </div>
           <div class="cart-footer-buttons">
-            <button type="submit" name="checkout" class="button checkout-btn">Checkout</button>
-            <a class="button continue-shopping minimal-button" href="/products">Continue Shopping</a>
+            <button type="submit" name="checkout" class="button checkout-btn">Passer au paiement</button>
+            <a class="button continue-shopping minimal-button" href="/products">Continuer vos achats</a>
           </div>
         </div>
       </form>

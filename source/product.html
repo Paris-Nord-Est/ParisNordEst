@@ -9,127 +9,131 @@
 {% endcase %}
 <div class="product-page">
 
-  <div id="vue"></div>
-
-  <div class="product-page-headings">
+  <div class="w-full">
     {% if product_status != blank %}<span class="product-status">{{ product_status }}</span>{% endif %}
-    <h1 class="product-title has-dash">{{ product.name }}</h1>
-    <div class="product-price">
-      {% if product.variable_pricing %}
-        {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
-      {% else %}
-        {{ product.default_price | money: theme.money_format }}
+    <h1 class="product-title has-dash text-3xl">{{ product.name }}</h1>
+  </div>
+
+  <div class="w-full flex space-x-8 items-center">    
+    <div class="md:w-8/12">
+      <div class="product-images{% if product.images.size > 1 %} product-images-slideshow{% endif %}">
+        <ul class="slides">
+          {% for image in product.images %}
+            <li>
+              <img alt="{{ product.name | escape }}" class="lazy product-image" src="{{ image | product_image_url | constrain: 100 }}" data-src="{{ image | product_image_url | constrain: 650 }}" data-srcset="{{ image | product_image_url | constrain: 1300 }} 2x, {{ image | product_image_url | constrain: 650 }} 1x">
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-details md:w-4/12">
+      {% if product.description != blank %}
+        <div class="product-description">
+          {{ product.description | paragraphs }}
+        </div>
+      {% endif %}
+  
+      {% if product.status == 'active' %}
+        {% if theme.show_inventory_bars %}
+          <div class="product-inventory">
+            <h2 class="product-inventory-header">Availability</h2>
+            <ul class="inventory-bars">
+              {% for option in product.options %}
+              <li>
+                {% unless product.has_default_option %}<div class="option-name">{{ option.name }}</div>{% endunless %}
+                <div class="inventory-bar">
+                  <span class="inventory-percentage" style="width:{{ option.inventory }}%;"></span>
+                  <span class="inventory-label">{{ option.quantity }} in stock</span>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+  
+        <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
+          <input type="hidden" name="utf8" value='✓'>
+          {% if product.has_default_option %}
+            {{ product.option | hidden_option_input }}
+          {% else %}
+            {% if product.has_option_groups %}
+              <div class="product_option_groups">
+                <input id="option" name="cart[add][id]" type="hidden" value="0">
+                {% for option_group in product.option_groups %}
+                  <div class="select">
+                    <select data-unavailable-text="(Unavailable)" data-sold-text="(Sold out)" data-group-id="{{ option_group.id }}" data-group-name="{{ option_group.name | escape }}" class="product_option_group" name="option_group[{{ option_group.id }}]" aria-label="Select {{ option_group.name | escape }}">
+                      <option value="0" disabled="disabled" selected>Select {{ option_group.name }}</option>
+                      {% for value in option_group.values %}
+                        <option value="{{ value.id }}" data-name="{{ value.name | escape }}">{{ value.name }}</option>
+                      {% endfor %}
+                    </select>
+                    <svg viewBox="0 0 15 7.6" enable-background="new 0 0 15 7.6"><path d="M15 1.1l-7.5 6.5-7.5-6.3 1-1.2 6.5 5.5 6.5-5.6z"/></svg>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="select">
+                <select class="product_option_select" id="option" name="cart[add][id]" aria-label="Select option">
+                  <option value="0" disabled="disabled" selected>Select option</option>
+                  {% for option in product.options %}
+                    <option value="{{ option.id }}" data-price="{{ option.price }}"{% if option.sold_out %} disabled="disabled" disabled-type="sold-out"{% endif %}>{{ option.name }} {% if option.sold_out %} (Sold out){% endif %}</option>
+                  {% endfor %}
+                </select>
+                <svg viewBox="0 0 15 7.6" enable-background="new 0 0 15 7.6"><path d="M15 1.1l-7.5 6.5-7.5-6.3 1-1.2 6.5 5.5 6.5-5.6z"/></svg>
+              </div>
+            {% endif %}
+          {% endif %}
+          <div class="product-price">
+            {% if product.variable_pricing %}
+              {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
+            {% else %}
+              {{ product.default_price | money: theme.money_format }}
+            {% endif %}
+          </div>
+          <button class="button add-to-cart-button text-black bg-white hover:bg-black hover:text-white transition-colors" name="submit" type="submit" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>Add to Cart</button>
+          {{ store | instant_checkout_button: 'dark', '44px' }}
+  
+          {% if product.has_option_groups %}
+            <div class="reset-selection-button-container">
+              <button class="button minimal-button reset-selection-button" title="Reset selection" type="reset">Reset selection</button>
+            </div>
+          {% endif %}
+        </form>
+  
+      {% endif %}
+  
+      {% if theme.show_facebook or theme.show_twitter or theme.show_pinterest %}
+        <ul class="social-buttons">
+          {% if theme.show_facebook %}
+          <li class="social-facebook">
+            <div class="social-title">Share it</div>
+            <div class="social-action">
+              <div class="fb-share-button" data-href="{{ page.full_url }}" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url }}src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+            </div>
+          </li>
+          {% endif %}
+          {% if theme.show_twitter %}
+          <li class="social-twitter">
+            <div class="social-title">Tweet It</div>
+            <div class="social-action">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ page.full_url }}" data-text="Check out {{ product.name }} from {{ store.name }}!">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+          </li>
+          {% endif %}
+          {% if theme.show_pinterest %}
+          <li class="social-pinterest">
+            <div class="social-title">Pin It</div>
+            <div class="social-action">
+              <a href="http://pinterest.com/pin/create/button/?url={{ page.full_url }}&media={{ product.image.url }}&description={% if product.description != blank %}{{ product.description | escape | truncate: 490 }}{% endif %}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It"></a>
+              <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
       {% endif %}
     </div>
   </div>
 
-  <div class="product-images{% if product.images.size > 1 %} product-images-slideshow{% endif %}">
-    <ul class="slides">
-      {% for image in product.images %}
-        <li>
-          <img alt="{{ product.name | escape }}" class="lazy product-image" src="{{ image | product_image_url | constrain: 100 }}" data-src="{{ image | product_image_url | constrain: 650 }}" data-srcset="{{ image | product_image_url | constrain: 1300 }} 2x, {{ image | product_image_url | constrain: 650 }} 1x">
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <div class="product-details">
-    {% if product.description != blank %}
-      <div class="product-description">
-        {{ product.description | paragraphs }}
-      </div>
-    {% endif %}
-
-    {% if product.status == 'active' %}
-      {% if theme.show_inventory_bars %}
-        <div class="product-inventory">
-        	<h2 class="product-inventory-header">Availability</h2>
-        	<ul class="inventory-bars">
-            {% for option in product.options %}
-        		<li>
-        		  {% unless product.has_default_option %}<div class="option-name">{{ option.name }}</div>{% endunless %}
-        			<div class="inventory-bar">
-        			  <span class="inventory-percentage" style="width:{{ option.inventory }}%;"></span>
-                <span class="inventory-label">{{ option.quantity }} in stock</span>
-        			</div>
-        		</li>
-        		{% endfor %}
-        	</ul>
-        </div>
-      {% endif %}
-
-      <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
-        <input type="hidden" name="utf8" value='✓'>
-        {% if product.has_default_option %}
-          {{ product.option | hidden_option_input }}
-        {% else %}
-          {% if product.has_option_groups %}
-            <div class="product_option_groups">
-              <input id="option" name="cart[add][id]" type="hidden" value="0">
-              {% for option_group in product.option_groups %}
-                <div class="select">
-                  <select data-unavailable-text="(Unavailable)" data-sold-text="(Sold out)" data-group-id="{{ option_group.id }}" data-group-name="{{ option_group.name | escape }}" class="product_option_group" name="option_group[{{ option_group.id }}]" aria-label="Select {{ option_group.name | escape }}">
-                    <option value="0" disabled="disabled" selected>Select {{ option_group.name }}</option>
-                    {% for value in option_group.values %}
-                      <option value="{{ value.id }}" data-name="{{ value.name | escape }}">{{ value.name }}</option>
-                    {% endfor %}
-                  </select>
-                  <svg viewBox="0 0 15 7.6" enable-background="new 0 0 15 7.6"><path d="M15 1.1l-7.5 6.5-7.5-6.3 1-1.2 6.5 5.5 6.5-5.6z"/></svg>
-                </div>
-              {% endfor %}
-            </div>
-          {% else %}
-            <div class="select">
-              <select class="product_option_select" id="option" name="cart[add][id]" aria-label="Select option">
-                <option value="0" disabled="disabled" selected>Select option</option>
-                {% for option in product.options %}
-                  <option value="{{ option.id }}" data-price="{{ option.price }}"{% if option.sold_out %} disabled="disabled" disabled-type="sold-out"{% endif %}>{{ option.name }} {% if option.sold_out %} (Sold out){% endif %}</option>
-                {% endfor %}
-              </select>
-              <svg viewBox="0 0 15 7.6" enable-background="new 0 0 15 7.6"><path d="M15 1.1l-7.5 6.5-7.5-6.3 1-1.2 6.5 5.5 6.5-5.6z"/></svg>
-            </div>
-          {% endif %}
-        {% endif %}
-        <button class="button add-to-cart-button" name="submit" type="submit" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>Add to Cart</button>
-        {{ store | instant_checkout_button: 'dark', '44px' }}
-
-        {% if product.has_option_groups %}
-          <div class="reset-selection-button-container">
-            <button class="button minimal-button reset-selection-button" title="Reset selection" type="reset">Reset selection</button>
-          </div>
-        {% endif %}
-      </form>
-
-    {% endif %}
-
-    {% if theme.show_facebook or theme.show_twitter or theme.show_pinterest %}
-      <ul class="social-buttons">
-        {% if theme.show_facebook %}
-        <li class="social-facebook">
-          <div class="social-title">Share it</div>
-          <div class="social-action">
-            <div class="fb-share-button" data-href="{{ page.full_url }}" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url }}src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-          </div>
-        </li>
-        {% endif %}
-        {% if theme.show_twitter %}
-        <li class="social-twitter">
-          <div class="social-title">Tweet It</div>
-          <div class="social-action">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ page.full_url }}" data-text="Check out {{ product.name }} from {{ store.name }}!">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-          </div>
-        </li>
-        {% endif %}
-        {% if theme.show_pinterest %}
-        <li class="social-pinterest">
-          <div class="social-title">Pin It</div>
-          <div class="social-action">
-            <a href="http://pinterest.com/pin/create/button/?url={{ page.full_url }}&media={{ product.image.url }}&description={% if product.description != blank %}{{ product.description | escape | truncate: 490 }}{% endif %}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It"></a>
-            <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
-          </div>
-        </li>
-        {% endif %}
-      </ul>
-    {% endif %}
-  </div>
+  <div id="vue"></div>
 </div>

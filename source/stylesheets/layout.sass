@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5
 a[href], label[for], select, button, .pointer
   cursor: pointer
 
-button, input, textarea, select
+input, textarea, select
   +appearance(none)
   background: none
   border: none
@@ -115,6 +115,17 @@ button, input, textarea, select
   font-family: $primary-font
   letter-spacing: 1px
   padding: 0
+
+button
+  +appearance(none)
+  background: none
+  border: 1px solid #000
+  font-family: $primary-font
+  letter-spacing: 1px
+  padding: 0
+  &:hover
+    background: black
+    color: #fff
 
 header
   text-align: center
@@ -215,12 +226,12 @@ _:-ms-fullscreen, :root .main
 #cart_page, #contact_page, #maintenance_page, #product_page, .custom
   .main
     background-color: $secondary-background-color
-    padding-bottom: $luna-base * 8
-    padding-top: $luna-base * 8
+    // padding-bottom: $luna-base * 8
+    // padding-top: $luna-base * 8
 
-    @media screen and (max-width: $break-small)
-      padding-bottom: $luna-base * 4
-      padding-top: $luna-base * 4
+    // @media screen and (max-width: $break-small)
+    //   padding-bottom: $luna-base * 4
+    //   padding-top: $luna-base * 4
 
 button, a.button
   +transition(color, background-color .1s linear)
@@ -242,20 +253,12 @@ button, a.button
     border: none
     font-size: 14px
 
-    &:not(:disabled):hover, &:not(:disabled):focus
-      background: none !important
-      color: $links-rollover-color
-      text-decoration: underline
-
   &:disabled, &.disabled
     cursor: not-allowed
     opacity: .4
 
   &.no-border
     border: none
-
-  &:not(:disabled):hover, &:not(:disabled):focus
-    background: $button-rollover-color
 
 .select
   border: 2px solid $primary-text-color
