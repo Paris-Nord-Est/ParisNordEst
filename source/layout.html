@@ -26,7 +26,7 @@
         </button>
       </aside>
     {% endif %}
-    <header class="border-b border-black border-solid">
+    <header>
       <div class="wrapper">
         <nav class="header-nav" role="navigation" aria-label="Main">
           <ul>
@@ -175,16 +175,16 @@
         {% endif %}
       {% endif %}
 
-      <aside class="related-products-container wrapper {{ theme.show_overlay }}" role="complementary" aria-label="Related products">
+      <aside class="related-products-container wrapper {{ theme.show_overlay }}" role="complementary" aria-label="Produits liés">
         {% if product_divs != blank %}
           <div class="all-similar-products">{{ product_divs }}</div>
           <div class="similar-products">
             <div class="similar-products-header">
-              <h2 class="similar-products-title">Related products</h2>
+              <h2 class="similar-products-title">Produits liés</h2>
               {% if product.previous_product != blank or product.next_product != blank %}
                 <ul class="prev-next-products">
-                  {% if product.previous_product != blank %}<li>{{ product.previous_product | link_to: "Previous product" }}</li>{% endif %}
-                  {% if product.next_product != blank %}<li>{{ product.next_product | link_to: "Next product" }}</li>{% endif %}
+                  {% if product.previous_product != blank %}<li>{{ product.previous_product | link_to: "Produit précédent" }}</li>{% endif %}
+                  {% if product.next_product != blank %}<li>{{ product.next_product | link_to: "Produit suivant" }}</li>{% endif %}
                 </ul>
               {% endif %}
             </div>
@@ -209,7 +209,7 @@
               <li>{{ page | link_to }}</li>
             {% endfor %}
             <li><a href="/contact">Contact</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="/cart">Panier</a></li>
             {% if theme.show_search %}
               <li>
                 <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">

@@ -36,6 +36,17 @@ const loadImage = () => {
 
 onMounted(() => {
   fetchDataFromContentFull();
+
+  // Triger slideshow in desktop too
+  if ($(".product-images-slideshow").length) {
+    $(".product-images-slideshow").addClass("flexslider");
+    $(".product-images-slideshow").flexslider({
+      animation: "slide",
+      animationLoop: false,
+      controlsContainer: "canvas",
+      directionNav: false,
+    });
+  }
 });
 </script>
 

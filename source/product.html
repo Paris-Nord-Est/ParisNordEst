@@ -91,7 +91,7 @@
               {{ product.default_price | money: theme.money_format }}
             {% endif %}
           </div>
-          <button class="button add-to-cart-button text-black bg-white hover:bg-black hover:text-white transition-colors" name="submit" type="submit" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>Add to Cart</button>
+          <button class="button add-to-cart-button bg-black text-white hover:text-black hover:bg-white transition-colors uppercase" name="submit" type="submit" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>Ajouter au panier</button>
           {{ store | instant_checkout_button: 'dark', '44px' }}
   
           {% if product.has_option_groups %}
