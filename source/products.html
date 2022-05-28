@@ -24,9 +24,9 @@
 {% if categories.active != blank or artists.active != blank %}
   <div class="artist-category-nav artist-category-nav-header">
     <nav aria-label="Category navigation" class="category-nav products-nav">
-      <div class="nav-title">Products</div>
+      <div class="nav-title">Produits</div>
       <ul>
-        <li class="{% if page.full_url contains '/products' %}selected{% endif %}"><a href="/products">All</a></li>
+        <li class="{% if page.full_url contains '/products' %}selected{% endif %} uppercase"><a href="/products">Tous</a></li>
         {% for category in categories.active %}
           <li class="{% if page.full_url contains category.url %}selected{% endif %}">{{ category | link_to }}</li>
         {% endfor %}

@@ -30,12 +30,13 @@
       <div class="wrapper">
         <nav class="header-nav" role="navigation" aria-label="Main">
           <ul>
-            <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">{{ pages.products.name }}</a></li>
+            <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">Produits</a></li>
+            <!-- <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">{{ pages.products.name }}</a></li> -->
             {% for page in pages.all limit:theme.nav_items %}
               <li{% if page.full_url contains page.url %} class="selected"{% endif %}>{{ page | link_to }}</li>
             {% endfor %}
-            <li{% if page.full_url contains '/contact' %} class="selected"{% endif %}><a href="/contact">Contact</a></li>
-            <li{% if page.full_url contains '/cart' %} class="selected"{% endif %}><a href="/cart">Cart</a></li>
+            <li{% if page.full_url contains '/contact' %} class="selected"{% endif %}><a href="/contact">Nous contacter</a></li>
+            <li{% if page.full_url contains '/cart' %} class="selected"{% endif %}><a href="/cart">Panier</a></li>
           </ul>
         </nav>
 
@@ -54,13 +55,14 @@
       <nav class="header-nav mobile-nav" aria-label="Mobile Main" role="navigation">
         <ul>
           <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}>
-            <a href="/products">{{ pages.products.name }}</a>
+            <a href="/products">Produits</a>
+            <!-- <a href="/products">{{ pages.products.name }}</a> -->
           </li>
           <li{% if page.full_url contains '/contact' %} class="selected"{% endif %}>
-            <a href="/contact">Contact</a>
+            <a href="/contact">Nous contacter</a>
           </li>
           <li{% if page.full_url contains '/cart' %} class="selected"{% endif %}>
-            <a href="/cart">Cart</a>
+            <a href="/cart">Panier</a>
           </li>
         </ul>
       </nav>
@@ -204,11 +206,12 @@
         <nav class="footer-nav" id="footer" role="navigation" aria-label="Footer">
           <ul class="footer-links">
             <li><a href="/">Accueil</a></li>
-            <li><a href="/products">{{ pages.products.name }}</a></li>
+            <!-- <li><a href="/products">{{ pages.products.name }}</a></li> -->
+            <li><a href="/products">Produits</a></li>
             {% for page in pages.all %}
               <li>{{ page | link_to }}</li>
             {% endfor %}
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/contact">Nous contacter</a></li>
             <li><a href="/cart">Panier</a></li>
             {% if theme.show_search %}
               <li>

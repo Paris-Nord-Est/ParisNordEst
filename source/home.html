@@ -33,7 +33,7 @@
 {% assign thumb_constrain_width = 30 %}
 {% assign thumb_constrain_height = 30 %}
 
-<h1 class="visually-hidden">Featured Products</h1>
+<h1 class="visually-hidden">Produits liés</h1>
 {% if theme.featured_items > 0 %}
   {% get products from products.all limit:theme.featured_items order:theme.featured_order %}
     {% if products != blank %}

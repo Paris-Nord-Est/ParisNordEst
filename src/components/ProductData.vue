@@ -19,6 +19,8 @@ const loading = ref(true);
 
 const imageSkeleton = ref(true);
 
+const link = ref(null);
+
 const fetchDataFromContentFull = async () => {
   const { items } = await client.getEntries();
   console.log(items);
@@ -48,6 +50,8 @@ onMounted(() => {
   fetchDataFromContentFull();
 
   loadSlider();
+
+  link.value = location.href.match(/.+\/(.+)$/)[1];
 });
 </script>
 
@@ -55,15 +59,17 @@ onMounted(() => {
   <Suspense>
     <template #default>
       <div v-for="{ fields, sys } in data" :key="sys.id">
-        <img
-          :src="`${fields.mainPhoto?.fields?.file?.url}?fm=jpg&fl=progressive`"
-          class="border-[15px] border-solid border-yellow-50"
-          @load="loadImage"
-        />
-        <div
-          class="content-history"
-          v-html="converter.makeHtml(fields.history)"
-        />
+        <div v-if="fields.link === link">
+          <img
+            :src="`${fields.mainPhoto?.fields?.file?.url}?fm=jpg&fl=progressive`"
+            class="border-[15px] border-solid border-yellow-50 w-full"
+            @load="loadImage"
+          />
+          <div
+            class="content-history"
+            v-html="converter.makeHtml(fields.history)"
+          />
+        </div>
       </div>
     </template>
     <template #fallback>
