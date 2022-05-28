@@ -65,7 +65,7 @@
         </ul>
       </nav>
     </header>
-    <main class="main bg-white py-5" id="main">
+    <main class="main py-5" id="main">
       <div class="fade-in wrapper">
         {% if errors != blank %}
           <ul class="errors {{ page.permalink }}-errors">
@@ -203,7 +203,7 @@
       <div class="wrapper">
         <nav class="footer-nav" id="footer" role="navigation" aria-label="Footer">
           <ul class="footer-links">
-            <li><a href="/">Home</a></li>
+            <li><a href="/">Accueil</a></li>
             <li><a href="/products">{{ pages.products.name }}</a></li>
             {% for page in pages.all %}
               <li>{{ page | link_to }}</li>
@@ -252,6 +252,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script src="{{ theme | theme_js_url }}"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@main/source/dist/app.js"></script> -->
     {% if page.full_url contains '/product/' %}
       <script>
         var show_sold_out_product_options = '{{ theme.show_sold_out_product_options }}';

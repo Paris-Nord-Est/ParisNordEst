@@ -34,19 +34,20 @@ const loadImage = () => {
   console.log("Image Loaded");
 };
 
+const loadSlider = () => {
+  $(".product-images-slideshow").addClass("flexslider");
+  $(".product-images-slideshow").flexslider({
+    animation: "slide",
+    animationLoop: false,
+    controlsContainer: "canvas",
+    directionNav: false,
+  });
+};
+
 onMounted(() => {
   fetchDataFromContentFull();
 
-  // Triger slideshow in desktop too
-  if ($(".product-images-slideshow").length) {
-    $(".product-images-slideshow").addClass("flexslider");
-    $(".product-images-slideshow").flexslider({
-      animation: "slide",
-      animationLoop: false,
-      controlsContainer: "canvas",
-      directionNav: false,
-    });
-  }
+  loadSlider();
 });
 </script>
 

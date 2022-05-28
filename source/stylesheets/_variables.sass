@@ -1,5 +1,9 @@
 @import 'flexbox'
 
+@font-face
+  font-family: 'Garet'
+  src: url(https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@main/src/font/Garet-Book.otf) format('opentype')
+
 $primary-background-color: #{"{{ theme.background_color }}"}
 $secondary-background-color: #{"{{ theme.secondary_background_color }}"}
 
@@ -19,7 +23,8 @@ $button-background-color: #{"{{ theme.button_background_color }}"}
 
 $button-rollover-color: #{"{{ theme.button_rollover_color }}"}
 
-$primary-font: #{"{{ theme.primary_font }}"}
+// $primary-font: #{"{{ theme.primary_font }}"}
+$primary-font: 'Garet', #{"{{ theme.primary_font }}"}
 $secondary-font: #{"{{ theme.secondary_font }}"}
 
 $luna-base: 8px
