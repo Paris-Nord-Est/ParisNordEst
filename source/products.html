@@ -22,29 +22,29 @@
 {% assign thumb_constrain_width = 30 %}
 {% assign thumb_constrain_height = 30 %}
 {% if categories.active != blank or artists.active != blank %}
-  {% if categories.active.length > 1 %}
-    <div class="artist-category-nav artist-category-nav-header">
-      <nav aria-label="Category navigation" class="category-nav products-nav">
-        <div class="nav-title">Produits</div>
-        <ul>
+  <div class="artist-category-nav artist-category-nav-header">
+    <nav aria-label="Category navigation" class="category-nav products-nav">
+      <div class="nav-title">Produits</div>
+      <ul>
+        {% if categories.active > 1 %}
           <li class="{% if page.full_url contains '/products' %}selected{% endif %} uppercase"><a href="/products">Tous</a></li>
-          {% for category in categories.active %}
-            <li class="{% if page.full_url contains category.url %}selected{% endif %}">{{ category | link_to }}</li>
-          {% endfor %}
-        </ul>
-      </nav>
-      {% if artists.active != blank %}
-      <nav class="products-nav artist-nav" aria-label="Artist navigation">
-        <div class="nav-title">Artists</div>
-        <ul>
-          {% for artist in artists.active %}
-            <li class="{% if page.full_url contains artist.url %}selected{% endif %}">{{ artist | link_to }}</li>
-          {% endfor %}
-        </ul>
-      </nav>
-      {% endif %}
-    </div>
-  {% endif %}
+        {% endif %}
+        {% for category in categories.active %}
+          <li class="{% if page.full_url contains category.url %}selected{% endif %}">{{ category | link_to }}</li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% if artists.active != blank %}
+    <nav class="products-nav artist-nav" aria-label="Artist navigation">
+      <div class="nav-title">Artists</div>
+      <ul>
+        {% for artist in artists.active %}
+          <li class="{% if page.full_url contains artist.url %}selected{% endif %}">{{ artist | link_to }}</li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
 {% endif %}
 <h1 class="page-title visually-hidden">{{ page.name }}</h1>
 {% paginate products from products.current by theme.products_per_page %}
