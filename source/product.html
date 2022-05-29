@@ -11,11 +11,11 @@
 
   <div class="w-full">
     {% if product_status != blank %}<span class="product-status">{{ product_status }}</span>{% endif %}
-    <h1 class="product-title has-dash text-3xl">{{ product.name }}</h1>
+    <h1 class="product-title has-dash text-3xl md:mt-[40px] md:mb-[60px]">{{ product.name }}</h1>
   </div>
 
-  <div class="w-full flex space-x-8 items-center">    
-    <div class="md:w-8/12">
+  <div class="w-full flex flex-col md:flex-row md:space-x-8 items-center">    
+    <div class="w-full md:w-8/12">
       <div class="product-images{% if product.images.size > 1 %} product-images-slideshow{% endif %}">
         <ul class="slides">
           {% for image in product.images %}
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="product-details md:w-4/12">
+    <div class="product-details w-full md:w-4/12">
       {% if product.description != blank %}
         <div class="product-description">
           {{ product.description | paragraphs }}
@@ -52,7 +52,7 @@
           </div>
         {% endif %}
   
-        <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
+        <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %} mb-6 md:mb-0" action="/cart" accept-charset="utf8">
           <input type="hidden" name="utf8" value='✓'>
           {% if product.has_default_option %}
             {{ product.option | hidden_option_input }}
