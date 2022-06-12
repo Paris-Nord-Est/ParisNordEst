@@ -3,15 +3,8 @@ import { ref, onMounted } from "vue";
 
 import * as showdown from "showdown";
 
-import * as contentful from "contentful";
-
 // Components
 import LoaderItem from "./LoaderItem.vue";
-
-const client = contentful.createClient({
-  space: "1rmfbgapbw5t",
-  accessToken: "39TK_xI5H56kai0cCc4ueibhiY23LCcFlHTYiLg11qM",
-});
 
 const data = ref(null);
 const loading = ref(true);
@@ -22,11 +15,11 @@ const imageSkeleton = ref(true);
 const link = ref(null);
 
 const fetchDataFromContentFull = async () => {
-  const { items } = await client.getEntries();
-  console.log(items);
+  const data = await fetch("https://contentful-security.herokuapp.com");
+  const res = await data.json();
 
   loading.value = false;
-  data.value = items;
+  data.value = res;
 };
 
 const converter = new showdown.Converter();
