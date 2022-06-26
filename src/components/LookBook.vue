@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, toRaw } from "vue";
+import { ref, onMounted } from "vue";
 import * as FlexMasonry from "flexmasonry";
 
 // Components
@@ -9,27 +9,42 @@ const photos = ref(null);
 const loading = ref(true);
 const error = ref(null);
 
-const fetchDataFromContentFull = async () => {
+const fetchDataFromCloudinary = async () => {
+  // const headers = new Headers();
+  // headers.append("Directory", "photo-shoots");
+  // headers.append("Accept", "application/json");
+
+  // const data = await fetch("https://contentful-security.herokuapp.com", {
+  //   method: "GET",
+  //   headers,
+  //   moder: "cors",
+  // });
+  // const res = await data.json();
+  // console.log(res);
+
+  // const photosFromCloudinary = res
+  //   .filter(({ fields }) => fields.cloudinaryPhotos)
+  //   .map(({ fields: { cloudinaryPhotos } }) => cloudinaryPhotos);
+
   const data = await fetch("https://contentful-security.herokuapp.com");
   const res = await data.json();
 
-  console.log(res.value);
-  // const photosFromCloudinary = res
+  const cloudinaryPhotos = res.cloudinaryImages?.resources?.map(
+    ({ secure_url }) => secure_url
+  );
 
   loading.value = false;
-  photos.value = res;
-  // photos.value = photosFromCloudinary;
+  photos.value = cloudinaryPhotos;
 };
 
-onMounted(() => {
+onMounted(async () => {
   try {
-    fetchDataFromContentFull();
+    await fetchDataFromCloudinary();
   } catch (e) {
     console.log(e);
     error.value = e;
   }
 
-  console.log(photos);
   // FlexMasonry.init(".grid");
 });
 </script>
@@ -38,14 +53,9 @@ onMounted(() => {
   <Suspense>
     <template #default>
       <div v-if="photos" class="grid">
-        <div
-          v-for="{ url } in photos
-            .filter(({ fields }) => fields.cloudinaryPhotos)
-            .map(({ fields: { cloudinaryPhotos } }) => cloudinaryPhotos)"
-          :key="url"
-        >
+        <div v-for="photo in photos" :key="photo">
           <div class="inner">
-            <img :src="url" />
+            <img :src="photo" />
           </div>
         </div>
       </div>
