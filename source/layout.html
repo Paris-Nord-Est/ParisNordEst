@@ -47,7 +47,7 @@
       <div class="wrapper">
         <nav class="header-nav" role="navigation" aria-label="Main">
           <ul>
-            <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">Produits</a></li>
+            <!-- <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">Produits</a></li> -->
             <!-- <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">{{ pages.products.name }}</a></li> -->
             {% for page in pages.all limit:theme.nav_items %}
               <li{% if page.full_url contains page.url %} class="selected"{% endif %}>{{ page | link_to }}</li>
@@ -222,15 +222,19 @@
       <div class="wrapper">
         <nav class="footer-nav border-0" id="footer" role="navigation" aria-label="Footer">
           <ul class="footer-links">
-            <li><a href="/">Accueil</a></li>
+            <!-- <li><a href="/">Accueil</a></li> -->
             <!-- <li><a href="/products">{{ pages.products.name }}</a></li> -->
-            <li><a href="/products">Produits</a></li>
+            <!-- <li><a href="/products">Produits</a></li> -->
             {% for page in pages.all %}
-              <li>{{ page | link_to }}</li>
+              {% if page.id != 2349500661 %}
+                {% if page.id != 2349500664 %}
+                  <li>{{ page | link_to }}</li>
+                {% endif %}
+              {% endif %}
             {% endfor %}
-            <li><a href="/contact">Nous contacter</a></li>
-            <li><a href="/cart">Panier</a></li>
-            {% if theme.show_search %}
+            <li><a class="uppercase" href="/contact">Nous contacter</a></li>
+            <!-- <li><a href="/cart">Panier</a></li> -->
+            <!-- {% if theme.show_search %}
               <li>
                 <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                   <input type="hidden" name="utf8" value='✓'>
@@ -239,7 +243,7 @@
                   <button type="submit" class="search-button"><svg aria-hidden="true" class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M15.707 14.293l-3.112-3.092-.006-.004c.882-1.197 1.411-2.597 1.411-4.197 0-3.859-3.141-7-7-7s-7 3.1-7 7 3.141 7 7 7c1.575 0 3.025-.529 4.196-1.41v.006l3.093 3.111c.199.193.411.293.711.293s.512-.098.707-.293c.391-.407.393-1.007-.007-1.414zm-8.707-2.293c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.2 5 5-2.243 5-5 5z"/></svg></button>
                 </form>
               </li>
-            {% endif %}
+            {% endif %} -->
           </ul>
           {% if theme.twitter_url != blank or theme.facebook_url != blank or theme.instagram_url != blank or theme.tumblr_url != blank or theme.pinterest_url != blank %}
             <ul class="social-links">

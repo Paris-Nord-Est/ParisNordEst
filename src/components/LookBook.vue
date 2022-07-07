@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import * as FlexMasonry from "flexmasonry";
 
 // Components
 import LoaderItem from "./LoaderItem.vue";
@@ -36,7 +35,6 @@ const fetchDataFromCloudinary = async () => {
   loading.value = false;
   photos.value = cloudinaryPhotos;
 };
-
 onMounted(async () => {
   try {
     await fetchDataFromCloudinary();
@@ -44,19 +42,15 @@ onMounted(async () => {
     console.log(e);
     error.value = e;
   }
-
-  // FlexMasonry.init(".grid");
 });
 </script>
 
 <template>
   <Suspense>
     <template #default>
-      <div v-if="photos" class="grid">
-        <div v-for="photo in photos" :key="photo">
-          <div class="inner">
-            <img :src="photo" />
-          </div>
+      <div v-if="photos" class="ml">
+        <div v-for="photo in photos" :key="photo" class="p-1 photo">
+          <img :src="photo" />
         </div>
       </div>
     </template>
@@ -65,3 +59,30 @@ onMounted(async () => {
     </template>
   </Suspense>
 </template>
+<style lang="scss">
+/* MASONRY CSS */
+.ml {
+  box-sizing: border-box;
+  column-count: 1;
+  column-gap: 0;
+  position: relative;
+  * {
+    box-sizing: border-box;
+  }
+  div:hover {
+    img {
+      transform: rotateY(180deg);
+    }
+  }
+  img {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+  @media (min-width: 1200px) {
+    column-count: 3;
+  }
+}
+</style>
