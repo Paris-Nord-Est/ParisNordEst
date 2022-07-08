@@ -78,6 +78,7 @@ onMounted(async () => {
   img {
     transition: transform 0.8s;
     transform-style: preserve-3d;
+    transition-delay: 250ms;
   }
   @media (min-width: 768px) {
     column-count: 2;
