@@ -47,7 +47,7 @@
       <div class="wrapper">
         <nav class="header-nav" role="navigation" aria-label="Main">
           <ul>
-            <!-- <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">Produits</a></li> -->
+            <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/">Produits</a></li>
             <!-- <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}><a href="/products">{{ pages.products.name }}</a></li> -->
             {% for page in pages.all limit:theme.nav_items %}
               <li{% if page.full_url contains page.url %} class="selected"{% endif %}>{{ page | link_to }}</li>
@@ -71,12 +71,15 @@
       </div>
       <nav class="header-nav mobile-nav" aria-label="Mobile Main" role="navigation">
         <ul>
-          <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}>
+          <!-- <li{% if page.full_url contains '/products' or page.full_url contains '/product/' or page.full_url contains '/category/' or page.full_url contains '/artist/' %} class="selected"{% endif %}>
             <a href="/products">Produits</a>
-            <!-- <a href="/products">{{ pages.products.name }}</a> -->
+            <a href="/products">{{ pages.products.name }}</a>
+          </li> -->
+          <li>
+            <a href="/">Accueil</a>
           </li>
-          <li{% if page.full_url contains '/contact' %} class="selected"{% endif %}>
-            <a href="/contact">Nous contacter</a>
+          <li>
+            <a href="/lookbook">Lookbook</a>
           </li>
           <li{% if page.full_url contains '/cart' %} class="selected"{% endif %}>
             <a href="/cart">Panier</a>
@@ -222,13 +225,13 @@
       <div class="wrapper">
         <nav class="footer-nav border-0" id="footer" role="navigation" aria-label="Footer">
           <ul class="footer-links">
-            <!-- <li><a href="/">Accueil</a></li> -->
+            <li><a class="uppercase" href="/">Accueil</a></li>
             <!-- <li><a href="/products">{{ pages.products.name }}</a></li> -->
             <!-- <li><a href="/products">Produits</a></li> -->
             {% for page in pages.all %}
               {% if page.id != 2349500661 %}
                 {% if page.id != 2349500664 %}
-                  <li>{{ page | link_to }}</li>
+                  <li class="uppercase">{{ page | link_to }}</li>
                 {% endif %}
               {% endif %}
             {% endfor %}
@@ -276,7 +279,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script src="{{ theme | theme_js_url }}"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.1/source/dist/app.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.3/source/dist/app.js"></script> -->
     {% if page.full_url contains '/product/' %}
       <script>
         var show_sold_out_product_options = '{{ theme.show_sold_out_product_options }}';
