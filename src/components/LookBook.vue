@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
+import "lazysizes";
+
 // Components
 import LoaderItem from "./LoaderItem.vue";
 
@@ -8,23 +10,17 @@ const photos = ref(null);
 const loading = ref(true);
 const error = ref(null);
 
+const sizes = [300, 700];
+
+const getDataSrcSet = (url) => {
+  const responsiveUrl = sizes.map((s) =>
+    url.replace(/\/upload\//, `/upload/c_scale,w_${s},q_auto:best/`)
+  );
+
+  return `${responsiveUrl[0]} ${sizes[0]}w, ${responsiveUrl[1]} ${sizes[1]}w, ${url} 1200w`;
+};
+
 const fetchDataFromCloudinary = async () => {
-  // const headers = new Headers();
-  // headers.append("Directory", "photo-shoots");
-  // headers.append("Accept", "application/json");
-
-  // const data = await fetch("https://contentful-security.herokuapp.com", {
-  //   method: "GET",
-  //   headers,
-  //   moder: "cors",
-  // });
-  // const res = await data.json();
-  // console.log(res);
-
-  // const photosFromCloudinary = res
-  //   .filter(({ fields }) => fields.cloudinaryPhotos)
-  //   .map(({ fields: { cloudinaryPhotos } }) => cloudinaryPhotos);
-
   const data = await fetch("https://contentful-security.herokuapp.com");
   const res = await data.json();
 
@@ -50,7 +46,12 @@ onMounted(async () => {
     <template #default>
       <div v-if="photos" class="ml">
         <div v-for="photo in photos" :key="photo" class="p-1 photo">
-          <img :src="photo" />
+          <img
+            data-sizes="auto"
+            :data-src="photo"
+            :data-srcset="getDataSrcSet(photo)"
+            class="lazyload"
+          />
         </div>
       </div>
     </template>
