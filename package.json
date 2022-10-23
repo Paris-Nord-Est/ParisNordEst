@@ -1,8 +1,18 @@
 {
-  "name": "source",
+  "name": "paris-nord-est",
   "version": "1.0.0",
-  "description": "",
+  "description": "Overloading for BigCartel theme for Paris Nord-Est© brand",
   "main": "theme.js",
+  "author": "WellDon <11664211+Baldrani@users.noreply.github.com>",
+  "keywords": [
+    "BigCartel",
+    "theme",
+    "Paris Nord-Est"
+  ],
+  "license": "ISC",
+  "engines": {
+    "node": ">=0.8.0"
+  },
   "scripts": {
     "dev": "webpack serve --mode=development --open",
     "build": "export NODE_ENV=production && webpack",
@@ -395,8 +405,5 @@
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

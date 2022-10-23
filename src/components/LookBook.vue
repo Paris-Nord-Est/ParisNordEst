@@ -47,6 +47,7 @@ onMounted(async () => {
       <div v-if="photos" class="ml">
         <div v-for="photo in photos" :key="photo" class="p-1 photo">
           <img
+            loading="lazy"
             data-sizes="auto"
             :data-src="photo"
             :data-srcset="getDataSrcSet(photo)"
