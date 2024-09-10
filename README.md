@@ -4,6 +4,12 @@
 
 ## Develop locally
 
+Install ruby
+Install node
+
+Run `gem install dugway`
+Run `npm i`
+
 Run `npm run watch && dugway serve`
 
 ---
