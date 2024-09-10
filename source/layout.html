@@ -25,7 +25,7 @@
     {{ head_content }}
   </head>
 
-  <body id="{{ page.permalink }}_page" class="{{ page.category }} bg-cover bg-center bg-fixed bg-no-repeat m-0 bg-[#F7F4ED]">
+  <body id="{{ page.permalink }}_page" class="{{ page.category }} bg-cover bg-center bg-fixed bg-no-repeat m-0 bg-[#F7F4ED]" style="background-color: #F7F4ED;">
     <a class="skip-link" href="#main">Skip to main content</a>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -63,7 +63,7 @@
               <img class="store-logo" srcset="{{ theme.images.header.url | constrain: 1068, 200 }}, {{ theme.images.header.url | constrain: 2136, 400 }} 2x" src="{{ theme.images.header.url | constrain: 1068, 200 }}" alt="{{ store.name }} Home">
             {% else %}
               <div class="store-header">
-                <img class="h-[100px]" src="https://raw.githubusercontent.com/Baldrani/ParisNordEst/main/source/images/logo-transparent.svg">
+                <img class="h-[100px]" src="https://raw.githubusercontent.com/Baldrani/ParisNordEst/main/source/images/logo-black.svg">
               </div>
             {% endif %}
           </a>
@@ -279,7 +279,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script src="{{ theme | theme_js_url }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.1/source/dist/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.3/source/dist/app.js"></script>
     {% if page.full_url contains '/product/' %}
       <script>
         var show_sold_out_product_options = '{{ theme.show_sold_out_product_options }}';
