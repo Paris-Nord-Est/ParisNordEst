@@ -8,6 +8,7 @@ module.exports = {
       fontFamily: {
         garet: ["Garet", ...defaultTheme.fontFamily.sans],
         akira: ["Akira", ...defaultTheme.fontFamily.sans],
+        delagothic: ["Dela Gothic One", ...defaultTheme.fontFamily.sans],
       },
     },
   },

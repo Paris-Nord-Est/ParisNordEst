@@ -44,15 +44,17 @@ onMounted(async () => {
 <template>
   <Suspense>
     <template #default>
-      <div v-if="photos" class="ml">
-        <div v-for="photo in photos" :key="photo" class="p-1 photo">
-          <img
-            loading="lazy"
-            data-sizes="auto"
-            :data-src="photo"
-            :data-srcset="getDataSrcSet(photo)"
-            class="lazyload"
-          />
+      <div class="flex items-center justify-center">
+        <div v-if="photos" class="ml">
+          <div v-for="photo in photos" :key="photo" class="p-1 photo">
+            <img
+              loading="lazy"
+              data-sizes="auto"
+              :data-src="photo"
+              :data-srcset="getDataSrcSet(photo)"
+              class="lazyload"
+            />
+          </div>
         </div>
       </div>
     </template>

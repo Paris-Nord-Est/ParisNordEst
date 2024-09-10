@@ -25,7 +25,7 @@
     {{ head_content }}
   </head>
 
-  <body id="{{ page.permalink }}_page" class="{{ page.category }} bg-cover bg-center bg-fixed bg-no-repeat m-0" style="background-image: url('https://i.postimg.cc/kgLm6hmb/5432755.jpg');">
+  <body id="{{ page.permalink }}_page" class="{{ page.category }} bg-cover bg-center bg-fixed bg-no-repeat m-0 bg-[#F7F4ED]">
     <a class="skip-link" href="#main">Skip to main content</a>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -99,7 +99,7 @@
 
         {% if page.category == 'custom' %}
           <div class="custom-page">
-            <h1 class="custom-page-header page-title has-dash">{{ page.name }}</h1>
+            <h1 class="custom-page-header page-title has-dash font-delagothic">{{ page.name }}</h1>
             <div class="custom-page-content">{{ page_content | paragraphs }}</div>
           </div>
         {% else %}
@@ -224,7 +224,7 @@
     <footer>
       <div class="wrapper">
         <nav class="footer-nav border-0" id="footer" role="navigation" aria-label="Footer">
-          <ul class="footer-links">
+          <ul class="footer-links font-delagothic">
             <li><a class="uppercase" href="/">Accueil</a></li>
             <!-- <li><a href="/products">{{ pages.products.name }}</a></li> -->
             <!-- <li><a href="/products">Produits</a></li> -->
@@ -279,7 +279,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script src="{{ theme | theme_js_url }}"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.3/source/dist/app.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.1/source/dist/app.js"></script>
     {% if page.full_url contains '/product/' %}
       <script>
         var show_sold_out_product_options = '{{ theme.show_sold_out_product_options }}';
