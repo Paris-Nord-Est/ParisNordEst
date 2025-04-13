@@ -11,6 +11,16 @@ Run `gem install dugway`
 Run `npm i`
 
 Run `npm run watch && dugway serve`
+Then access: `localhost:9292`
+
+Replace in `layout.html`
+
+The online script with the local one.
+
+```js
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
+    <script src="http://localhost:8080/app.js"></script>
+```
 
 ---
 

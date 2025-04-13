@@ -29,8 +29,9 @@ const fetchDataFromCloudinary = async () => {
   );
 
   loading.value = false;
-  photos.value = cloudinaryPhotos;
+  photos.value = cloudinaryPhotos.sort(() => 0.5 - Math.random());
 };
+
 onMounted(async () => {
   try {
     await fetchDataFromCloudinary();

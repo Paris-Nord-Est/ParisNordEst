@@ -1,12 +1,12 @@
 <template>
-    <ProductData/>
+  <ProductData />
 </template>
 <script>
 import ProductData from "./components/ProductData.vue";
 
 export default {
   components: {
-    ProductData
-  }
+    ProductData,
+  },
 };
 </script>
