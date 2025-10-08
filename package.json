@@ -14,7 +14,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "dev": "webpack serve --mode=development --open",
+    "dev": "webpack serve --mode=development",
     "build": "export NODE_ENV=production && webpack",
     "watch": "webpack --watch",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
@@ -130,7 +130,6 @@
     "finalhandler": "^1.2.0",
     "find-cache-dir": "^3.3.2",
     "find-up": "^4.1.0",
-    "flexmasonry": "^0.2.3",
     "follow-redirects": "^1.15.0",
     "forwarded": "^0.2.0",
     "fraction.js": "^4.2.0",
@@ -191,7 +190,6 @@
     "json5": "^2.2.1",
     "kind-of": "^6.0.3",
     "klona": "^2.0.5",
-    "lazysizes": "^5.3.2",
     "lilconfig": "^2.0.5",
     "lines-and-columns": "^1.2.4",
     "loader-runner": "^4.3.0",

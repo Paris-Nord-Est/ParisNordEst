@@ -1,92 +1,399 @@
 <script setup>
-import { ref, onMounted } from "vue";
-
-import "lazysizes";
+import { ref, onMounted, onBeforeUnmount, computed, nextTick } from "vue";
 
 // Components
 import LoaderItem from "./LoaderItem.vue";
 
-const photos = ref(null);
+const photos = ref([]);
 const loading = ref(true);
 const error = ref(null);
+const imageLoadErrors = ref(new Set());
+let imageObserver = null;
+let resizeObserver = null;
+const masonryContainer = ref(null);
 
-const sizes = [300, 700];
+const sizes = [400, 800, 1200];
 
-const getDataSrcSet = (url) => {
-  const responsiveUrl = sizes.map((s) =>
-    url.replace(/\/upload\//, `/upload/c_scale,w_${s},q_auto:best/`)
-  );
-
-  return `${responsiveUrl[0]} ${sizes[0]}w, ${responsiveUrl[1]} ${sizes[1]}w, ${url} 1200w`;
+// Insert Cloudinary transformations after /upload/
+const insertCloudinaryTransform = (url, transform) => {
+  return url.replace(/\/upload\//, `/upload/${transform}/`);
 };
 
-const fetchDataFromCloudinary = async () => {
-  const data = await fetch("https://contentful-security.herokuapp.com");
-  const res = await data.json();
+const getDataSrcSet = (url) => {
+  const responsiveImages = sizes.map((size) => {
+    const transformed = insertCloudinaryTransform(
+      url,
+      `c_scale,w_${size},q_auto,f_auto`
+    );
+    return `${transformed} ${size}w`;
+  });
 
-  const cloudinaryPhotos = res.cloudinaryImages?.resources?.map(
-    ({ secure_url }) => secure_url
+  return responsiveImages.join(", ");
+};
+
+// Get optimized image URL for the src attribute
+const getOptimizedUrl = (url) => {
+  return insertCloudinaryTransform(url, "c_scale,w_800,q_auto,f_auto");
+};
+
+// Get tiny blurred placeholder (LQIP - Low Quality Image Placeholder)
+const getBlurPlaceholder = (url) => {
+  return insertCloudinaryTransform(
+    url,
+    "c_scale,w_20,e_blur:1000,q_auto:low,f_auto"
+  );
+};
+
+// Fetch images from API (both Cloudinary and Contentful)
+const fetchDataFromCloudinary = async () => {
+  try {
+    const startTime = performance.now();
+    const data = await fetch("https://contentful-security.herokuapp.com");
+    const res = await data.json();
+    const endTime = performance.now();
+    console.log(`Fetch and parse took ${Math.round(endTime - startTime)} ms`);
+
+    // Get Cloudinary images
+    const cloudinaryPhotos =
+      res.cloudinaryImages?.resources?.map(({ secure_url }) => ({
+        url: secure_url,
+        type: "cloudinary",
+      })) || [];
+
+    console.log(res.cloudinaryImages);
+
+    if (cloudinaryPhotos.length === 0) {
+      throw new Error("No images found");
+    }
+
+    console.log(`Loaded ${cloudinaryPhotos.length} images`);
+    // Randomize images
+    photos.value = cloudinaryPhotos.sort(() => 0.5 - Math.random());
+    loading.value = false;
+  } catch (e) {
+    console.error("Failed to load lookbook images:", e);
+    error.value = e;
+    loading.value = false;
+  }
+};
+
+// Handle individual image load errors
+const handleImageError = (photoUrl) => {
+  imageLoadErrors.value.add(photoUrl);
+};
+
+// Retry loading images
+const retryLoad = () => {
+  error.value = null;
+  loading.value = true;
+  imageLoadErrors.value.clear();
+  fetchDataFromCloudinary();
+};
+
+// Filter out images with errors
+const validPhotos = computed(() => {
+  return photos.value.filter((photo) => !imageLoadErrors.value.has(photo.url));
+});
+
+// JavaScript Masonry Layout
+const layoutMasonry = () => {
+  if (!masonryContainer.value) return;
+
+  const container = masonryContainer.value;
+  const items = Array.from(container.children);
+
+  if (items.length === 0) return;
+
+  // Get column count based on screen width
+  const getColumnCount = () => {
+    const width = window.innerWidth;
+    if (width < 768) return 1;
+    if (width < 1200) return 2;
+    if (width < 1600) return 3;
+    return 4;
+  };
+
+  const columnCount = getColumnCount();
+  const gap = window.innerWidth < 768 ? 8 : 16;
+  const padding = window.innerWidth < 768 ? 8 : window.innerWidth < 1200 ? 32 : 48;
+
+  const containerWidth = container.offsetWidth - (padding * 2);
+  const columnWidth = (containerWidth - (gap * (columnCount - 1))) / columnCount;
+
+  // Initialize column heights
+  const columnHeights = new Array(columnCount).fill(0);
+
+  items.forEach((item, index) => {
+    // Find shortest column
+    const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
+
+    // Calculate position
+    const x = shortestColumn * (columnWidth + gap);
+    const y = columnHeights[shortestColumn];
+
+    // Position item
+    item.style.position = 'absolute';
+    item.style.left = `${x}px`;
+    item.style.top = `${y}px`;
+    item.style.width = `${columnWidth}px`;
+
+    // Update column height (estimate based on aspect ratio)
+    const img = item.querySelector('img');
+    if (img && img.naturalHeight && img.naturalWidth) {
+      const itemHeight = (img.naturalHeight / img.naturalWidth) * columnWidth;
+      columnHeights[shortestColumn] += itemHeight + gap;
+    } else {
+      // Default aspect ratio for images not yet loaded
+      columnHeights[shortestColumn] += columnWidth * 1.5 + gap;
+    }
+  });
+
+  // Set container height
+  const maxHeight = Math.max(...columnHeights);
+  container.style.height = `${maxHeight}px`;
+};
+
+// Setup lazy loading observer
+const setupLazyLoading = async () => {
+  // Wait for Vue to render the images
+  await nextTick();
+
+  imageObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.dataset.src;
+          const srcset = img.dataset.srcset;
+
+          // Only load if not already loaded
+          if (src && img.dataset.src) {
+            console.log('Loading image:', src.substring(0, 50) + '...');
+            img.src = src;
+            img.removeAttribute('data-src');
+
+            // Relayout when image loads
+            img.onload = () => {
+              img.classList.add('loaded');
+              layoutMasonry();
+            };
+          }
+          if (srcset && img.dataset.srcset) {
+            img.srcset = srcset;
+            img.removeAttribute('data-srcset');
+          }
+
+          // Stop observing this image
+          imageObserver.unobserve(img);
+        }
+      });
+    },
+    {
+      rootMargin: "200px", // Start loading 200px before entering viewport
+      threshold: 0.01,
+    }
   );
 
-  loading.value = false;
-  photos.value = cloudinaryPhotos.sort(() => 0.5 - Math.random());
+  // Observe all images
+  const images = document.querySelectorAll(".lookbook-image[data-src]");
+  console.log(`Observing ${images.length} images for lazy loading`);
+  images.forEach((img) => {
+    imageObserver.observe(img);
+  });
+
+  // Initial layout
+  layoutMasonry();
 };
 
 onMounted(async () => {
-  try {
-    await fetchDataFromCloudinary();
-  } catch (e) {
-    console.log(e);
-    error.value = e;
+  await fetchDataFromCloudinary();
+  await setupLazyLoading();
+
+  // Handle window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      layoutMasonry();
+    }, 150);
+  });
+});
+
+onBeforeUnmount(() => {
+  if (imageObserver) {
+    imageObserver.disconnect();
+  }
+  if (resizeObserver) {
+    resizeObserver.disconnect();
   }
 });
 </script>
 
 <template>
-  <Suspense>
-    <template #default>
-      <div v-if="photos" class="ml">
-        <div v-for="photo in photos" :key="photo" class="p-1 photo">
-          <img
-            loading="lazy"
-            data-sizes="auto"
-            :data-src="photo"
-            :data-srcset="getDataSrcSet(photo)"
-            class="lazyload"
-          />
-        </div>
+  <div class="lookbook-container">
+    <!-- Loading State -->
+    <div v-if="loading" class="lookbook-loading">
+      <LoaderItem />
+    </div>
+
+    <!-- Error State -->
+    <div v-else-if="error" class="lookbook-error">
+      <p>Failed to load lookbook images</p>
+      <button class="retry-button" @click="retryLoad">Retry</button>
+    </div>
+
+    <!-- Photos Masonry Grid -->
+    <div v-else-if="validPhotos.length > 0" class="lookbook-masonry" ref="masonryContainer">
+      <div v-for="photo in validPhotos" :key="photo.url" class="lookbook-item">
+        <img
+          class="lookbook-image"
+          :src="getBlurPlaceholder(photo.url)"
+          :data-src="getOptimizedUrl(photo.url)"
+          :data-srcset="getDataSrcSet(photo.url)"
+          sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 400px"
+          alt="Paris Nord-Est lookbook"
+          @load="(e) => e.target.classList.add('loaded')"
+          @error="handleImageError(photo.url)"
+        />
       </div>
-    </template>
-    <template #fallback>
-      <loader-item />
-    </template>
-  </Suspense>
+    </div>
+
+    <!-- Empty State -->
+    <div v-else class="lookbook-empty">
+      <p>No images to display</p>
+    </div>
+  </div>
 </template>
+
 <style lang="scss">
-/* MASONRY CSS */
-.ml {
-  box-sizing: border-box;
-  column-count: 1;
-  column-gap: 0;
+.lookbook-container {
+  width: 100vw;
   position: relative;
-  * {
-    box-sizing: border-box;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 300px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: none !important;
+}
+
+.lookbook-loading,
+.lookbook-error,
+.lookbook-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+  text-align: center;
+
+  svg {
+    max-width: 60px;
+    max-height: 60px;
+    width: 60px;
+    height: 60px;
   }
-  div:hover {
-    img {
-      transform: rotateY(180deg);
+}
+
+.lookbook-error {
+  p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+.retry-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* JavaScript-based Masonry Layout */
+.lookbook-masonry {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  padding: 0.5rem;
+
+  @media (min-width: 768px) {
+    padding: 1rem 2rem;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 1rem 3rem;
+  }
+
+  @media (min-width: 1600px) {
+    padding: 1rem 4rem;
+  }
+}
+
+.lookbook-item {
+  /* Position will be set by JavaScript */
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.05);
+
+  /* Prevent layout shift */
+  contain: layout;
+}
+
+.lookbook-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in forwards;
+  transition: transform 0.3s ease, opacity 0.3s ease, filter 0.4s ease;
+
+  /* Blur effect while loading */
+  filter: blur(20px);
+  transform: scale(1.1);
+
+  /* Remove blur when loaded */
+  &.loaded {
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  /* Hover effect - simple scale (only when loaded) */
+  &.loaded {
+    .lookbook-item:hover & {
+      transform: scale(1.02);
     }
   }
-  img {
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-    transition-delay: 250ms;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  @media (min-width: 768px) {
-    column-count: 2;
+  to {
+    opacity: 1;
   }
-  @media (min-width: 1200px) {
-    column-count: 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .lookbook-masonry {
+    column-gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .lookbook-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .lookbook-item:hover .lookbook-image {
+    /* Disable hover effect on mobile */
+    transform: none;
   }
 }
 </style>

@@ -10,8 +10,9 @@ Install node
 Run `gem install dugway`
 Run `npm i`
 
-Run `npm run watch && dugway serve`
-Then access: `localhost:9292`
+Run `npm run watch` in one terminal
+Run `dugway serve` in another terminal
+Then access: `http://127.0.0.1:9292`
 
 Replace in `layout.html`
 
