@@ -127,8 +127,8 @@ const layoutMasonry = () => {
     // Find shortest column
     const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
 
-    // Calculate position
-    const x = shortestColumn * (columnWidth + gap);
+    // Calculate position (add padding offset)
+    const x = padding + shortestColumn * (columnWidth + gap);
     const y = columnHeights[shortestColumn];
 
     // Position item
