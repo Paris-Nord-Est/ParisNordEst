@@ -40,7 +40,7 @@ const getOptimizedUrl = (url) => {
 const getBlurPlaceholder = (url) => {
   return insertCloudinaryTransform(
     url,
-    "c_scale,w_20,e_blur:1000,q_auto:low,f_auto"
+    "e_blur:1000,q_auto:low,f_auto"
   );
 };
 
