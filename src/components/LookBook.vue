@@ -53,10 +53,12 @@ const fetchDataFromCloudinary = async () => {
     const endTime = performance.now();
     console.log(`Fetch and parse took ${Math.round(endTime - startTime)} ms`);
 
-    // Get Cloudinary images
+    // Get Cloudinary images with dimensions
     const cloudinaryPhotos =
-      res.cloudinaryImages?.resources?.map(({ secure_url }) => ({
+      res.cloudinaryImages?.resources?.map(({ secure_url, width, height }) => ({
         url: secure_url,
+        width,
+        height,
         type: "cloudinary",
       })) || [];
 
@@ -137,15 +139,26 @@ const layoutMasonry = () => {
     item.style.top = `${y}px`;
     item.style.width = `${columnWidth}px`;
 
-    // Update column height (estimate based on aspect ratio)
+    // Get aspect ratio from data attributes or naturalHeight/Width
     const img = item.querySelector('img');
-    if (img && img.naturalHeight && img.naturalWidth) {
-      const itemHeight = (img.naturalHeight / img.naturalWidth) * columnWidth;
-      columnHeights[shortestColumn] += itemHeight + gap;
+    let itemHeight;
+
+    // Try to get dimensions from data attributes first
+    const dataWidth = img?.dataset.width;
+    const dataHeight = img?.dataset.height;
+
+    if (dataWidth && dataHeight) {
+      itemHeight = (parseFloat(dataHeight) / parseFloat(dataWidth)) * columnWidth;
+      item.style.height = `${itemHeight}px`;
+    } else if (img && img.naturalHeight && img.naturalWidth) {
+      itemHeight = (img.naturalHeight / img.naturalWidth) * columnWidth;
+      item.style.height = `${itemHeight}px`;
     } else {
       // Default aspect ratio for images not yet loaded
-      columnHeights[shortestColumn] += columnWidth * 1.5 + gap;
+      itemHeight = columnWidth * 1.5;
     }
+
+    columnHeights[shortestColumn] += itemHeight + gap;
   });
 
   // Set container height
@@ -250,6 +263,8 @@ onBeforeUnmount(() => {
           :src="getBlurPlaceholder(photo.url)"
           :data-src="getOptimizedUrl(photo.url)"
           :data-srcset="getDataSrcSet(photo.url)"
+          :data-width="photo.width"
+          :data-height="photo.height"
           sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 400px"
           alt="Paris Nord-Est lookbook"
           @load="(e) => e.target.classList.add('loaded')"
