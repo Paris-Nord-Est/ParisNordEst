@@ -362,7 +362,7 @@ onBeforeUnmount(() => {
 
 .lookbook-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
   opacity: 0;
