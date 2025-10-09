@@ -59,7 +59,6 @@ module.exports = {
   devServer: {
     static: path.resolve(__dirname, "source/dist"),
     watchFiles: ["source/**/*"],
-    open: true,
     hot: true,
   },
 };
