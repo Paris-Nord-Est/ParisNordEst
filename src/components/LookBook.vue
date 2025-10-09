@@ -38,10 +38,7 @@ const getOptimizedUrl = (url) => {
 
 // Get tiny blurred placeholder (LQIP - Low Quality Image Placeholder)
 const getBlurPlaceholder = (url) => {
-  return insertCloudinaryTransform(
-    url,
-    "w_50,e_blur:1000,q_auto:low,f_auto"
-  );
+  return insertCloudinaryTransform(url, "w_50,e_blur:1000,q_auto:low,f_auto");
 };
 
 // Fetch images from API (both Cloudinary and Contentful)
@@ -117,10 +114,11 @@ const layoutMasonry = () => {
 
   const columnCount = getColumnCount();
   const gap = window.innerWidth < 768 ? 8 : 16;
-  const padding = window.innerWidth < 768 ? 8 : window.innerWidth < 1200 ? 32 : 48;
+  const padding =
+    window.innerWidth < 768 ? 8 : window.innerWidth < 1200 ? 32 : 48;
 
-  const containerWidth = container.offsetWidth - (padding * 2);
-  const columnWidth = (containerWidth - (gap * (columnCount - 1))) / columnCount;
+  const containerWidth = container.offsetWidth - padding * 2;
+  const columnWidth = (containerWidth - gap * (columnCount - 1)) / columnCount;
 
   // Initialize column heights
   const columnHeights = new Array(columnCount).fill(0);
@@ -134,13 +132,13 @@ const layoutMasonry = () => {
     const y = columnHeights[shortestColumn];
 
     // Position item
-    item.style.position = 'absolute';
+    item.style.position = "absolute";
     item.style.left = `${x}px`;
     item.style.top = `${y}px`;
     item.style.width = `${columnWidth}px`;
 
     // Get aspect ratio from data attributes or naturalHeight/Width
-    const img = item.querySelector('img');
+    const img = item.querySelector("img");
     let itemHeight;
 
     // Try to get dimensions from data attributes first
@@ -148,7 +146,8 @@ const layoutMasonry = () => {
     const dataHeight = img?.dataset.height;
 
     if (dataWidth && dataHeight) {
-      itemHeight = (parseFloat(dataHeight) / parseFloat(dataWidth)) * columnWidth;
+      itemHeight =
+        (parseFloat(dataHeight) / parseFloat(dataWidth)) * columnWidth;
       item.style.height = `${itemHeight}px`;
     } else if (img && img.naturalHeight && img.naturalWidth) {
       itemHeight = (img.naturalHeight / img.naturalWidth) * columnWidth;
@@ -181,19 +180,19 @@ const setupLazyLoading = async () => {
 
           // Only load if not already loaded
           if (src && img.dataset.src) {
-            console.log('Loading image:', src.substring(0, 50) + '...');
+            console.log("Loading image:", src.substring(0, 50) + "...");
             img.src = src;
-            img.removeAttribute('data-src');
+            img.removeAttribute("data-src");
 
             // Relayout when image loads
             img.onload = () => {
-              img.classList.add('loaded');
+              img.classList.add("loaded");
               layoutMasonry();
             };
           }
           if (srcset && img.dataset.srcset) {
             img.srcset = srcset;
-            img.removeAttribute('data-srcset');
+            img.removeAttribute("data-srcset");
           }
 
           // Stop observing this image
@@ -224,7 +223,7 @@ onMounted(async () => {
 
   // Handle window resize
   let resizeTimeout;
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       layoutMasonry();
@@ -256,7 +255,11 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- Photos Masonry Grid -->
-    <div v-else-if="validPhotos.length > 0" class="lookbook-masonry" ref="masonryContainer">
+    <div
+      v-else-if="validPhotos.length > 0"
+      ref="masonryContainer"
+      class="lookbook-masonry"
+    >
       <div v-for="photo in validPhotos" :key="photo.url" class="lookbook-item">
         <img
           class="lookbook-image"
@@ -280,7 +283,7 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .lookbook-container {
   width: 100vw;
   position: relative;
