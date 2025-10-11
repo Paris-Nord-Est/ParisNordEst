@@ -12,7 +12,7 @@
   >
     <rect
       fill="none"
-      stroke="#fff"
+      stroke="#c5d1c5"
       stroke-width="4"
       x="25"
       y="25"
@@ -30,7 +30,7 @@
         begin="rectBox.end"
       />
     </rect>
-    <rect x="27" y="27" fill="#fff" width="46" height="50">
+    <rect x="27" y="27" fill="#c5d1c5" width="46" height="50">
       <animate
         id="rectBox"
         attributeName="height"
