@@ -33,9 +33,13 @@ const loadSlider = () => {
   $(".product-images-slideshow").addClass("flexslider");
   $(".product-images-slideshow").flexslider({
     animation: "slide",
-    animationLoop: false,
+    animationLoop: true,
     controlsContainer: "canvas",
-    directionNav: false,
+    directionNav: true,
+    slideshow: true,
+    slideshowSpeed: 4000,
+    animationSpeed: 600,
+    pauseOnHover: true,
   });
 };
 
