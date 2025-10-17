@@ -1,12 +1,11 @@
+<div id="lookbook"></div>
 {% if theme.image_sets.slideshow.size > 0 %}
-  <div class="flexslider home-slideshow">
-    <ul class="slides">
-      {% for image in theme.image_sets.slideshow %}
-        <li>
-          <img alt="" srcset="{{ image.url | constrain: 1068 }}, {{ image.url | constrain: 2136 }} 2x" src="{{ image.url | constrain: 1068 }}">
-        </li>
-      {% endfor %}
-    </ul>
+  <div class="home-slideshow">
+    {% for image in theme.image_sets.slideshow %}
+      <div class="home-slide">
+        <img alt="" srcset="{{ image.url | constrain: 1068 }}, {{ image.url | constrain: 2136 }} 2x" src="{{ image.url | constrain: 1068 }}">
+      </div>
+    {% endfor %}
   </div>
 {% endif %}
 {% if theme.max_products_per_row == 4 %}

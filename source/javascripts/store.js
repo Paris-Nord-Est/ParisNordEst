@@ -181,24 +181,7 @@ $(document).ready(function () {
   }
 });
 
-$(".home-slideshow").flexslider({
-  animation: "slide",
-});
-
-$(".flexslider").on("touchmove", function (e) {
-  e.stopPropagation();
-});
-var width = $(window).width();
-
-if ($(".product-images-slideshow").length && width <= 768 && !inPreview) {
-  $(".product-images-slideshow").addClass("flexslider");
-  $(".product-images-slideshow").flexslider({
-    animation: "slide",
-    animationLoop: false,
-    controlsContainer: "canvas",
-    directionNav: false,
-  });
-}
+// Swiper initialization is now handled in ProductData.vue
 
 $(".product_option_select").on("change", function () {
   var option_price = $(this).find("option:selected").attr("data-price");

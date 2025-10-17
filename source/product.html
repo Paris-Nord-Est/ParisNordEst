@@ -16,14 +16,27 @@
 
   <div class="w-full flex flex-col md:flex-row md:space-x-8 items-center">    
     <div class="w-full md:w-8/12">
-      <div class="product-images{% if product.images.size > 1 %} product-images-slideshow{% endif %}">
-        <ul class="slides">
+      <div class="product-images product-images-slideshow swiper">
+        <div class="swiper-wrapper">
           {% for image in product.images %}
-            <li>
+            <div class="swiper-slide">
               <img alt="{{ product.name | escape }}" class="lazy product-image" src="{{ image | product_image_url | constrain: 100 }}" data-src="{{ image | product_image_url | constrain: 650 }}" data-srcset="{{ image | product_image_url | constrain: 1300 }} 2x, {{ image | product_image_url | constrain: 650 }} 1x">
-            </li>
+            </div>
           {% endfor %}
-        </ul>
+          <!-- Test images for slider functionality -->
+          <div class="swiper-slide">
+            <img alt="Test Image 2" class="product-image" src="https://picsum.photos/650/650?random=2">
+          </div>
+          <div class="swiper-slide">
+            <img alt="Test Image 3" class="product-image" src="https://picsum.photos/650/650?random=3">
+          </div>
+          <div class="swiper-slide">
+            <img alt="Test Image 4" class="product-image" src="https://picsum.photos/650/650?random=4">
+          </div>
+        </div>
+        <!-- Navigation arrows -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </div>
 
