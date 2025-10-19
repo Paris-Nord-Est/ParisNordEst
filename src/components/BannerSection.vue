@@ -37,7 +37,7 @@ const props = defineProps({
   },
   bannerImage: {
     type: String,
-    default: "https://via.placeholder.com/1400x600/2C5F2D/ffffff?text=Banner+Image",
+    default: "https://placehold.co/1400x600/2C5F2D/ffffff?text=Banner+Image",
   },
   bannerAlt: {
     type: String,

@@ -62,15 +62,15 @@ const props = defineProps({
     type: Array,
     default: () => [
       {
-        url: "https://via.placeholder.com/1200x600/4A90E2/ffffff?text=Hero+Image+1",
+        url: "https://placehold.co/1200x600/4A90E2/ffffff?text=Hero+Image+1",
         alt: "Hero image 1",
       },
       {
-        url: "https://via.placeholder.com/1200x600/E94B3C/ffffff?text=Hero+Image+2",
+        url: "https://placehold.co/1200x600/E94B3C/ffffff?text=Hero+Image+2",
         alt: "Hero image 2",
       },
       {
-        url: "https://via.placeholder.com/1200x600/50C878/ffffff?text=Hero+Image+3",
+        url: "https://placehold.co/1200x600/50C878/ffffff?text=Hero+Image+3",
         alt: "Hero image 3",
       },
     ],

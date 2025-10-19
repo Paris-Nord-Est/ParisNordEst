@@ -101,15 +101,15 @@ const config = reactive({
     ctaLink: "/products",
     images: [
       {
-        url: "https://via.placeholder.com/1400x700/4A90E2/ffffff?text=Hero+Slider+1",
+        url: "https://placehold.co/1400x700/4A90E2/ffffff?text=Hero+Slider+1",
         alt: "Hero image 1",
       },
       {
-        url: "https://via.placeholder.com/1400x700/E94B3C/ffffff?text=Hero+Slider+2",
+        url: "https://placehold.co/1400x700/E94B3C/ffffff?text=Hero+Slider+2",
         alt: "Hero image 2",
       },
       {
-        url: "https://via.placeholder.com/1400x700/50C878/ffffff?text=Hero+Slider+3",
+        url: "https://placehold.co/1400x700/50C878/ffffff?text=Hero+Slider+3",
         alt: "Hero image 3",
       },
     ],
@@ -120,7 +120,7 @@ const config = reactive({
   },
   banner: {
     title: "On a mis Paris Nord-Est<br>dans une casquette.",
-    image: "https://via.placeholder.com/1400x600/2C5F2D/ffffff?text=Banner+Paris+Nord-Est",
+    image: "https://placehold.co/1400x600/2C5F2D/ffffff?text=Banner+Paris+Nord-Est",
     alt: "Paris Nord-Est Banner",
     showCta: true,
     ctaText: "SHOP NOW",

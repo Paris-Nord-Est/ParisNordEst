@@ -54,6 +54,19 @@
               <p class="product-price text-sm md:text-base">
                 {{ formatPrice(product.price) }}
               </p>
+              <!-- Product Status Badge -->
+              <div
+                v-if="product.status === 'sold-out'"
+                class="product-status mt-1 text-xs uppercase font-bold text-red-600"
+              >
+                Épuisé
+              </div>
+              <div
+                v-else-if="product.on_sale"
+                class="product-status mt-1 text-xs uppercase font-bold text-green-600"
+              >
+                En promo
+              </div>
             </div>
           </a>
         </div>
@@ -101,8 +114,8 @@ const formatPrice = (price) => {
   const currency = window.bigcartel?.account?.currency || "EUR";
   const moneyFormat = window.bigcartel?.account?.moneyFormat || "{{amount}} €";
 
-  // Format price (price is in cents)
-  const amount = (price / 100).toFixed(2);
+  // BigCartel prices are already in display format (not cents)
+  const amount = Number(price).toFixed(0);
 
   // Simple formatting
   if (currency === "EUR") {
@@ -114,7 +127,7 @@ const formatPrice = (price) => {
   }
 };
 
-const fetchProducts = async () => {
+const fetchProducts = () => {
   // If products are provided via props, don't fetch
   if (props.products) {
     return;
@@ -123,79 +136,96 @@ const fetchProducts = async () => {
   loading.value = true;
   error.value = null;
 
-  console.log("ICI");
-
   try {
     // Check if BigCartel Product API is available
-    if (window.Product && typeof window.Product.fetchAll === "function") {
-      const products = await window.Product.fetchAll();
-      console.log(products);
-      fetchedProducts.value = products.map((product) => ({
-        id: product.id,
-        name: product.name,
-        price: product.default_price,
-        url: product.url,
-        image:
-          product.images?.[0]?.url ||
-          "https://via.placeholder.com/400x400/CCCCCC/666666?text=No+Image",
-      }));
+    if (window.Product && typeof window.Product.findAll === "function") {
+      // BigCartel uses callback pattern: Product.findAll({}, callback)
+      window.Product.findAll({}, (products) => {
+        console.log("BigCartel API Response:", products);
+
+        fetchedProducts.value = products.map((product) => ({
+          id: product.id,
+          name: product.name,
+          price: product.default_price || product.price,
+          url: product.url,
+          status: product.status,
+          on_sale: product.on_sale,
+          image:
+            product.images?.[0]?.url ||
+            "https://placehold.co/400x400/CCCCCC/666666?text=No+Image",
+        }));
+
+        loading.value = false;
+      });
     } else {
       // Fallback: use placeholder products for development
       fetchedProducts.value = [
         {
           id: 1,
           name: "NOM DU PRODUIT",
-          price: 1900,
+          price: 37,
           url: "/product/product-1",
+          status: "active",
+          on_sale: false,
           image:
-            "https://via.placeholder.com/400x400/E8DED2/666666?text=Product+1",
+            "https://placehold.co/400x400/E8DED2/666666?text=Product+1",
         },
         {
           id: 2,
           name: "NOM DU PRODUIT",
-          price: 1900,
+          price: 37,
           url: "/product/product-2",
+          status: "active",
+          on_sale: false,
           image:
-            "https://via.placeholder.com/400x400/E8DED2/666666?text=Product+2",
+            "https://placehold.co/400x400/E8DED2/666666?text=Product+2",
         },
         {
           id: 3,
           name: "NOM DU PRODUIT",
-          price: 1900,
+          price: 37,
           url: "/product/product-3",
+          status: "active",
+          on_sale: false,
           image:
-            "https://via.placeholder.com/400x400/E8DED2/666666?text=Product+3",
+            "https://placehold.co/400x400/E8DED2/666666?text=Product+3",
         },
         {
           id: 4,
           name: "NOM DU PRODUIT",
-          price: 1900,
+          price: 37,
           url: "/product/product-4",
+          status: "active",
+          on_sale: false,
           image:
-            "https://via.placeholder.com/400x400/E8DED2/666666?text=Product+4",
+            "https://placehold.co/400x400/E8DED2/666666?text=Product+4",
         },
         {
           id: 5,
           name: "NOM DU PRODUIT",
-          price: 1900,
+          price: 37,
           url: "/product/product-5",
+          status: "active",
+          on_sale: false,
           image:
-            "https://via.placeholder.com/400x400/E8DED2/666666?text=Product+5",
+            "https://placehold.co/400x400/E8DED2/666666?text=Product+5",
         },
         {
           id: 6,
           name: "NOM DU PRODUIT",
-          price: 1900,
+          price: 37,
           url: "/product/product-6",
+          status: "active",
+          on_sale: false,
           image:
-            "https://via.placeholder.com/400x400/E8DED2/666666?text=Product+6",
+            "https://placehold.co/400x400/E8DED2/666666?text=Product+6",
         },
       ];
+      loading.value = false;
     }
   } catch (err) {
     console.error("Error fetching products:", err);
     error.value = "Impossible de charger les produits.";
-  } finally {
     loading.value = false;
   }
 };
