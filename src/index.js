@@ -25,3 +25,27 @@ if (document.getElementById("lookbook")) {
   document.getElementById("lookbook").style.position = "relative";
 }
 // End Vue Part
+
+// Mobile Menu Toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const mobileNav = document.querySelector(".mobile-nav");
+
+  if (mobileMenuToggle && mobileNav) {
+    mobileMenuToggle.addEventListener("click", function () {
+      mobileNav.classList.toggle("active");
+
+      // Animate hamburger icon
+      const spans = mobileMenuToggle.querySelectorAll("span");
+      if (mobileNav.classList.contains("active")) {
+        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+        spans[1].style.opacity = "0";
+        spans[2].style.transform = "rotate(-45deg) translate(7px, -6px)";
+      } else {
+        spans[0].style.transform = "none";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "none";
+      }
+    });
+  }
+});

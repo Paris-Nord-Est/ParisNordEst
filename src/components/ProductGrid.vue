@@ -25,7 +25,7 @@
       <!-- Product Grid -->
       <div
         v-else-if="displayProducts.length > 0"
-        class="product-grid grid grid-cols-2 md:grid-cols-3 gap-6"
+        class="product-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 md:gap-8"
       >
         <div
           v-for="product in displayProducts"
@@ -242,6 +242,16 @@ onMounted(() => {
 
 .product-image-container {
   aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.product-card {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
 }
 
 .product-card:hover .product-name {
@@ -250,5 +260,17 @@ onMounted(() => {
 
 .product-price {
   color: #333;
+  font-weight: 500;
+}
+
+.product-name {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .product-name {
+    font-size: 1rem;
+  }
 }
 </style>

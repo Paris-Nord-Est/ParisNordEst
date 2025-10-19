@@ -43,7 +43,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Splide from "@splidejs/splide";
-import "@splidejs/splide/css";
+import "@splidejs/splide/dist/css/splide.min.css";
 
 const props = defineProps({
   heroTitle: {
@@ -102,23 +102,41 @@ onMounted(() => {
   position: relative;
   width: 100%;
   min-height: 500px;
+  overflow: hidden;
 }
 
 .hero-slideshow {
   width: 100%;
+  height: 100%;
+}
+
+.hero-slideshow img {
+  min-height: 500px;
+  max-height: 700px;
+  object-fit: cover;
 }
 
 .hero-overlay {
   pointer-events: none;
   z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .hero-content {
   pointer-events: auto;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .hero-cta {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+  transition: all 0.3s ease;
 }
 
 .hero-cta:hover {
@@ -133,6 +151,7 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.3);
   opacity: 0;
   transition: all 0.3s ease;
+  border-radius: 50%;
 }
 
 .hero-slideshow:hover :deep(.splide__arrow) {
@@ -153,5 +172,20 @@ onMounted(() => {
 
 .hero-slideshow :deep(.splide__arrow--next) {
   right: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 400px;
+  }
+
+  .hero-slideshow img {
+    min-height: 400px;
+    max-height: 500px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
 }
 </style>

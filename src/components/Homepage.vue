@@ -34,53 +34,80 @@
     <section class="footer-content bg-black text-white py-16 px-4">
       <div class="container mx-auto max-w-4xl text-center">
         <!-- Logo/Icon -->
-        <div class="footer-logo mb-6 flex justify-center">
-          <div class="logo-container w-32 h-32">
-            <!-- Simple logo placeholder - replace with actual logo -->
+        <div class="footer-logo mb-8 flex justify-center">
+          <div class="logo-container w-40 h-40">
+            <!-- Circular logo with smiley face -->
             <svg
               viewBox="0 0 200 200"
               xmlns="http://www.w3.org/2000/svg"
               class="w-full h-full"
             >
-              <circle cx="100" cy="70" r="50" fill="white" />
-              <circle cx="75" cy="60" r="8" fill="black" />
-              <circle cx="125" cy="60" r="8" fill="black" />
-              <path
-                d="M 70 80 Q 100 95 130 80"
-                stroke="black"
-                stroke-width="3"
+              <!-- Outer circle border -->
+              <circle
+                cx="100"
+                cy="100"
+                r="95"
                 fill="none"
+                stroke="white"
+                stroke-width="3"
               />
+
+              <!-- Smiley face -->
+              <circle cx="70" cy="85" r="8" fill="white" />
+              <circle cx="130" cy="85" r="8" fill="white" />
               <path
-                d="M 130 100 L 160 120"
+                d="M 60 120 Q 100 145 140 120"
                 stroke="white"
                 stroke-width="4"
                 stroke-linecap="round"
+                fill="none"
+              />
+
+              <!-- CASQUETTE text curved at bottom -->
+              <path
+                id="circlePath"
+                d="M 40,140 Q 100,170 160,140"
+                fill="none"
               />
               <text
-                x="100"
-                y="160"
                 font-family="Arial, sans-serif"
-                font-size="32"
+                font-size="16"
                 font-weight="bold"
                 fill="white"
                 text-anchor="middle"
               >
-                CASQUETTE
+                <textPath href="#circlePath" startOffset="50%">
+                  CASQUETTE
+                </textPath>
               </text>
             </svg>
           </div>
         </div>
 
         <!-- Footer Title -->
-        <h3 class="footer-title text-3xl md:text-4xl font-bold mb-6 dela-gothic-one-regular">
+        <h3 class="footer-title text-3xl md:text-4xl font-bold mb-6">
           {{ config.footer.title }}
         </h3>
 
         <!-- Footer Description -->
-        <p class="footer-description text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+        <p class="footer-description text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-10">
           {{ config.footer.description }}
         </p>
+
+        <!-- Footer Links -->
+        <nav class="footer-nav">
+          <ul class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base font-medium">
+            <li><a href="/" class="hover:opacity-70 transition-opacity">ACCUEIL</a></li>
+            <li class="hidden md:inline">-</li>
+            <li><a href="/products" class="hover:opacity-70 transition-opacity">PRODUITS</a></li>
+            <li class="hidden md:inline">-</li>
+            <li><a href="/lookbook" class="hover:opacity-70 transition-opacity">LOOKBOOK</a></li>
+            <li class="hidden md:inline">-</li>
+            <li><a href="/contact" class="hover:opacity-70 transition-opacity">CONTACT</a></li>
+            <li class="hidden md:inline">-</li>
+            <li><a href="/cart" class="hover:opacity-70 transition-opacity">PANIER</a></li>
+          </ul>
+        </nav>
       </div>
     </section>
   </div>
@@ -101,16 +128,16 @@ const config = reactive({
     ctaLink: "/products",
     images: [
       {
-        url: "https://placehold.co/1400x700/4A90E2/ffffff?text=Hero+Slider+1",
-        alt: "Hero image 1",
+        url: "https://placehold.co/1600x700/4A90E2/FFFFFF?text=Hero+Casquette+1&font=montserrat",
+        alt: "Hero image 1 - Casquette Collection",
       },
       {
-        url: "https://placehold.co/1400x700/E94B3C/ffffff?text=Hero+Slider+2",
-        alt: "Hero image 2",
+        url: "https://placehold.co/1600x700/E94B3C/FFFFFF?text=Hero+Casquette+2&font=montserrat",
+        alt: "Hero image 2 - Casquette Collection",
       },
       {
-        url: "https://placehold.co/1400x700/50C878/ffffff?text=Hero+Slider+3",
-        alt: "Hero image 3",
+        url: "https://placehold.co/1600x700/50C878/FFFFFF?text=Hero+Casquette+3&font=montserrat",
+        alt: "Hero image 3 - Casquette Collection",
       },
     ],
   },
@@ -120,7 +147,7 @@ const config = reactive({
   },
   banner: {
     title: "On a mis Paris Nord-Est<br>dans une casquette.",
-    image: "https://placehold.co/1400x600/2C5F2D/ffffff?text=Banner+Paris+Nord-Est",
+    image: "https://placehold.co/1600x600/2C3E50/FFFFFF?text=Paris+Nord-Est+Banner&font=montserrat",
     alt: "Paris Nord-Est Banner",
     showCta: true,
     ctaText: "SHOP NOW",

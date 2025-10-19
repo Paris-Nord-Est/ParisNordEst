@@ -62,34 +62,45 @@ const props = defineProps({
 .banner-section {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .banner-image-container {
   position: relative;
   width: 100%;
-  min-height: 400px;
+  min-height: 500px;
+  overflow: hidden;
 }
 
 .banner-image-container img {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 400px;
+  min-height: 500px;
+  max-height: 600px;
   object-fit: cover;
 }
 
 .banner-overlay {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
 .banner-content {
   z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.banner-title {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .banner-cta {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  border-radius: 0;
 }
 
 .banner-cta:hover {
@@ -103,7 +114,12 @@ const props = defineProps({
   }
 
   .banner-image-container {
-    min-height: 300px;
+    min-height: 350px;
+  }
+
+  .banner-image-container img {
+    min-height: 350px;
+    max-height: 450px;
   }
 }
 </style>

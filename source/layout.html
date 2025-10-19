@@ -49,26 +49,8 @@
         {% endif %}
       </div>
     {% endif %}
-    <header data-bc-hook="header">
-      <div class="wrapper">
-        <nav class="header-nav" role="navigation" aria-label="Main">
-          <ul>
-            <li><a href="/products">{{ t['navigation.products'] }}</a></li>
-            {% if theme.nav_page_display == "all" or theme.nav_page_display == "pages_only" %}
-              {% for custom_page in pages.custom_pages limit:theme.nav_items %}
-                <li>{{ custom_page | link_to }}</li>
-              {% endfor %}
-            {% endif %}
-            {% if pages.subscribe_page %}
-              <li class="artist-support"><a href="{{ pages.subscribe_page.url }}">{{ t['navigation.subscribe'] }}</a></li>
-            {% endif %}
-            {% if theme.nav_page_display == "all" or theme.nav_page_display == "contact_only" %}
-              <li><a href="/contact">{{ t['navigation.contact'] }}</a></li>
-            {% endif %}
-            <li><a href="/cart">{{ t['navigation.cart'] }} (<span class="cart-num-items">{{ cart.item_count }}</span>)</a></li>
-          </ul>
-        </nav>
-
+    <header data-bc-hook="header" class="modern-header">
+      <div class="header-container">
         <div class="branding">
           <a href="/" title="Home">
             {% if theme.images.welcome_image != blank %}
@@ -84,23 +66,41 @@
                 alt="{{ store.name }} Home"
               >
             {% else %}
-              <div class="store-header">{{ store.name }}</div>
+              <div class="store-header">CASQUETTE</div>
             {% endif %}
           </a>
         </div>
-      </div>
-      <nav class="header-nav mobile-nav" aria-label="Mobile Main" role="navigation">
-        <ul>
-          <li><a href="/products">{{ t['navigation.products'] }}</a></li>
-          {% if theme.nav_page_display == "all" or theme.nav_page_display == "pages_only" %}
+
+        <nav class="header-nav" role="navigation" aria-label="Main">
+          <ul>
+            <li><a href="/products">BOUTIQUE</a></li>
             {% for custom_page in pages.custom_pages limit:theme.nav_items %}
               <li>{{ custom_page | link_to }}</li>
             {% endfor %}
-          {% endif %}
+            {% if theme.nav_page_display == "all" or theme.nav_page_display == "contact_only" %}
+              <li><a href="/contact">CONTACT</a></li>
+            {% endif %}
+            <li><a href="/cart">PANIER (<span class="cart-num-items">{{ cart.item_count }}</span>)</a></li>
+          </ul>
+        </nav>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="header-nav mobile-nav" aria-label="Mobile Main" role="navigation">
+        <ul>
+          <li><a href="/products">BOUTIQUE</a></li>
+          {% for custom_page in pages.custom_pages limit:theme.nav_items %}
+            <li>{{ custom_page | link_to }}</li>
+          {% endfor %}
           {% if theme.nav_page_display == "all" or theme.nav_page_display == "contact_only" %}
-            <li><a href="/contact">{{ t['navigation.contact'] }}</a></li>
+            <li><a href="/contact">CONTACT</a></li>
           {% endif %}
-          <li><a href="/cart">{{ t['navigation.cart'] }} (<span class="cart-num-items">{{ cart.item_count }}</span>)</a></li>
+          <li><a href="/cart">PANIER (<span class="cart-num-items">{{ cart.item_count }}</span>)</a></li>
         </ul>
       </nav>
     </header>
