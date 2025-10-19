@@ -18,3 +18,70 @@ a {
   font-weight: 400;
   font-style: normal;
 }
+
+/* Homepage Specific Styles */
+#homepage-app {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default wrapper padding/margin for homepage */
+.home_page .wrapper[data-bc-hook="content"] {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global button styles */
+button,
+.button,
+a.hero-cta,
+a.banner-cta {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Product grid responsive adjustments */
+@media (max-width: 768px) {
+  .product-grid {
+    gap: 1rem;
+  }
+}
+
+/* Ensure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Text shadow utility for readability over images */
+.text-shadow-lg {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
