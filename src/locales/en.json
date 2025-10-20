@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "products": "SHOP",
+    "contact": "CONTACT",
+    "cart": "CART",
+    "home": "HOME"
+  },
+  "pages": {
+    "lookbook": "Lookbook",
+    "ou-nous-trouver": "Where to find us",
+    "faq": "FAQ",
+    "cgv": "Terms & Conditions",
+    "paris-nord-est": "Paris Nord-Est"
+  },
+  "hero": {
+    "title": "Get youun dnama!",
+    "cta": "SHOP NOW"
+  },
+  "banner": {
+    "title": "We put Paris Nord-Est<br>in a cap.",
+    "cta": "SHOP NOW"
+  },
+  "productGrid": {
+    "loading": "Loading products...",
+    "error": "Unable to load products.",
+    "empty": "No products available at the moment.",
+    "soldOut": "Sold out",
+    "onSale": "On sale"
+  },
+  "collection": {
+    "title": "PARIS NORD-EST COLLECTION"
+  },
+  "footer": {
+    "title": "Here we make cool stuff for your head",
+    "description": "No gimmicks, no lies, just real caps designed with love, made to follow you on your adventures – because a cap is stylish. It's fun, but also serious. Not a joke. No BS, just style that reigns supreme, materials that will last. And we make it all in Saint-Denis, because even caps need a little Parisian energy.",
+    "links": {
+      "home": "HOME",
+      "products": "PRODUCTS",
+      "lookbook": "LOOKBOOK",
+      "contact": "CONTACT",
+      "cart": "CART"
+    }
+  },
+  "language": {
+    "fr": "Français",
+    "en": "English",
+    "switchTo": "Switch to {lang}"
+  }
+}

@@ -14,12 +14,12 @@
         <div
           class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"
         ></div>
-        <p class="mt-4 text-gray-600">Chargement des produits...</p>
+        <p class="mt-4 text-gray-600">{{ t("productGrid.loading") }}</p>
       </div>
 
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-12 text-red-600">
-        <p>{{ error }}</p>
+        <p>{{ t("productGrid.error") }}</p>
       </div>
 
       <!-- Product Grid -->
@@ -59,13 +59,13 @@
                 v-if="product.status === 'sold-out'"
                 class="product-status mt-1 text-xs uppercase font-bold text-red-600"
               >
-                Épuisé
+                {{ t("productGrid.soldOut") }}
               </div>
               <div
                 v-else-if="product.on_sale"
                 class="product-status mt-1 text-xs uppercase font-bold text-green-600"
               >
-                En promo
+                {{ t("productGrid.onSale") }}
               </div>
             </div>
           </a>
@@ -74,7 +74,7 @@
 
       <!-- Empty State -->
       <div v-else class="text-center py-12 text-gray-600">
-        <p>Aucun produit disponible pour le moment.</p>
+        <p>{{ t("productGrid.empty") }}</p>
       </div>
     </div>
   </section>
@@ -82,6 +82,9 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = defineProps({
   title: {

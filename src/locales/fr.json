@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "products": "BOUTIQUE",
+    "contact": "CONTACT",
+    "cart": "PANIER",
+    "home": "ACCUEIL"
+  },
+  "pages": {
+    "lookbook": "Lookbook",
+    "ou-nous-trouver": "Où nous trouver",
+    "faq": "FAQ",
+    "cgv": "CGV",
+    "paris-nord-est": "Paris Nord-Est"
+  },
+  "hero": {
+    "title": "Get youun dnama!",
+    "cta": "SHOP NOW"
+  },
+  "banner": {
+    "title": "On a mis Paris Nord-Est<br>dans une casquette.",
+    "cta": "SHOP NOW"
+  },
+  "productGrid": {
+    "loading": "Chargement des produits...",
+    "error": "Impossible de charger les produits.",
+    "empty": "Aucun produit disponible pour le moment.",
+    "soldOut": "Épuisé",
+    "onSale": "En promo"
+  },
+  "collection": {
+    "title": "COLLECTION PARIS NORD-EST"
+  },
+  "footer": {
+    "title": "Ici on fait des trucs cool pour ta tête",
+    "description": "Pas des décocos, pas des mensonges, juste de vraies casquettes conçues avec amour, conçues pour qu'elles te suivent dans tes pérégrinations – parce qu'une casquette c'est stylé. C'est fun, mais aussi sérieux. Pas un truc d'humour. Pas de blabla, juste du style qui détrône, des matières qui dureront longtemps. Et tout ça on le fabrique à Saint-Denis, parce que même les casquettes ont besoin d'un peu d'énergie parisienne.",
+    "links": {
+      "home": "ACCUEIL",
+      "products": "PRODUITS",
+      "lookbook": "LOOKBOOK",
+      "contact": "CONTACT",
+      "cart": "PANIER"
+    }
+  },
+  "language": {
+    "fr": "Français",
+    "en": "English",
+    "switchTo": "Passer en {lang}"
+  }
+}

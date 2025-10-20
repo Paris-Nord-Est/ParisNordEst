@@ -49,63 +49,9 @@
         {% endif %}
       </div>
     {% endif %}
-    <header data-bc-hook="header" class="modern-header">
-      <div class="header-container">
-        <div class="branding">
-          <a href="/" title="Home">
-            {% if theme.images.welcome_image != blank %}
-              {% comment %} Calculate optimal image size with width and height constraints for DPI optimization {% endcomment %}
-              {% assign display_height = theme.header_logo_image_size %}
-              {% assign optimal_width = display_height | times: 6 %}
-              {% assign retina_width = optimal_width | times: 2 %}
-              {% assign retina_height = display_height | times: 2 %}
-              <img
-                class="store-logo"
-                srcset="{{ theme.images.welcome_image.url | constrain: optimal_width, display_height }} 1x, {{ theme.images.welcome_image.url | constrain: retina_width, retina_height }} 2x"
-                src="{{ theme.images.welcome_image.url | constrain: optimal_width, display_height }}"
-                alt="{{ store.name }} Home"
-              >
-            {% else %}
-              <div class="store-header">CASQUETTE</div>
-            {% endif %}
-          </a>
-        </div>
-
-        <nav class="header-nav" role="navigation" aria-label="Main">
-          <ul>
-            <li><a href="/products">BOUTIQUE</a></li>
-            {% for custom_page in pages.custom_pages limit:theme.nav_items %}
-              <li>{{ custom_page | link_to }}</li>
-            {% endfor %}
-            {% if theme.nav_page_display == "all" or theme.nav_page_display == "contact_only" %}
-              <li><a href="/contact">CONTACT</a></li>
-            {% endif %}
-            <li><a href="/cart">PANIER (<span class="cart-num-items">{{ cart.item_count }}</span>)</a></li>
-          </ul>
-        </nav>
-
-        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-
-      <nav class="header-nav mobile-nav" aria-label="Mobile Main" role="navigation">
-        <ul>
-          <li><a href="/products">BOUTIQUE</a></li>
-          {% for custom_page in pages.custom_pages limit:theme.nav_items %}
-            <li>{{ custom_page | link_to }}</li>
-          {% endfor %}
-          {% if theme.nav_page_display == "all" or theme.nav_page_display == "contact_only" %}
-            <li><a href="/contact">CONTACT</a></li>
-          {% endif %}
-          <li><a href="/cart">PANIER (<span class="cart-num-items">{{ cart.item_count }}</span>)</a></li>
-        </ul>
-      </nav>
-    </header>
+    {% comment %} Header/Navigation is now handled by Vue Navigation component {% endcomment %}
     <main class="main" id="main">
-      <div class="wrapper" data-bc-hook="content">
+      <div data-bc-hook="content">
         {% if errors != blank %}
           <ul class="errors {{ page.permalink }}-errors">
             {% for error in errors %}
@@ -490,14 +436,42 @@
     {% endif %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
-    <script src="http://localhost:8080/app.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> --> 
+    {% comment %} Inject BigCartel data for Vue {% endcomment %}
     <script type="text/javascript">
       window.bigcartel = window.bigcartel || {};
       window.bigcartel.account = window.bigcartel.account || {};
       window.bigcartel.account.currency = window.bigcartel.account.currency || "{{ store.currency.code }}";
       window.bigcartel.account.moneyFormat = "{{ theme.money_format }}";
+
+      {% comment %} Data injection for Vue app {% endcomment %}
+      window.BIGCARTEL_DATA = {
+        store: {
+          name: "{{ store.name }}",
+          currency: "{{ store.currency.code }}",
+          website: "{{ store.website }}"
+        },
+        pages: [
+          {% for custom_page in pages.custom_pages limit:theme.nav_items %}
+          {
+            name: "{{ custom_page.name }}",
+            permalink: "{{ custom_page.permalink }}",
+            url: "{{ custom_page.url }}"
+          }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+        cart: {
+          count: {{ cart.item_count }},
+          url: "/cart"
+        },
+        navigation: {
+          products: "/products",
+          contact: "/contact",
+          home: "/"
+        }
+      };
     </script>
+    <script src="http://localhost:8080/app.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
     <script src="{{ theme | theme_js_url }}"></script>
     {% if page.full_url contains '/product/' %}
       <script>

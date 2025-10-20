@@ -2,6 +2,48 @@
 
 All notable changes to Paris Nord-Est theme will be documented in this file.
 
+## [2025-10-19]
+
+### Features
+- **Bilingual Support**: Complete internationalization (i18n) system with French and English language support
+- **Language Switcher**: Added FR/EN toggle button in navigation for instant language switching
+- **Vue Navigation**: New black sticky navigation with centered links (BOUTIQUE, LOOKBOOK, CONTACT, PANIER)
+- **Vue Footer**: New footer component with circular smiley face logo and navigation links
+- **Homepage Redesign**: Redesigned homepage to match new design specifications
+- **3-Column Product Grid**: Updated product grid to display 3 columns on desktop/tablet
+- **Full-Width Sections**: Hero slider and banner sections now span full viewport width
+- **Language Persistence**: User language preference saved in browser localStorage
+- **Mobile Menu**: Responsive hamburger menu with smooth animations
+- **Translated UI**: All static text, navigation, and product states now support both languages
+
+### Architecture
+- **Vue Layout System**: Implemented Layout component wrapping Navigation, content, and Footer
+- **Data Injection**: BigCartel data (pages, cart, store info) injected from Liquid to Vue via `window.BIGCARTEL_DATA`
+- **Translation Files**: Centralized translations in `src/locales/fr.json` and `src/locales/en.json`
+- **i18n Configuration**: Language preference management with localStorage and HTML lang attribute updates
+- **Component Structure**: Homepage and Lookbook pages now use Layout wrapper for consistent UI
+
+### Dependencies
+- Added `vue-i18n@9` for internationalization
+- Added `@vueuse/head` for dynamic meta tag management
+
+### Files Created
+- `src/locales/fr.json` - French translations
+- `src/locales/en.json` - English translations
+- `src/i18n/index.js` - i18n configuration and language management
+- `src/components/Navigation.vue` - Vue-based navigation with language switcher
+- `src/components/Footer.vue` - Reusable footer component
+- `src/components/Layout.vue` - Layout wrapper component
+
+### Files Modified
+- `source/layout.html` - Added BigCartel data injection, removed Liquid-based header
+- `src/index.js` - Added i18n plugin, wrapped pages in Layout component
+- `src/components/Homepage.vue` - Updated to use i18n, removed inline footer
+- `src/components/ProductGrid.vue` - Added i18n for loading/error states and product badges
+- `src/components/HeroSection.vue` - Enhanced styling for full-width display
+- `src/components/BannerSection.vue` - Enhanced overlay and full-width styling
+- `src/style.css` - Removed navigation styles (moved to Navigation.vue), added full-width layout system
+
 ## [2025-10-08]
 
 ### Performance
