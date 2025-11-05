@@ -27,6 +27,19 @@ a {
   padding: 0;
 }
 
+/* Product Page Layout */
+.product_page .product-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .product_page .product-page {
+    padding: 0 1rem;
+  }
+}
+
 /* Remove default wrapper padding/margin for homepage */
 .home_page [data-bc-hook="content"] {
   max-width: 100%;

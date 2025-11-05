@@ -19,15 +19,21 @@ Then access: `http://127.0.0.1:9292`
 ```html
 <!-- Inside <head> tag -->
 <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
-<!-- DEV: Load live CSS from webpack-dev-server -->
+<!-- DEV: Load live CSS from webpack-dev-server (homepage and product pages) -->
+{% if page.category == 'home' or page.category == 'product' %}
 <link href="http://localhost:8080/main.css" media="screen" rel="stylesheet" type="text/css">
+{% endif %}
 
 <!-- Before </body> tag -->
 <script src="http://localhost:8080/app.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
 ```
 
-**Why?** Dugway serves compiled CSS from disk (`/theme.css`), but webpack-dev-server serves live CSS with Hot Module Replacement. Without loading `http://localhost:8080/main.css`, your CSS changes won't appear until you rebuild.
+**Why?**
+- Dugway serves compiled CSS from disk (`/theme.css`), but webpack-dev-server serves live CSS with Hot Module Replacement
+- Without loading `http://localhost:8080/main.css`, your CSS changes won't appear until you rebuild
+- The CSS is loaded on homepage and product pages (which use Vue components and Tailwind for layout)
+- Other pages (cart, contact, products list, etc.) don't load it to prevent Tailwind base styles from interfering with BigCartel theme styles
 
 ---
 

@@ -7,7 +7,7 @@
 	{% when 'coming-soon' %}
 		{% assign product_status = 'Coming soon' %}
 {% endcase %}
-<div class="product-page">
+<div class="product-page container mx-auto">
 
   <div class="w-full">
     {% if product_status != blank %}<span class="product-status">{{ product_status }}</span>{% endif %}
