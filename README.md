@@ -10,18 +10,24 @@ Install node
 Run `gem install dugway`
 Run `npm i`
 
-Run `npm run watch` in one terminal
-Run `dugway serve` in another terminal
+Run `npm run dev` in one terminal (starts webpack-dev-server on port 8080)
+Run `dugway serve` in another terminal (starts Dugway on port 9292)
 Then access: `http://127.0.0.1:9292`
 
-Replace in `layout.html`
+**Important:** In `layout.html`, you must load BOTH JavaScript AND CSS from webpack-dev-server for HMR to work:
 
-The online script with the local one.
+```html
+<!-- Inside <head> tag -->
+<link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
+<!-- DEV: Load live CSS from webpack-dev-server -->
+<link href="http://localhost:8080/main.css" media="screen" rel="stylesheet" type="text/css">
 
-```js
-    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
-    <script src="http://localhost:8080/app.js"></script>
+<!-- Before </body> tag -->
+<script src="http://localhost:8080/app.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
 ```
+
+**Why?** Dugway serves compiled CSS from disk (`/theme.css`), but webpack-dev-server serves live CSS with Hot Module Replacement. Without loading `http://localhost:8080/main.css`, your CSS changes won't appear until you rebuild.
 
 ---
 

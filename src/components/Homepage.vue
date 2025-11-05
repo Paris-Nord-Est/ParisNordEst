@@ -8,8 +8,6 @@
       :hero-images="config.hero.images"
     />
 
-    ICI
-
     <!-- First Product Grid -->
     <ProductGrid
       :title="config.firstGrid.title"

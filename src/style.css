@@ -28,10 +28,11 @@ a {
 }
 
 /* Remove default wrapper padding/margin for homepage */
-.home_page .wrapper[data-bc-hook="content"] {
+.home_page [data-bc-hook="content"] {
   max-width: 100%;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 /* Full-width layout system */
@@ -40,16 +41,6 @@ a {
   max-width: 100%;
   padding: 0;
   margin: 0;
-}
-
-@supports (width: 100dvw) {
-  .hero-section,
-  .banner-section,
-  #homepage-app {
-    width: 100dvw;
-    margin-left: -50dvw;
-    margin-right: -50dvw;
-  }
 }
 
 /* Ensure smooth scrolling */
