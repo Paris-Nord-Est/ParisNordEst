@@ -251,7 +251,7 @@ function disableSelectOption(select_option, type) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+  var lazyImages = [].slice.call(document.querySelectorAll("img.lazy, img.lazyload"));
   if ("IntersectionObserver" in window) {
     let lazyImageObserver = new IntersectionObserver(function (
       entries,
@@ -264,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
             lazyImage.src = lazyImage.dataset.src;
             lazyImage.srcset = lazyImage.dataset.srcset;
             lazyImage.classList.remove("lazy");
+            lazyImage.classList.remove("lazyload");
             lazyImageObserver.unobserve(lazyImage);
           }
         },

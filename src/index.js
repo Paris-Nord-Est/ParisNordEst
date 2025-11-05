@@ -7,6 +7,8 @@ import App from "./App.vue";
 import LookBook from "./components/LookBook.vue";
 import Homepage from "./components/Homepage.vue";
 import Layout from "./components/Layout.vue";
+import Navigation from "./components/Navigation.vue";
+import Footer from "./components/Footer.vue";
 
 // Remove preloader once DOM is ready
 function removePreloader() {
@@ -17,11 +19,9 @@ function removePreloader() {
   }, 100);
 }
 
-// Homepage Vue App with Layout
+// Homepage Vue App (without Layout - Navigation/Footer mounted separately)
 if (document.getElementById("homepage-app")) {
-  const homepageApp = createApp({
-    render: () => h(Layout, {}, () => h(Homepage)),
-  });
+  const homepageApp = createApp(Homepage);
   homepageApp.use(i18n);
   homepageApp.mount("#homepage-app");
   removePreloader();
@@ -33,6 +33,20 @@ if (document.getElementById("vue")) {
   app.use(i18n);
   app.mount("#vue");
   removePreloader();
+}
+
+// Navigation for pages that don't have Layout (homepage, product pages, etc.)
+if (document.getElementById("navigation-app") && !document.getElementById("lookbook")) {
+  const navApp = createApp(Navigation);
+  navApp.use(i18n);
+  navApp.mount("#navigation-app");
+}
+
+// Footer for pages that don't have Layout (homepage, product pages, etc.)
+if (document.getElementById("footer-app") && !document.getElementById("lookbook")) {
+  const footerApp = createApp(Footer);
+  footerApp.use(i18n);
+  footerApp.mount("#footer-app");
 }
 
 // Page Lookbook with Layout
