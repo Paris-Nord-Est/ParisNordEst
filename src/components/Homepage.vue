@@ -2,11 +2,13 @@
   <div class="homepage">
     <!-- Hero Section with Slider -->
     <HeroSection
-      :heroTitle="config.hero.title"
-      :ctaText="config.hero.ctaText"
-      :ctaLink="config.hero.ctaLink"
-      :heroImages="config.hero.images"
+      :hero-title="config.hero.title"
+      :cta-text="config.hero.ctaText"
+      :cta-link="config.hero.ctaLink"
+      :hero-images="config.hero.images"
     />
+
+    ICI
 
     <!-- First Product Grid -->
     <ProductGrid
@@ -16,12 +18,12 @@
 
     <!-- Middle Banner -->
     <BannerSection
-      :bannerTitle="config.banner.title"
-      :bannerImage="config.banner.image"
-      :bannerAlt="config.banner.alt"
-      :showCta="config.banner.showCta"
-      :ctaText="config.banner.ctaText"
-      :ctaLink="config.banner.ctaLink"
+      :banner-title="config.banner.title"
+      :banner-image="config.banner.image"
+      :banner-alt="config.banner.alt"
+      :show-cta="config.banner.showCta"
+      :cta-text="config.banner.ctaText"
+      :cta-link="config.banner.ctaLink"
     />
 
     <!-- Second Product Grid (Collection) -->
@@ -68,7 +70,8 @@ const config = reactive({
   },
   banner: {
     title: t("banner.title"),
-    image: "https://placehold.co/1600x600/2C3E50/FFFFFF?text=Paris+Nord-Est+Banner&font=montserrat",
+    image:
+      "https://placehold.co/1600x600/2C3E50/FFFFFF?text=Paris+Nord-Est+Banner&font=montserrat",
     alt: "Paris Nord-Est Banner",
     showCta: true,
     ctaText: t("banner.cta"),

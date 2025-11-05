@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const webpack = require("webpack");
 
 module.exports = {
   mode: "production",
@@ -31,7 +32,12 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
-          "sass-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              api: "modern",
+            },
+          },
           "postcss-loader",
         ],
       },
@@ -60,10 +66,36 @@ module.exports = {
       chunkFilename: "[id].css",
     }),
     new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: JSON.stringify(true),
+      __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false),
+    }),
   ],
   devServer: {
     static: path.resolve(__dirname, "source/dist"),
-    watchFiles: ["source/**/*"],
+    watchFiles: ["source/**/*", "src/**/*"],
     hot: true,
+    liveReload: true,
+    port: 8080,
+    allowedHosts: "all",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
+    },
+    client: {
+      webSocketURL: {
+        hostname: "localhost",
+        pathname: "/ws",
+        port: 8080,
+        protocol: "ws",
+      },
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+      progress: true,
+    },
   },
 };
