@@ -22,14 +22,17 @@
           </li>
           <li>
             <a :href="cart.url">
-              {{ t("nav.cart") }} (<span class="cart-num-items">{{ cartCount }}</span>)
+              {{ t("nav.cart") }} (<span class="cart-num-items">{{
+                cartCount
+              }}</span
+              >)
             </a>
           </li>
           <li class="language-switcher">
             <button
-              @click="toggleLanguage"
               :aria-label="t('language.switchTo', { lang: otherLanguage })"
               class="language-toggle"
+              @click="toggleLanguage"
             >
               {{ currentLocale.toUpperCase() }}
             </button>
@@ -56,7 +59,9 @@
     >
       <ul>
         <li>
-          <a :href="navigation.products" @click="closeMobileMenu">{{ t("nav.products") }}</a>
+          <a :href="navigation.products" @click="closeMobileMenu">{{
+            t("nav.products")
+          }}</a>
         </li>
         <li v-for="page in pages" :key="page.permalink">
           <a :href="page.url" @click="closeMobileMenu">
@@ -64,19 +69,22 @@
           </a>
         </li>
         <li v-if="navigation.contact">
-          <a :href="navigation.contact" @click="closeMobileMenu">{{ t("nav.contact") }}</a>
+          <a :href="navigation.contact" @click="closeMobileMenu">{{
+            t("nav.contact")
+          }}</a>
         </li>
         <li>
           <a :href="cart.url" @click="closeMobileMenu">
-            {{ t("nav.cart") }} (<span class="cart-num-items">{{ cartCount }}</span>)
+            {{ t("nav.cart") }} (<span class="cart-num-items">{{
+              cartCount
+            }}</span
+            >)
           </a>
         </li>
         <li class="language-switcher-mobile">
-          <button
-            @click="toggleLanguage"
-            class="language-toggle"
-          >
-            {{ otherLanguage.toUpperCase() }} - {{ t(`language.${otherLanguage}`) }}
+          <button class="language-toggle" @click="toggleLanguage">
+            {{ otherLanguage.toUpperCase() }} -
+            {{ t(`language.${otherLanguage}`) }}
           </button>
         </li>
       </ul>
@@ -171,7 +179,7 @@ function closeMobileMenu() {
 .modern-header .header-nav {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
 }
 
 .modern-header .header-nav ul {

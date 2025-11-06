@@ -107,3 +107,26 @@ img {
 .hover-lift:hover {
   transform: translateY(-4px);
 }
+
+.announcement-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.announcement-message__text {
+  padding: 16px 0;
+}
+
+/* Sticky navigation */
+#navigation-app {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: white;
+}
+
+/* When announcement is present, navigation sticks below it */
+.announcement-message ~ * #navigation-app {
+  top: auto;
+}

@@ -1,12 +1,7 @@
 <template>
   <div class="homepage">
     <!-- Hero Section with Slider -->
-    <HeroSection
-      :hero-title="config.hero.title"
-      :cta-text="config.hero.ctaText"
-      :cta-link="config.hero.ctaLink"
-      :hero-images="config.hero.images"
-    />
+    <HeroSection :slides="config.hero.slides" />
 
     <!-- First Product Grid -->
     <ProductGrid
@@ -44,21 +39,20 @@ const { t } = useI18n();
 // Homepage configuration
 const config = reactive({
   hero: {
-    title: t("hero.title"),
-    ctaText: t("hero.cta"),
-    ctaLink: "/products",
-    images: [
+    slides: [
       {
-        url: "https://placehold.co/1600x700/4A90E2/FFFFFF?text=Hero+Casquette+1&font=montserrat",
+        url: "/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp",
         alt: "Hero image 1 - Casquette Collection",
+        title: t("hero.title"),
+        ctaText: t("hero.cta"),
+        ctaLink: "/products",
       },
       {
-        url: "https://placehold.co/1600x700/E94B3C/FFFFFF?text=Hero+Casquette+2&font=montserrat",
-        alt: "Hero image 2 - Casquette Collection",
-      },
-      {
-        url: "https://placehold.co/1600x700/50C878/FFFFFF?text=Hero+Casquette+3&font=montserrat",
-        alt: "Hero image 3 - Casquette Collection",
+        url: "/images/home/slider/le-bar.jpg",
+        alt: "Hero image 2 - Le Bar Collection",
+        title: "Discover Le Bar",
+        ctaText: "EXPLORE",
+        ctaLink: "/collection/le-bar",
       },
     ],
   },

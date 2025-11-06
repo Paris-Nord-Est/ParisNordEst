@@ -2,6 +2,37 @@
 
 All notable changes to Paris Nord-Est theme will be documented in this file.
 
+## [2025-11-06]
+
+### Architecture
+- **Vue/BigCartel Page Separation**: Implemented clean separation between Vue-powered pages and traditional BigCartel theme pages
+- **is_vue_page Helper**: Created single source of truth variable to identify Vue pages (Homepage, Product pages, Products listing, Lookbook)
+- **Conditional Asset Loading**: Vue pages now load only webpack assets (CSS/JS), BigCartel pages load only theme assets
+- **Conditional Footer**: Vue pages use Vue Footer component, BigCartel pages use original HTML footer
+- **Development Workflow**: Established dual-server setup with webpack dev server (port 8080) and Dugway server (port 9292)
+
+### Features
+- **Products Listing Page**: Converted /products from BigCartel Liquid template to Vue component
+- **ProductsListing Component**: New Vue component with bilingual title and ProductGrid integration
+- **Clean Vue Pages**: Homepage, product pages, products listing, and lookbook now free from BigCartel CSS conflicts
+
+### Bug Fixes
+- Fixed BigCartel CSS interfering with Vue pages by implementing conditional loading
+- Fixed footer appearing on Vue pages when it should only show on BigCartel pages
+- Fixed page detection using reliable `page.permalink` and `page.full_url` checks instead of unreliable `page.category`
+- Fixed blank Vue pages by ensuring webpack dev server runs alongside Dugway
+
+### Files Created
+- `src/components/ProductsListing.vue` - Vue component for products listing page
+- `.vscode/settings.json` - VS Code customization with pink title bar
+
+### Files Modified
+- `source/layout.html` - Added is_vue_page variable, conditional CSS/JS/footer loading
+- `source/products.html` - Simplified from 132-line Liquid template to Vue mount point
+- `src/index.js` - Added ProductsListing mounting logic
+- `src/locales/fr.json` - Added productsListing.title translation ("BOUTIQUE")
+- `src/locales/en.json` - Added productsListing.title translation ("SHOP")
+
 ## [2025-10-19]
 
 ### Features
