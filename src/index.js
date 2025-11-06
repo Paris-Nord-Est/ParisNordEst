@@ -6,6 +6,7 @@ import i18n from "./i18n";
 import App from "./App.vue";
 import LookBook from "./components/LookBook.vue";
 import Homepage from "./components/Homepage.vue";
+import ProductsListing from "./components/ProductsListing.vue";
 import Layout from "./components/Layout.vue";
 import Navigation from "./components/Navigation.vue";
 import Footer from "./components/Footer.vue";
@@ -32,6 +33,14 @@ if (document.getElementById("vue")) {
   const app = createApp(App);
   app.use(i18n);
   app.mount("#vue");
+  removePreloader();
+}
+
+// Products Listing Vue App (for /products page)
+if (document.getElementById("products-app")) {
+  const productsApp = createApp(ProductsListing);
+  productsApp.use(i18n);
+  productsApp.mount("#products-app");
   removePreloader();
 }
 
@@ -65,6 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (
     !document.getElementById("homepage-app") &&
     !document.getElementById("vue") &&
+    !document.getElementById("products-app") &&
     !document.getElementById("lookbook")
   ) {
     removePreloader();

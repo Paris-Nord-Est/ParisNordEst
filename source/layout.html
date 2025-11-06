@@ -4,6 +4,12 @@
 {% comment %} Set default page title {% endcomment %}
 {% assign page_title = page.name | append: title_suffix %}
 
+{% comment %} Determine if this is a Vue-powered page {% endcomment %}
+{% assign is_vue_page = false %}
+{% if page.permalink == 'home' or page.full_url contains '/product/' or page.full_url contains '/products' or page.permalink == 'lookbook' %}
+  {% assign is_vue_page = true %}
+{% endif %}
+
 {% comment %} Handle special page cases {% endcomment %}
 {% if page.name == 'Home' %}
   {% assign page_title = store.name %}
@@ -21,9 +27,11 @@
     <title>{{ page_title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% unless is_vue_page %}
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
-    <!-- DEV: Load live CSS from webpack-dev-server (homepage and product pages) -->
-    {% if page.category == 'home' or page.category == 'product' %}
+    {% endunless %}
+    {% if is_vue_page %}
+    <!-- DEV: Load live CSS from webpack-dev-server (Vue pages only) -->
     <link href="http://localhost:8080/main.css" media="screen" rel="stylesheet" type="text/css">
     {% endif %}
     {{ head_content }}
@@ -193,8 +201,10 @@
     {% if pages.required_pages.size > 0 %}
       {% assign show_pages_section_in_footer = true %}
     {% endif %}
-    {% unless page.permalink == 'home' or page.full_url contains '/product/' %}
+    {% if is_vue_page %}
     <div id="footer-app"></div>
+    {% endif %}
+    {% unless is_vue_page %}
     <footer data-bc-hook="footer">
       <div class="wrapper">
         {% if theme.footer_text != blank and theme.footer_text_position == "start" %}
@@ -478,9 +488,14 @@
         }
       };
     </script>
+    {% if is_vue_page %}
+    <!-- Vue JavaScript Bundle -->
     <script src="http://localhost:8080/app.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
+    {% endif %}
+    {% unless is_vue_page %}
     <script src="{{ theme | theme_js_url }}"></script>
+    {% endunless %}
     {% if page.full_url contains '/product/' %}
       <script>
         Product.find('{{ product.permalink }}', processProduct)
