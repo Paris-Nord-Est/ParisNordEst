@@ -193,6 +193,7 @@
     {% if pages.required_pages.size > 0 %}
       {% assign show_pages_section_in_footer = true %}
     {% endif %}
+    {% unless page.permalink == 'home' or page.full_url contains '/product/' %}
     <div id="footer-app"></div>
     <footer data-bc-hook="footer">
       <div class="wrapper">
@@ -367,6 +368,7 @@
         </nav>
       </div>
     </footer>
+    {% endunless %}
     {% comment %}
       Manual array construction needed for themeFeatures for Liquid 3.0.6 since standard JSON filters 
       (json, jsonify) don't work properly. This ensures proper JavaScript array 
