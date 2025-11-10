@@ -370,11 +370,6 @@
           {% if theme.footer_text != blank and theme.footer_text_position == "end" %}
             <div class="footer-custom-content">{{ theme.footer_text }} </div>
           {% endif %}
-          <div data-bc-hook="credit">
-            {% unless theme.hide_big_cartel_credit %}
-              {{ big_cartel_credit_logo }}
-            {% endunless %}
-          </div>
         </nav>
       </div>
     </footer>

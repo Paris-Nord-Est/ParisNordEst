@@ -103,7 +103,12 @@ const { t, locale } = useI18n();
 const bigcartelData = window.BIGCARTEL_DATA || {
   pages: [],
   cart: { count: 0, url: "/cart" },
-  navigation: { products: "/products", contact: "/contact", home: "/" },
+  navigation: {
+    home: "/",
+    products: "/products",
+    lookbook: "/lookbook",
+    contact: "/contact",
+  },
 };
 
 const pages = ref(bigcartelData.pages);

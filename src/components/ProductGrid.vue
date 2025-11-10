@@ -83,6 +83,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
+import { products as fallbackProducts } from "../data/products";
 
 const { t } = useI18n();
 
@@ -140,9 +141,18 @@ const fetchProducts = () => {
   error.value = null;
 
   try {
-    // Check if BigCartel Product API is available
-    if (window.Product && typeof window.Product.findAll === "function") {
-      // BigCartel uses callback pattern: Product.findAll({}, callback)
+    // Detect if we're in local development (Dugway)
+    const isLocalDev = window.location.hostname === 'localhost' ||
+                       window.location.hostname === '127.0.0.1';
+
+    if (isLocalDev) {
+      // Use real product data for local development (Dugway returns dummy data)
+      console.log("Local development detected - using real product data");
+      fetchedProducts.value = fallbackProducts;
+      loading.value = false;
+    } else if (window.Product && typeof window.Product.findAll === "function") {
+      // Production: use BigCartel API
+      console.log("Production mode - fetching from BigCartel API");
       window.Product.findAll({}, (products) => {
         console.log("BigCartel API Response:", products);
 
@@ -161,69 +171,9 @@ const fetchProducts = () => {
         loading.value = false;
       });
     } else {
-      // Fallback: use placeholder products for development
-      fetchedProducts.value = [
-        {
-          id: 1,
-          name: "NOM DU PRODUIT",
-          price: 37,
-          url: "/product/product-1",
-          status: "active",
-          on_sale: false,
-          image:
-            "https://placehold.co/400x400/E8DED2/666666?text=Product+1",
-        },
-        {
-          id: 2,
-          name: "NOM DU PRODUIT",
-          price: 37,
-          url: "/product/product-2",
-          status: "active",
-          on_sale: false,
-          image:
-            "https://placehold.co/400x400/E8DED2/666666?text=Product+2",
-        },
-        {
-          id: 3,
-          name: "NOM DU PRODUIT",
-          price: 37,
-          url: "/product/product-3",
-          status: "active",
-          on_sale: false,
-          image:
-            "https://placehold.co/400x400/E8DED2/666666?text=Product+3",
-        },
-        {
-          id: 4,
-          name: "NOM DU PRODUIT",
-          price: 37,
-          url: "/product/product-4",
-          status: "active",
-          on_sale: false,
-          image:
-            "https://placehold.co/400x400/E8DED2/666666?text=Product+4",
-        },
-        {
-          id: 5,
-          name: "NOM DU PRODUIT",
-          price: 37,
-          url: "/product/product-5",
-          status: "active",
-          on_sale: false,
-          image:
-            "https://placehold.co/400x400/E8DED2/666666?text=Product+5",
-        },
-        {
-          id: 6,
-          name: "NOM DU PRODUIT",
-          price: 37,
-          url: "/product/product-6",
-          status: "active",
-          on_sale: false,
-          image:
-            "https://placehold.co/400x400/E8DED2/666666?text=Product+6",
-        },
-      ];
+      // Fallback: use real product data if API is not available
+      console.log("BigCartel API not available - using fallback data");
+      fetchedProducts.value = fallbackProducts;
       loading.value = false;
     }
   } catch (err) {

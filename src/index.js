@@ -14,6 +14,7 @@ import Footer from "./components/Footer.vue";
 // Remove preloader once DOM is ready
 function removePreloader() {
   document.body.classList.remove("preloader");
+  console.log("removePreloader");
   // Remove transition blocker after a short delay to allow initial render
   setTimeout(() => {
     document.body.classList.remove("transition-preloader");
@@ -45,14 +46,20 @@ if (document.getElementById("products-app")) {
 }
 
 // Navigation for pages that don't have Layout (homepage, product pages, etc.)
-if (document.getElementById("navigation-app") && !document.getElementById("lookbook")) {
+if (
+  document.getElementById("navigation-app") &&
+  !document.getElementById("lookbook")
+) {
   const navApp = createApp(Navigation);
   navApp.use(i18n);
   navApp.mount("#navigation-app");
 }
 
 // Footer for pages that don't have Layout (homepage, product pages, etc.)
-if (document.getElementById("footer-app") && !document.getElementById("lookbook")) {
+if (
+  document.getElementById("footer-app") &&
+  !document.getElementById("lookbook")
+) {
   const footerApp = createApp(Footer);
   footerApp.use(i18n);
   footerApp.mount("#footer-app");

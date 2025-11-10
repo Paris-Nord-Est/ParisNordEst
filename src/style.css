@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Custom font families */
+  --font-garet: "Garet", ui-sans-serif, system-ui, sans-serif;
+  --font-akira: "Akira", ui-sans-serif, system-ui, sans-serif;
+  --font-delagothic: "Dela Gothic One", ui-sans-serif, system-ui, sans-serif;
+}
 
 a {
   transition-property: color, background-color, border-color, fill, stroke,
@@ -116,6 +121,7 @@ img {
 
 .announcement-message__text {
   padding: 16px 0;
+  text-align: center;
 }
 
 /* Sticky navigation */
