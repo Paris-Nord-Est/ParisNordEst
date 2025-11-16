@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        garet: ["Garet", ...defaultTheme.fontFamily.sans],
-        akira: ["Akira", ...defaultTheme.fontFamily.sans],
-        delagothic: ["Dela Gothic One", ...defaultTheme.fontFamily.sans],
+        sans: ["Amiko", ...defaultTheme.fontFamily.sans],
+        amiko: ["Amiko", ...defaultTheme.fontFamily.sans],
+        sharpie: ["Sharpie", ...defaultTheme.fontFamily.sans],
       },
     },
   },

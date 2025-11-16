@@ -226,6 +226,117 @@
       "requires": "inventory"
     },
     {
+      "variable": "show_sold_out_product_prices",
+      "label": "Show sold out product prices",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows prices for sold out products",
+      "requires": "inventory"
+    },
+    {
+      "variable": "show_low_inventory_messages",
+      "label": "Show low inventory messages",
+      "type": "boolean",
+      "default": false,
+      "description": "Shows low inventory warning messages on product pages",
+      "requires": "inventory"
+    },
+    {
+      "variable": "desktop_product_page_images",
+      "label": "Desktop product page images",
+      "type": "select",
+      "options": [
+        ["Single image", "single"],
+        ["Thumbnail gallery", "thumbnails"],
+        ["Slideshow", "slideshow"]
+      ],
+      "default": "thumbnails",
+      "description": "Sets the display of product images on desktop"
+    },
+    {
+      "variable": "mobile_product_page_images",
+      "label": "Mobile product page images",
+      "type": "select",
+      "options": [
+        ["Single image", "single"],
+        ["Thumbnail gallery", "thumbnails"],
+        ["Slideshow", "slideshow"]
+      ],
+      "default": "slideshow",
+      "description": "Sets the display of product images on mobile"
+    },
+    {
+      "variable": "product_image_zoom",
+      "label": "Enable product image zoom",
+      "type": "boolean",
+      "default": true,
+      "description": "Allows users to zoom in on product images"
+    },
+    {
+      "variable": "homepage_slideshow_transition",
+      "label": "Homepage slideshow transition",
+      "type": "select",
+      "options": [
+        ["Fade", "fade"],
+        ["Slide", "slide"]
+      ],
+      "default": "fade",
+      "description": "Animation style for homepage slideshow"
+    },
+    {
+      "variable": "homepage_slideshow_autoplay",
+      "label": "Homepage slideshow autoplay",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically advance homepage slideshow"
+    },
+    {
+      "variable": "homepage_slideshow_speed",
+      "label": "Homepage slideshow speed",
+      "type": "select",
+      "options": "1000..10000",
+      "default": 5000,
+      "description": "Time between slides in milliseconds (1000 = 1 second)"
+    },
+    {
+      "variable": "homepage_slideshow_link",
+      "label": "Homepage slideshow link",
+      "type": "text",
+      "description": "URL to link slideshow images to (optional)"
+    },
+    {
+      "variable": "show_bnpl_messaging",
+      "label": "Show Buy Now Pay Later messaging",
+      "type": "boolean",
+      "default": false,
+      "description": "Displays BNPL payment options on product pages"
+    },
+    {
+      "variable": "home_featured_video_url",
+      "label": "Homepage featured video URL",
+      "type": "text",
+      "description": "YouTube or Vimeo URL for homepage video"
+    },
+    {
+      "variable": "home_featured_video_size",
+      "label": "Homepage video size",
+      "type": "select",
+      "options": [
+        ["Small", "small"],
+        ["Medium", "medium"],
+        ["Large", "large"]
+      ],
+      "default": "medium",
+      "description": "Size of the homepage featured video"
+    },
+    {
+      "variable": "home_featured_video_border",
+      "label": "Homepage video border",
+      "type": "boolean",
+      "default": false,
+      "description": "Add border around homepage video"
+    },
+    {
       "variable": "show_facebook",
       "label": "Show Facebook's Share button",
       "type": "boolean",

@@ -9,10 +9,12 @@
       />
 
       <!-- Text Overlay -->
-      <div class="banner-overlay absolute inset-0 flex items-center justify-center">
+      <div
+        class="banner-overlay absolute inset-0 flex items-center justify-center"
+      >
         <div class="banner-content text-center text-white px-4 max-w-2xl">
           <h2
-            class="banner-title text-3xl md:text-5xl font-bold mb-4 dela-gothic-one-regular"
+            class="banner-title text-3xl md:text-5xl font-bold mb-4 font-sharpie"
             style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7)"
             v-html="bannerTitle"
           ></h2>

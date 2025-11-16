@@ -106,9 +106,46 @@ const loading = ref(false);
 const error = ref(null);
 const fetchedProducts = ref([]);
 
+// Custom product sorting logic
+const sortProducts = (products) => {
+  // Priority order (first category)
+  const priorityOrder = [115392261, 102294355, 103866085, 89598492, 102007111];
+
+  // Separate products into categories
+  const priorityProducts = [];
+  const tshirts = [];
+  const otherProducts = [];
+
+  products.forEach(product => {
+    const priorityIndex = priorityOrder.indexOf(product.id);
+
+    if (priorityIndex !== -1) {
+      // Add to priority products with their index for sorting
+      priorityProducts.push({ product, priorityIndex });
+    } else if (product.name.toLowerCase().includes('t-shirt')) {
+      // T-shirts go to the end
+      tshirts.push(product);
+    } else {
+      // Everything else goes in the middle
+      otherProducts.push(product);
+    }
+  });
+
+  // Sort priority products by their specified order
+  priorityProducts.sort((a, b) => a.priorityIndex - b.priorityIndex);
+
+  // Combine: priority products first, then others, then t-shirts
+  return [
+    ...priorityProducts.map(item => item.product),
+    ...otherProducts,
+    ...tshirts
+  ];
+};
+
 const displayProducts = computed(() => {
   const source = props.products || fetchedProducts.value;
-  return source.slice(0, props.limit);
+  const sortedProducts = sortProducts(source);
+  return sortedProducts.slice(0, props.limit);
 });
 
 const formatPrice = (price) => {

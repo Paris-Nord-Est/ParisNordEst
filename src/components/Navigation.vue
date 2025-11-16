@@ -3,7 +3,13 @@
     <div class="header-container">
       <div class="branding">
         <a :href="navigation.home" :title="t('nav.home')">
-          <div class="store-header">CASQUETTE</div>
+          <div class="store-header">
+            <img
+              src="/images/casquette/vectoriel/logo-horizontal-white.svg"
+              alt="Casquette"
+              class="store-logo"
+            />
+          </div>
         </a>
       </div>
 
@@ -16,6 +22,9 @@
             <a :href="page.url">
               {{ t(`pages.${page.permalink}`, page.name) }}
             </a>
+          </li>
+          <li v-if="navigation.lookbook">
+            <a :href="navigation.lookbook">{{ t("nav.lookbook") }}</a>
           </li>
           <li v-if="navigation.contact">
             <a :href="navigation.contact">{{ t("nav.contact") }}</a>
@@ -67,6 +76,11 @@
           <a :href="page.url" @click="closeMobileMenu">
             {{ t(`pages.${page.permalink}`, page.name) }}
           </a>
+        </li>
+        <li v-if="navigation.lookbook">
+          <a :href="navigation.lookbook" @click="closeMobileMenu">{{
+            t("nav.lookbook")
+          }}</a>
         </li>
         <li v-if="navigation.contact">
           <a :href="navigation.contact" @click="closeMobileMenu">{{

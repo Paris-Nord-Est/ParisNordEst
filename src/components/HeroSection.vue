@@ -24,7 +24,7 @@
         class="hero-content text-left text-white px-4 flex flex-col items-start justify-center absolute left-[10%]"
       >
         <h2
-          class="hero-title text-4xl md:text-6xl font-bold dela-gothic-one-regular bg-black px-3 py-2"
+          class="hero-title text-4xl md:text-6xl font-bold bg-black px-3 py-2 font-sharpie"
           style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7)"
         >
           {{ currentSlide.title }}

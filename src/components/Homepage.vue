@@ -62,8 +62,7 @@ const config = reactive({
   },
   banner: {
     title: t("banner.title"),
-    image:
-      "https://placehold.co/1600x600/2C3E50/FFFFFF?text=Paris+Nord-Est+Banner&font=montserrat",
+    image: "/images/home/banner/paris-nord-est-banner.jpg",
     alt: "Paris Nord-Est Banner",
     showCta: true,
     ctaText: t("banner.cta"),

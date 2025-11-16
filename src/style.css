@@ -1,10 +1,76 @@
 @import "tailwindcss";
 
+/* Amiko Font Family */
+@font-face {
+  font-family: "Amiko";
+  src: url("./font/Amiko-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiko";
+  src: url("./font/Amiko-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiko";
+  src: url("./font/Amiko-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sharpie Font Family */
+@font-face {
+  font-family: "Sharpie";
+  src: url("./font/Sharpie-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sharpie";
+  src: url("./font/Sharpie-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sharpie";
+  src: url("./font/Sharpie-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sharpie";
+  src: url("./font/Sharpie-Extrabold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sharpie";
+  src: url("./font/Sharpie-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Custom font families */
-  --font-garet: "Garet", ui-sans-serif, system-ui, sans-serif;
-  --font-akira: "Akira", ui-sans-serif, system-ui, sans-serif;
-  --font-delagothic: "Dela Gothic One", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Amiko", ui-sans-serif, system-ui, sans-serif;
+  --font-amiko: "Amiko", ui-sans-serif, system-ui, sans-serif;
+  --font-sharpie: "Sharpie", ui-sans-serif, system-ui, sans-serif;
 }
 
 a {
