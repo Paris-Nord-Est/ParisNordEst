@@ -3,10 +3,12 @@
     <!-- Hero Section with Slider -->
     <HeroSection :slides="config.hero.slides" />
 
-    <!-- First Product Grid -->
+    <!-- First Product Grid - Non Paris Nord-Est Products -->
     <ProductGrid
       :title="config.firstGrid.title"
-      :limit="config.firstGrid.limit"
+      :product-ids="config.firstGrid.productIds"
+      :desktop-limit="config.firstGrid.desktopLimit"
+      :mobile-limit="config.firstGrid.mobileLimit"
     />
 
     <!-- Middle Banner -->
@@ -19,9 +21,10 @@
       :cta-link="config.banner.ctaLink"
     />
 
-    <!-- Second Product Grid (Collection) -->
+    <!-- Second Product Grid - Paris Nord-Est Collection -->
     <ProductGrid
       :title="t('collection.title')"
+      :exclude-ids="config.secondGrid.excludeIds"
       :limit="config.secondGrid.limit"
     />
   </div>
@@ -58,7 +61,9 @@ const config = reactive({
   },
   firstGrid: {
     title: "",
-    limit: 6,
+    productIds: [115392261, 102294355, 103866085], // Non Paris Nord-Est products
+    desktopLimit: 3,
+    mobileLimit: 2,
   },
   banner: {
     title: t("banner.title"),
@@ -69,7 +74,8 @@ const config = reactive({
     ctaLink: "/products",
   },
   secondGrid: {
-    limit: 6,
+    excludeIds: [115392261, 102294355, 103866085], // Exclude non-PNE products
+    limit: 100, // Show all Paris Nord-Est products
   },
 });
 </script>

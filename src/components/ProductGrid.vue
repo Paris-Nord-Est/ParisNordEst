@@ -96,7 +96,23 @@ const props = defineProps({
     type: Number,
     default: 6,
   },
+  desktopLimit: {
+    type: Number,
+    default: null,
+  },
+  mobileLimit: {
+    type: Number,
+    default: null,
+  },
   products: {
+    type: Array,
+    default: null,
+  },
+  productIds: {
+    type: Array,
+    default: null,
+  },
+  excludeIds: {
     type: Array,
     default: null,
   },
@@ -105,6 +121,7 @@ const props = defineProps({
 const loading = ref(false);
 const error = ref(null);
 const fetchedProducts = ref([]);
+const isMobile = ref(window.innerWidth < 768);
 
 // Custom product sorting logic
 const sortProducts = (products) => {
@@ -143,9 +160,29 @@ const sortProducts = (products) => {
 };
 
 const displayProducts = computed(() => {
-  const source = props.products || fetchedProducts.value;
+  let source = props.products || fetchedProducts.value;
+
+  // Filter by specific product IDs if provided
+  if (props.productIds && props.productIds.length > 0) {
+    source = source.filter(product => props.productIds.includes(product.id));
+  }
+
+  // Exclude specific product IDs if provided
+  if (props.excludeIds && props.excludeIds.length > 0) {
+    source = source.filter(product => !props.excludeIds.includes(product.id));
+  }
+
   const sortedProducts = sortProducts(source);
-  return sortedProducts.slice(0, props.limit);
+
+  // Determine limit based on screen size
+  let effectiveLimit = props.limit;
+  if (props.mobileLimit && isMobile.value) {
+    effectiveLimit = props.mobileLimit;
+  } else if (props.desktopLimit && !isMobile.value) {
+    effectiveLimit = props.desktopLimit;
+  }
+
+  return sortedProducts.slice(0, effectiveLimit);
 });
 
 const formatPrice = (price) => {
@@ -222,6 +259,17 @@ const fetchProducts = () => {
 
 onMounted(() => {
   fetchProducts();
+
+  // Handle window resize for responsive limits
+  const handleResize = () => {
+    isMobile.value = window.innerWidth < 768;
+  };
+  window.addEventListener('resize', handleResize);
+
+  // Cleanup
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
 });
 </script>
 
