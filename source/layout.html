@@ -6,7 +6,7 @@
 
 {% comment %} Determine if this is a Vue-powered page {% endcomment %}
 {% assign is_vue_page = false %}
-{% if page.permalink == 'home' or page.full_url contains '/product/' or page.full_url contains '/products' or page.permalink == 'lookbook' %}
+{% if page.permalink == 'home' or page.permalink == 'lookbook' %}
   {% assign is_vue_page = true %}
 {% endif %}
 
@@ -27,12 +27,12 @@
     <title>{{ page_title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% unless is_vue_page %}
-    <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
-    {% endunless %}
     {% if is_vue_page %}
-    <!-- DEV: Load live CSS from webpack-dev-server (Vue pages only) -->
+    <!-- DEV: Vue CSS only (no BigCartel theme CSS to avoid conflicts) -->
     <link href="http://localhost:8080/main.css" media="screen" rel="stylesheet" type="text/css">
+    {% else %}
+    <!-- BigCartel theme CSS (non-Vue pages only) -->
+    <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
     {% endif %}
     {{ head_content }}
     <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
@@ -62,7 +62,7 @@
       </div>
     {% endif %}
     {% comment %} Header/Navigation is now handled by Vue Navigation component {% endcomment %}
-    <div id="navigation-app"></div>
+    <div id="navigation-app" data-bc-hook="header"></div>
     <main class="main" id="main">
       <div data-bc-hook="content">
         {% if errors != blank %}
