@@ -83,7 +83,6 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { products as fallbackProducts } from "../data/products";
 
 const { t } = useI18n();
 
@@ -215,39 +214,36 @@ const fetchProducts = () => {
   error.value = null;
 
   try {
-    // Detect if we're in local development (Dugway)
-    const isLocalDev = window.location.hostname === 'localhost' ||
-                       window.location.hostname === '127.0.0.1';
-
-    if (isLocalDev) {
-      // Use real product data for local development (Dugway returns dummy data)
-      console.log("Local development detected - using real product data");
-      fetchedProducts.value = fallbackProducts;
-      loading.value = false;
-    } else if (window.Product && typeof window.Product.findAll === "function") {
-      // Production: use BigCartel API
-      console.log("Production mode - fetching from BigCartel API");
+    // Use BigCartel API for both local (Dugway) and production
+    if (window.Product && typeof window.Product.findAll === "function") {
+      console.log("Fetching products from BigCartel API");
       window.Product.findAll({}, (products) => {
         console.log("BigCartel API Response:", products);
 
-        fetchedProducts.value = products.map((product) => ({
-          id: product.id,
-          name: product.name,
-          price: product.default_price || product.price,
-          url: product.url,
-          status: product.status,
-          on_sale: product.on_sale,
-          image:
-            product.images?.[0]?.url ||
-            "https://placehold.co/400x400/CCCCCC/666666?text=No+Image",
-        }));
+        if (products && products.length > 0) {
+          fetchedProducts.value = products.map((product) => ({
+            id: product.id,
+            name: product.name,
+            price: product.default_price || product.price,
+            url: product.url,
+            status: product.status,
+            on_sale: product.on_sale,
+            image:
+              product.images?.[0]?.url ||
+              "https://placehold.co/400x400/CCCCCC/666666?text=No+Image",
+          }));
+        } else {
+          // API returned empty
+          console.warn("BigCartel API returned no products");
+          error.value = "Aucun produit disponible.";
+        }
 
         loading.value = false;
       });
     } else {
-      // Fallback: use real product data if API is not available
-      console.log("BigCartel API not available - using fallback data");
-      fetchedProducts.value = fallbackProducts;
+      // API not available
+      console.error("BigCartel API not available");
+      error.value = "Impossible de charger les produits. L'API BigCartel n'est pas disponible.";
       loading.value = false;
     }
   } catch (err) {

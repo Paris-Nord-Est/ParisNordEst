@@ -34,7 +34,7 @@
       <!-- Footer Links -->
       <nav class="footer-nav">
         <ul
-          class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base font-medium"
+          class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base font-medium uppercase"
         >
           <li>
             <a
@@ -56,7 +56,9 @@
             <a :href="page.url" class="hover:opacity-70 transition-opacity">
               {{ t(`pages.${page.permalink}`, page.name) }}
             </a>
-            <span v-if="index < limitedPages.length - 1" class="hidden md:inline mx-2"
+            <span
+              v-if="index < limitedPages.length - 1"
+              class="hidden md:inline mx-2"
               >-</span
             >
           </li>

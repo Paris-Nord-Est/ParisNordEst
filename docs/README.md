@@ -38,6 +38,27 @@ var formatted = Format.money(29.99);
 
 ---
 
+## Development Setup
+
+### Dugway Configuration
+
+The project uses `.dugway.json` to connect to the live BigCartel store during local development:
+
+```json
+{
+  "store": {
+    "subdomain": "parisnordest"
+  }
+}
+```
+
+This configuration provides:
+- **Real Products**: Fetched dynamically via BigCartel JavaScript API
+- **Custom Pages**: All pages from the live store (lookbook, où nous trouver, etc.)
+- **Store Settings**: Production theme configuration
+
+**No manual mocking needed** - all data comes from the live store API.
+
 ## External Resources
 
 - [BigCartel Theme API](https://developers.bigcartel.com/api/themes)
