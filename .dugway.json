@@ -1,6 +1,8 @@
 {
+  "store": {
+    "subdomain": "parisnordest"
+  },
   "name": "Paris Nord-Est",
-  "subdomain": "dugway",
   "primary_font": "Varela Round",
   "secondary_font": "Verdana",
   "background_color": "#FFFFFF",
