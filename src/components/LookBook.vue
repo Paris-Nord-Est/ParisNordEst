@@ -309,10 +309,10 @@ onBeforeUnmount(() => {
   text-align: center;
 
   svg {
-    max-width: 60px;
-    max-height: 60px;
-    width: 60px;
-    height: 60px;
+    max-width: 160px;
+    max-height: 160px;
+    width: 160px;
+    height: 160px;
   }
 }
 

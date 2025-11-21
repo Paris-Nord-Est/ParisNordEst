@@ -70,11 +70,14 @@
           </ul>
         {% endif %}
 
-        {% if page.category == 'custom' %}
+        {% if page.category == 'custom' and is_vue_page == false %}
           <div class="custom-page">
             <h1 class="custom-page-header page-title has-dash text-center">{{ page.name }}</h1>
             <div class="custom-page-content">{{ page_content | paragraphs }}</div>
           </div>
+        {% elsif page.category == 'custom' and is_vue_page %}
+          {% comment %} Vue-powered custom pages - no header, content handled by Vue {% endcomment %}
+          {{ page_content }}
         {% else %}
           {{ page_content }}
         {% endif %}
