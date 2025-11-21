@@ -5,6 +5,7 @@
 build
 tmp
 log
+dist
 
 *.tmproj
 *.esproj

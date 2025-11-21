@@ -119,6 +119,32 @@ a {
   width: 100%;
 }
 
+/* Fix: Override Tailwind utilities layer that sets opacity to 70% on hover */
+@layer utilities {
+  @media (hover: hover) {
+    /* Prevent opacity changes on hover that create white overlay effect */
+    body:hover,
+    .main:hover,
+    body .main:hover,
+    body#home_page:hover,
+    body#products_page:hover,
+    body.home_page:hover,
+    body.products_page:hover,
+    body#home_page:hover .main,
+    body#products_page:hover .main,
+    body.home_page:hover .main,
+    body.products_page:hover .main {
+      opacity: 1 !important;
+    }
+
+    /* Prevent any child elements from getting 70% opacity on hover */
+    body:hover *,
+    .main:hover * {
+      opacity: inherit !important;
+    }
+  }
+}
+
 /* Full-width layout system */
 .home_page .main {
   width: 100%;
@@ -200,5 +226,72 @@ img {
 
 /* When announcement is present, navigation sticks below it */
 .announcement-message ~ * #navigation-app {
+  top: auto;
+}
+
+/* CSS Isolation for Vue Components on non-Vue pages */
+/* Prevents BigCartel theme.css styles from conflicting with Vue component styles */
+.vue-isolated {
+  /* Reset common inherited properties */
+  all: revert;
+
+  /* Re-apply essential positioning for navigation */
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: white;
+}
+
+/* Reset all child elements within isolated Vue components */
+.vue-isolated *,
+.vue-isolated *::before,
+.vue-isolated *::after {
+  /* Remove BigCartel theme styling that might interfere */
+  box-sizing: border-box;
+}
+
+/* Ensure Vue component styles take precedence over BigCartel theme */
+.vue-isolated a,
+.vue-isolated button,
+.vue-isolated nav,
+.vue-isolated ul,
+.vue-isolated li,
+.vue-isolated div,
+.vue-isolated span {
+  /* Reset margins and padding that might be set by theme.css */
+  all: unset;
+  /* Restore box-sizing */
+  box-sizing: border-box;
+  /* Re-enable default display properties */
+  display: revert;
+}
+
+/* Restore link functionality */
+.vue-isolated a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Restore button functionality */
+.vue-isolated button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+}
+
+/* Ensure TailwindCSS classes work properly within isolated components */
+.vue-isolated [class*="flex"],
+.vue-isolated [class*="grid"],
+.vue-isolated [class*="block"],
+.vue-isolated [class*="inline"] {
+  display: revert;
+}
+
+/* Footer specific isolation */
+#footer-app.vue-isolated {
+  position: relative;
   top: auto;
 }

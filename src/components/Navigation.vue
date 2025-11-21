@@ -153,10 +153,19 @@ function closeMobileMenu() {
 </script>
 
 <style scoped>
+/* CSS Isolation - reset all inherited styles from BigCartel theme */
+.modern-header,
+.modern-header *,
+.modern-header *::before,
+.modern-header *::after {
+  all: revert;
+  box-sizing: border-box;
+}
+
 /* Modern Navigation Header */
 .modern-header {
-  background-color: #000;
-  color: #fff;
+  background-color: #000 !important;
+  color: #fff !important;
   padding: 0;
   position: sticky;
   top: 0;
@@ -165,12 +174,12 @@ function closeMobileMenu() {
 }
 
 .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  max-width: 100%;
-  margin: 0 auto;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 1rem 2rem !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
 }
 
 .modern-header .branding {
@@ -196,39 +205,40 @@ function closeMobileMenu() {
 
 /* Desktop Navigation */
 .modern-header .header-nav {
-  flex: 1;
-  display: flex;
-  justify-content: end;
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: end !important;
 }
 
 .modern-header .header-nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 2rem;
-  align-items: center;
+  display: flex !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 2rem !important;
+  align-items: center !important;
 }
 
 .modern-header .header-nav li {
-  margin: 0;
+  margin: 0 !important;
+  display: block !important;
 }
 
 .modern-header .header-nav a,
 .modern-header .header-nav button {
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.5rem 0;
-  position: relative;
-  transition: opacity 0.3s ease;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 0.5rem 0 !important;
+  position: relative !important;
+  transition: opacity 0.3s ease !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
 }
 
 .modern-header .header-nav a:hover,
@@ -290,40 +300,40 @@ function closeMobileMenu() {
 
 /* Mobile Navigation */
 .modern-header .mobile-nav {
-  display: none;
-  background-color: #000;
-  border-top: 1px solid #333;
+  display: none !important;
+  background-color: #000 !important;
+  border-top: 1px solid #333 !important;
 }
 
 .modern-header .mobile-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 1rem 2rem;
-  flex-direction: column;
-  gap: 0;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 1rem 2rem !important;
+  flex-direction: column !important;
+  gap: 0 !important;
 }
 
 .modern-header .mobile-nav li {
-  margin: 0;
-  border-bottom: 1px solid #333;
+  margin: 0 !important;
+  border-bottom: 1px solid #333 !important;
 }
 
 .modern-header .mobile-nav a,
 .modern-header .mobile-nav button {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  padding: 1rem 0;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
+  display: block !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  padding: 1rem 0 !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  width: 100% !important;
+  text-align: left !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
 }
 
 .language-switcher-mobile {
@@ -335,19 +345,19 @@ function closeMobileMenu() {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .modern-header .header-nav:not(.mobile-nav) {
-    display: none;
+    display: none !important;
   }
 
   .mobile-menu-toggle {
-    display: flex;
+    display: flex !important;
   }
 
   .modern-header .mobile-nav.active {
-    display: block;
+    display: block !important;
   }
 
   .header-container {
-    padding: 1rem;
+    padding: 1rem !important;
   }
 }
 </style>

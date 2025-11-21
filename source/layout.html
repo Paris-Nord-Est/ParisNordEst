@@ -27,13 +27,10 @@
     <title>{{ page_title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% if is_vue_page %}
-    <!-- DEV: Vue CSS only (no BigCartel theme CSS to avoid conflicts) -->
-    <link href="http://localhost:8080/main.css" media="screen" rel="stylesheet" type="text/css">
-    {% else %}
+    {% unless is_vue_page %}
     <!-- BigCartel theme CSS (non-Vue pages only) -->
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
-    {% endif %}
+    {% endunless %}
     {{ head_content }}
     <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
   </head>
@@ -62,7 +59,7 @@
       </div>
     {% endif %}
     {% comment %} Header/Navigation is now handled by Vue Navigation component {% endcomment %}
-    <div id="navigation-app" data-bc-hook="header"></div>
+    <div id="navigation-app" class="vue-isolated" data-bc-hook="header"></div>
     <main class="main" id="main">
       <div data-bc-hook="content">
         {% if errors != blank %}
@@ -191,21 +188,11 @@
       {% endif %}
     {% endif %}
 
-    {% assign show_pages_section_in_footer = false %}
-    {% if theme.nav_page_display_footer == "all" or theme.nav_page_display_footer == "pages_only" %}
-      {% if pages.custom_pages.size >= 3 or theme.nav_items_footer >= 3 %}
-        {% assign show_pages_section_in_footer = true %}
-      {% endif %}
-    {% endif %}
-
-    {% if pages.required_pages.size > 0 %}
-      {% assign show_pages_section_in_footer = true %}
-    {% endif %}
-    {% if is_vue_page %}
-    <div id="footer-app"></div>
-    {% endif %}
-    {% unless is_vue_page %}
-    <footer data-bc-hook="footer">
+    <!-- Vue Footer Component - Used on ALL pages -->
+    <div id="footer-app" class="vue-isolated" data-bc-hook="footer"></div>
+    {% comment %} Traditional BigCartel footer removed - now using Vue Footer component everywhere {% endcomment %}
+    {% if false %}
+    <footer>
       <div class="wrapper">
         {% if theme.footer_text != blank and theme.footer_text_position == "start" %}
           <div class="footer-custom-content">{{ theme.footer_text }} </div>
@@ -373,7 +360,7 @@
         </nav>
       </div>
     </footer>
-    {% endunless %}
+    {% endif %}
     {% comment %}
       Manual array construction needed for themeFeatures for Liquid 3.0.6 since standard JSON filters 
       (json, jsonify) don't work properly. This ensures proper JavaScript array 
@@ -484,12 +471,11 @@
         }
       };
     </script>
-    {% if is_vue_page %}
-    <!-- Vue JavaScript Bundle -->
+    <!-- Vue JavaScript Bundle (Navigation/Footer components) - Loaded on ALL pages -->
     <script src="http://localhost:8080/app.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
-    {% endif %}
     {% unless is_vue_page %}
+    <!-- BigCartel theme JS for non-Vue pages -->
     <script src="{{ theme | theme_js_url }}"></script>
     {% endunless %}
     {% if page.full_url contains '/product/' %}
