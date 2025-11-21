@@ -1,5 +1,3 @@
-import "./style.css";
-
 import { createApp, h } from "vue";
 import i18n from "./i18n";
 
@@ -10,6 +8,17 @@ import ProductsListing from "./components/ProductsListing.vue";
 import Layout from "./components/Layout.vue";
 import Navigation from "./components/Navigation.vue";
 import Footer from "./components/Footer.vue";
+
+// Determine if this is a Vue-powered page (needs Tailwind CSS)
+const isVuePage =
+  document.getElementById("homepage-app") ||
+  document.getElementById("lookbook") ||
+  document.getElementById("products-app");
+
+// Only load Tailwind CSS on Vue-powered pages to avoid polluting theme pages
+if (isVuePage) {
+  import("./style.css");
+}
 
 // Remove preloader once DOM is ready
 function removePreloader() {
