@@ -10,6 +10,12 @@
   {% assign is_vue_page = true %}
 {% endif %}
 
+{% comment %} Determine if this page uses the new Vue-first architecture (AppShell) {% endcomment %}
+{% assign is_vue_first_page = false %}
+{% if page.permalink == 'home' %}
+  {% assign is_vue_first_page = true %}
+{% endif %}
+
 {% comment %} Handle special page cases {% endcomment %}
 {% if page.name == 'Home' %}
   {% assign page_title = store.name %}
@@ -58,8 +64,14 @@
         {% endif %}
       </div>
     {% endif %}
-    {% comment %} Header/Navigation is now handled by Vue Navigation component {% endcomment %}
+    {% comment %} Header/Navigation - Only render for legacy pages (new architecture includes Nav in AppShell) {% endcomment %}
+    {% unless is_vue_first_page %}
     <div id="navigation-app" class="vue-isolated" data-bc-hook="header"></div>
+    {% endunless %}
+    {% if is_vue_first_page %}
+      {% comment %} Vue-first architecture - content is the mount point, AppShell handles everything {% endcomment %}
+      {{ page_content }}
+    {% else %}
     <main class="main" id="main">
       <div data-bc-hook="content">
         {% if errors != blank %}
@@ -83,6 +95,7 @@
         {% endif %}
       </div>
     </main>
+    {% endif %}
     {% if page.full_url contains '/product/' %}
       {% if theme.show_similar_products %}
         {% assign related_products_header = t['products.related_products'] %}
@@ -191,8 +204,10 @@
       {% endif %}
     {% endif %}
 
-    <!-- Vue Footer Component - Used on ALL pages -->
+    {% comment %} Footer - Only render for legacy pages (new architecture includes Footer in AppShell) {% endcomment %}
+    {% unless is_vue_first_page %}
     <div id="footer-app" class="vue-isolated" data-bc-hook="footer"></div>
+    {% endunless %}
     {% comment %} Traditional BigCartel footer removed - now using Vue Footer component everywhere {% endcomment %}
     {% if false %}
     <footer>
@@ -447,12 +462,13 @@
       window.bigcartel.account.currency = window.bigcartel.account.currency || "{{ store.currency.code }}";
       window.bigcartel.account.moneyFormat = "{{ theme.money_format }}";
 
-      {% comment %} Data injection for Vue app {% endcomment %}
+      {% comment %} Data injection for Vue app (enhanced for Vue-first architecture) {% endcomment %}
       window.BIGCARTEL_DATA = {
         store: {
           name: "{{ store.name }}",
           currency: "{{ store.currency.code }}",
-          website: "{{ store.website }}"
+          website: "{{ store.website }}",
+          moneyFormat: "{{ theme.money_format }}"
         },
         pages: [
           {% for custom_page in pages.custom_pages limit:theme.nav_items %}
@@ -463,6 +479,15 @@
           }{% unless forloop.last %},{% endunless %}
           {% endfor %}
         ],
+        categories: [
+          {% for category in categories.active %}
+          {
+            name: "{{ category.name }}",
+            permalink: "{{ category.permalink }}",
+            url: "{{ category.url }}"
+          }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
         cart: {
           count: {{ cart.item_count }},
           url: "/cart"
@@ -470,7 +495,14 @@
         navigation: {
           products: "/products",
           contact: "/contact",
-          home: "/"
+          home: "/",
+          lookbook: "{% for p in pages.custom_pages %}{% if p.permalink == 'lookbook' %}{{ p.url }}{% endif %}{% endfor %}"
+        },
+        currentPage: {
+          name: "{{ page.name }}",
+          permalink: "{{ page.permalink }}",
+          category: "{{ page.category }}",
+          fullUrl: "{{ page.full_url }}"
         }
       };
     </script>

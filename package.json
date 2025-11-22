@@ -251,6 +251,7 @@
     "path-type": "^4.0.0",
     "picocolors": "^1.0.0",
     "picomatch": "^2.3.1",
+    "pinia": "^3.0.4",
     "pkg-dir": "^4.2.0",
     "postcss-attribute-case-insensitive": "^5.0.0",
     "postcss-clamp": "^4.1.0",
