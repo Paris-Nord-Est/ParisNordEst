@@ -4,15 +4,21 @@
 {% comment %} Set default page title {% endcomment %}
 {% assign page_title = page.name | append: title_suffix %}
 
-{% comment %} Determine if this is a Vue-powered page {% endcomment %}
+{% comment %} Determine if this is a Vue-powered page (needs Tailwind CSS) {% endcomment %}
 {% assign is_vue_page = false %}
 {% if page.permalink == 'home' or page.permalink == 'lookbook' %}
+  {% assign is_vue_page = true %}
+{% endif %}
+{% if page.full_url contains '/products' %}
   {% assign is_vue_page = true %}
 {% endif %}
 
 {% comment %} Determine if this page uses the new Vue-first architecture (AppShell) {% endcomment %}
 {% assign is_vue_first_page = false %}
 {% if page.permalink == 'home' %}
+  {% assign is_vue_first_page = true %}
+{% endif %}
+{% if page.full_url contains '/products' %}
   {% assign is_vue_first_page = true %}
 {% endif %}
 

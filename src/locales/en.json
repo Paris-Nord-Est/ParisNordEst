@@ -29,6 +29,18 @@
     "soldOut": "Sold out",
     "onSale": "On sale"
   },
+  "products": {
+    "title": "SHOP",
+    "all": "All",
+    "loading": "Loading products...",
+    "error": "Unable to load products.",
+    "noProducts": "No products available.",
+    "searchResults": "Search Results",
+    "soldOut": "Sold out",
+    "comingSoon": "Coming soon",
+    "onSale": "On sale",
+    "variants": "variants"
+  },
   "collection": {
     "title": "PARIS NORD-EST COLLECTION"
   },

@@ -2,6 +2,48 @@
 
 All notable changes to Paris Nord-Est theme will be documented in this file.
 
+## [2025-11-22]
+
+### Architecture
+- **Vue-First Architecture**: Major refactor moving from hybrid Liquid/Vue to Vue-first approach where all UI rendering is handled by Vue components
+- **Page-Based Mounting**: New system using `data-page` attribute to automatically mount the correct Vue page component
+- **AppShell Layout**: Single layout wrapper (Navigation + Content + Footer) for all Vue-first pages
+- **Pinia State Management**: Added Pinia for centralized state (cart, theme configuration)
+- **BigCartel API Wrapper**: Created promisified composable for all BigCartel API calls
+- **Backward Compatibility**: Legacy mount points still work during migration
+
+### Features
+- **Products Page Redesign**: Complete Vue rewrite with category filtering and search support
+- **ProductCard Component**: New reusable product card with status badges (sold out, coming soon, on sale)
+- **Category Navigation**: Client-side category filtering on products page
+- **Enhanced Data Injection**: Layout now injects categories, current page info, and more data for Vue
+
+### Dependencies
+- Added `pinia` for Vue state management
+
+### Files Created
+- `src/composables/useBigCartel.js` - Promisified BigCartel API wrapper
+- `src/stores/cart.js` - Reactive cart state with API integration
+- `src/stores/theme.js` - Theme configuration from BigCartel data
+- `src/components/layout/AppShell.vue` - Main layout wrapper
+- `src/components/pages/HomePage.vue` - Homepage page component
+- `src/components/pages/ProductsPage.vue` - Products listing with filtering
+- `src/components/pages/ProductPage.vue` - Product detail placeholder
+- `src/components/pages/CartPage.vue` - Cart page placeholder
+- `src/components/pages/ContactPage.vue` - Contact page placeholder
+- `src/components/pages/LookbookPage.vue` - Lookbook page wrapper
+- `src/components/pages/CustomPage.vue` - Generic custom page placeholder
+- `src/components/products/ProductCard.vue` - Reusable product card
+- `docs/VUE_FIRST_ARCHITECTURE.md` - Migration plan and documentation
+
+### Files Modified
+- `src/index.js` - New page-based mounting system with legacy support
+- `source/layout.html` - Enhanced data injection, conditional rendering for Vue-first pages
+- `source/home.html` - Simplified to Vue-first mount point
+- `source/products.html` - Simplified to Vue-first mount point with category/search data
+- `src/locales/fr.json` - Added products page translations
+- `src/locales/en.json` - Added products page translations
+
 ## [2025-11-06]
 
 ### Architecture

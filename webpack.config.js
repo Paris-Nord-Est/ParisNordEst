@@ -15,6 +15,11 @@ module.exports = (env, argv) => {
         ? path.resolve(__dirname, "dist")
         : path.resolve(__dirname, "source/dist"),
       filename: "app.js",
+      chunkFilename: "[name].app.js",
+      // publicPath tells the browser where to find chunks
+      // In dev: load from webpack dev server
+      // In prod: load from same directory as main bundle
+      publicPath: isDev ? "http://localhost:8080/" : "/dist/",
     },
     module: {
       rules: [

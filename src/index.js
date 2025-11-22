@@ -16,6 +16,9 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import i18n from "./i18n";
 
+// Styles - loaded for all Vue pages
+import "./style.css";
+
 // Layout
 import AppShell from "./components/layout/AppShell.vue";
 
@@ -82,9 +85,6 @@ function mountApp() {
     const PageComponent = pageComponents[pageName];
 
     if (PageComponent) {
-      // Load Tailwind CSS for Vue pages
-      import("./style.css");
-
       // Create the app with AppShell as root
       const app = createApp(AppShell, {
         page: PageComponent,
@@ -117,7 +117,6 @@ function mountLegacyApps() {
   // Legacy: Homepage (old mount point)
   const homepageEl = document.getElementById("homepage-app");
   if (homepageEl) {
-    import("./style.css");
     const Homepage = require("./components/Homepage.vue").default;
     const app = createApp(Homepage);
     app.use(createPinia());
@@ -130,7 +129,6 @@ function mountLegacyApps() {
   // Legacy: Lookbook (old mount point)
   const lookbookEl = document.getElementById("lookbook");
   if (lookbookEl) {
-    import("./style.css");
     const { h } = require("vue");
     const Layout = require("./components/Layout.vue").default;
     const LookBook = require("./components/LookBook.vue").default;
@@ -148,7 +146,6 @@ function mountLegacyApps() {
   // Legacy: Products listing (old mount point)
   const productsEl = document.getElementById("products-app");
   if (productsEl) {
-    import("./style.css");
     const ProductsListing = require("./components/ProductsListing.vue").default;
     const app = createApp(ProductsListing);
     app.use(createPinia());

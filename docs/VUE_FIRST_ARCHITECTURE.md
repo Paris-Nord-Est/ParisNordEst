@@ -140,11 +140,12 @@ await addToCart(optionId, quantity)
 - [x] Refactor `index.js` for page-based mounting
 - [x] Update `layout.html` with conditional rendering
 
-### Phase 2: Products Page (TODO)
-- [ ] Create `ProductsPage.vue`
-- [ ] Create `ProductCard.vue` component
-- [ ] Add category filtering support
-- [ ] Simplify `source/products.html` to mount point
+### Phase 2: Products Page ✅ COMPLETED
+- [x] Create `ProductsPage.vue` with category filtering
+- [x] Create `ProductCard.vue` component
+- [x] Add category filtering support
+- [x] Simplify `source/products.html` to mount point
+- [x] Update translations (fr.json, en.json)
 
 ### Phase 3: Product Detail Page (TODO)
 - [ ] Create `ProductPage.vue`
@@ -210,9 +211,13 @@ npm run build
 - `src/components/pages/ContactPage.vue`
 - `src/components/pages/LookbookPage.vue`
 - `src/components/pages/CustomPage.vue`
+- `src/components/products/ProductCard.vue`
 
 ### Modified
 - `src/index.js` - New page-based mounting system
 - `source/layout.html` - Enhanced data injection, conditional rendering
 - `source/home.html` - New architecture mount point
+- `source/products.html` - New architecture mount point with category/search data
+- `src/locales/fr.json` - Added products translations
+- `src/locales/en.json` - Added products translations
 - `package.json` - Added Pinia dependency

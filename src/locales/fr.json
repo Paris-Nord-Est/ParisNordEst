@@ -29,6 +29,18 @@
     "soldOut": "Épuisé",
     "onSale": "En promo"
   },
+  "products": {
+    "title": "BOUTIQUE",
+    "all": "Tout",
+    "loading": "Chargement des produits...",
+    "error": "Impossible de charger les produits.",
+    "noProducts": "Aucun produit disponible.",
+    "searchResults": "Résultats de recherche",
+    "soldOut": "Épuisé",
+    "comingSoon": "Bientôt disponible",
+    "onSale": "En promo",
+    "variants": "variantes"
+  },
   "collection": {
     "title": "COLLECTION PARIS NORD-EST"
   },
