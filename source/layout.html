@@ -12,6 +12,9 @@
 {% if page.full_url contains '/products' %}
   {% assign is_vue_page = true %}
 {% endif %}
+{% if page.full_url contains '/product/' %}
+  {% assign is_vue_page = true %}
+{% endif %}
 
 {% comment %} Determine if this page uses the new Vue-first architecture (AppShell) {% endcomment %}
 {% assign is_vue_first_page = false %}
@@ -19,6 +22,9 @@
   {% assign is_vue_first_page = true %}
 {% endif %}
 {% if page.full_url contains '/products' %}
+  {% assign is_vue_first_page = true %}
+{% endif %}
+{% if page.full_url contains '/product/' %}
   {% assign is_vue_first_page = true %}
 {% endif %}
 

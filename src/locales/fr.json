@@ -41,6 +41,17 @@
     "onSale": "En promo",
     "variants": "variantes"
   },
+  "product": {
+    "loading": "Chargement du produit...",
+    "error": "Impossible de charger le produit.",
+    "notFound": "Produit non trouvé.",
+    "backToProducts": "Retour à la boutique",
+    "addToCart": "Ajouter au panier",
+    "selectVariant": "Choisir une option",
+    "reset": "Réinitialiser",
+    "noImage": "Pas d'image",
+    "lowInventory": "Plus que {count} en stock"
+  },
   "collection": {
     "title": "COLLECTION PARIS NORD-EST"
   },

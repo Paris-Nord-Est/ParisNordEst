@@ -147,13 +147,14 @@ await addToCart(optionId, quantity)
 - [x] Simplify `source/products.html` to mount point
 - [x] Update translations (fr.json, en.json)
 
-### Phase 3: Product Detail Page (TODO)
-- [ ] Create `ProductPage.vue`
-- [ ] Create `ProductGallery.vue` (Splide carousel)
-- [ ] Create `ProductOptions.vue` (variant selector)
-- [ ] Create `AddToCart.vue` (HTML form)
-- [ ] Create `ProductPrice.vue`
-- [ ] Simplify `source/product.html` to mount point
+### Phase 3: Product Detail Page ✅ COMPLETED
+- [x] Create `ProductPage.vue` with full product layout
+- [x] Create `ProductGallery.vue` (Splide carousel with thumbnails)
+- [x] Create `ProductOptions.vue` (variant selector + option groups)
+- [x] Create `AddToCart.vue` (HTML form submission)
+- [x] Create `ProductPrice.vue` (price display with sale support)
+- [x] Simplify `source/product.html` to mount point
+- [x] Update translations (fr.json, en.json)
 
 ### Phase 4: Cart Page (TODO)
 - [ ] Create `CartPage.vue`
@@ -212,6 +213,10 @@ npm run build
 - `src/components/pages/LookbookPage.vue`
 - `src/components/pages/CustomPage.vue`
 - `src/components/products/ProductCard.vue`
+- `src/components/products/ProductGallery.vue`
+- `src/components/products/ProductOptions.vue`
+- `src/components/products/ProductPrice.vue`
+- `src/components/products/AddToCart.vue`
 
 ### Modified
 - `src/index.js` - New page-based mounting system
