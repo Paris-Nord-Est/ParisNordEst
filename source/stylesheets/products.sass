@@ -56,10 +56,25 @@
   margin-top: $luna-base * 2.5
 
 .product-list
-  +flexbox
-  +flex-wrap(wrap)
-  +justify-content(flex-start)
-  margin: 8px -8px
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  margin: 0 auto
+  padding: 0 $luna-base * 4
+  max-width: 1000px
+  gap: $luna-base * 2
+
+  @media screen and (max-width: $break-large)
+    grid-template-columns: repeat(4, 1fr)
+
+  @media screen and (max-width: $break-medium)
+    grid-template-columns: repeat(3, 1fr)
+    gap: $luna-base * 2
+    padding: 0 $luna-base * 2
+
+  @media screen and (max-width: $break-small)
+    grid-template-columns: repeat(2, 1fr)
+    gap: $luna-base
+    padding: 0 $luna-base
 
 .product-list-link
   text-decoration: none
@@ -72,34 +87,25 @@
   color: $primary-text-color
   display: block
   font-size: 0
-  padding: $luna-base
-  padding-bottom: $luna-base * 2
+  padding: 0
   position: relative
   text-decoration: none
   text-transform: uppercase
-  vertical-align: middle
-  width: calc(100% / #{"{{ theme.max_products_per_row }}"})
   word-break: break-word
+  transition: transform 0.3s ease
 
   &:hover, &:focus
     text-decoration: none
+    transform: translateY(-4px)
 
-    &:not(.rollover)
-      .product-list-image
-        opacity: .9
+    .product-list-image
+      transform: scale(1.05)
 
-      .product-list-thumb-name:after
-        background-color: $links-rollover-color
+    .product-list-thumb-name
+      text-decoration: underline
 
-      .product-list-thumb-status
-        color: $links-rollover-color
-
-  @media screen and (max-width: $break-medium)
-    width: calc(100% / 2)
-
-  @media screen and (max-width: $break-small)
-    padding: $luna-base
-    width: calc(100% / #{"{{ theme.max_products_per_row_mobile }}"})
+    .product-list-thumb-status
+      color: $links-rollover-color
 
   @media (hover: hover), (-moz-touch-enabled: 0)
     &.rollover
@@ -149,60 +155,32 @@ _:-ms-fullscreen, :root .product-list-thumb
   width: 100%
 
 .product-list-image-container
-  border-radius: $border-radius
+  border-radius: 4px
   font-size: 0
-  margin: 0
+  margin: 0 0 $luna-base 0
   overflow: hidden
-  padding-bottom: 100%
-  position: relative
+  aspect-ratio: 1 / 1
   width: 100%
+  background-color: #f5f5f5
+  display: flex
+  align-items: center
+  justify-content: center
 
   .default &
-    padding-bottom: 0
+    aspect-ratio: auto
 
 .product-list-image
-  +transition(opacity .1s linear)
+  +transition(transform .3s ease, opacity .3s ease)
   border-radius: $border-radius
   display: block
-  overflow: hidden
+  max-width: 100%
+  max-height: 100%
+  width: auto
+  height: auto
+  object-fit: contain
 
   &.lazy
     filter: blur(5px)
-
-  .default &
-    width: 100%
-
-  .crop-to-square &
-    height: 100% !important
-    left: 0
-    object-fit: cover
-    position: absolute
-    top: 0
-    width: 100%
-
-  .fit-to-square &
-    left: 0
-    will-change: transform
-    cursor: pointer
-    position: absolute
-    max-width: 100%
-    height: 100%
-    top: 0
-    width: 100%
-
-    &.image-tall
-      height: 100%
-      left: auto
-      width: auto
-
-    &.image-wide
-      height: auto
-      top: auto
-      width: 100%
-
-    &.image-square
-      height: 100%
-      width: 100%
 
   &:last-child
     opacity: 0
@@ -221,15 +199,15 @@ _:-ms-fullscreen, :root .product-list-thumb
   width: 100%
 
 .product-list-thumb-info
-  font-size: 20px
-  line-height: 1.25em
-  padding: $luna-base * 2 $luna-base
+  font-size: 12px
+  line-height: 1.3em
+  padding: $luna-base 0
   position: relative
   text-align: center
 
   @media screen and (max-width: $break-small)
-    font-size: 18px
-    padding: $luna-base
+    font-size: 11px
+    padding: $luna-base * 0.75 0
 
 .product-list-item-background
   background-color: $products-background-color
@@ -242,24 +220,29 @@ _:-ms-fullscreen, :root .product-list-thumb
   width: 100%
 
 .product-list-thumb-name
-  letter-spacing: 2px
+  letter-spacing: 0.5px
   overflow-wrap: break-word
   position: relative
+  font-weight: 600
+  font-size: 0.875rem
+  line-height: 1.4
+  text-transform: uppercase
+
+  @media screen and (min-width: $break-small)
+    font-size: 1rem
 
   &:after
-    bottom: -$luna-base
-    content: ""
-    background-color: $primary-text-color
-    height: 1px
-    left: 50%
-    position: absolute
-    transform: translateX(-50%)
-    width: 20px
+    display: none
 
 .product-list-thumb-price
-  font-family: $secondary-font
-  font-size: 16px
-  margin-top: $luna-base * 2
+  font-family: $primary-font
+  font-size: 0.875rem
+  margin-top: 4px
+  color: #333
+  font-weight: 500
+
+  @media screen and (min-width: $break-small)
+    font-size: 1rem
 
 .product-list-thumb-status
   color: $secondary-text-color
