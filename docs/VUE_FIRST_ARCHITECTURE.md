@@ -156,12 +156,14 @@ await addToCart(optionId, quantity)
 - [x] Simplify `source/product.html` to mount point
 - [x] Update translations (fr.json, en.json)
 
-### Phase 4: Cart Page (TODO)
-- [ ] Create `CartPage.vue`
-- [ ] Create `CartItem.vue`
-- [ ] Create `CartSummary.vue`
-- [ ] Create `CartEmpty.vue`
-- [ ] Simplify `source/cart.html` to mount point
+### Phase 4: Cart Page ✅ COMPLETED
+- [x] Create `CartPage.vue` (full cart with reactive state)
+- [x] Create `CartItem.vue` (item row with quantity controls)
+- [x] Create `CartSummary.vue` (totals + checkout form)
+- [x] Create `CartEmpty.vue` (empty state with CTA)
+- [x] Simplify `source/cart.html` to mount point
+- [x] Update `layout.html` for cart page detection
+- [x] Update translations (fr.json, en.json)
 
 ### Phase 5: Contact + Custom Pages (TODO)
 - [ ] Create `ContactPage.vue` (HTML form)
@@ -217,12 +219,17 @@ npm run build
 - `src/components/products/ProductOptions.vue`
 - `src/components/products/ProductPrice.vue`
 - `src/components/products/AddToCart.vue`
+- `src/components/cart/CartItem.vue`
+- `src/components/cart/CartSummary.vue`
+- `src/components/cart/CartEmpty.vue`
 
 ### Modified
 - `src/index.js` - New page-based mounting system
 - `source/layout.html` - Enhanced data injection, conditional rendering
 - `source/home.html` - New architecture mount point
 - `source/products.html` - New architecture mount point with category/search data
-- `src/locales/fr.json` - Added products translations
-- `src/locales/en.json` - Added products translations
+- `source/product.html` - New architecture mount point
+- `source/cart.html` - New architecture mount point
+- `src/locales/fr.json` - Added products and cart translations
+- `src/locales/en.json` - Added products and cart translations
 - `package.json` - Added Pinia dependency

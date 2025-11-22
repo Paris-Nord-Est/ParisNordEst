@@ -69,6 +69,20 @@
       "cart": "CART"
     }
   },
+  "cart": {
+    "title": "CART",
+    "loading": "Loading cart...",
+    "error": "Unable to load cart.",
+    "retry": "Try again",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "shareCart": "Share this cart",
+    "linkCopied": "Link copied!",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
   "language": {
     "fr": "Français",
     "en": "English",

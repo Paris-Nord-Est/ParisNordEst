@@ -69,6 +69,20 @@
       "cart": "PANIER"
     }
   },
+  "cart": {
+    "title": "PANIER",
+    "loading": "Chargement du panier...",
+    "error": "Impossible de charger le panier.",
+    "retry": "Réessayer",
+    "empty": "Votre panier est vide.",
+    "continueShopping": "Continuer les achats",
+    "subtotal": "Sous-total",
+    "checkout": "Commander",
+    "shareCart": "Partager ce panier",
+    "linkCopied": "Lien copié !",
+    "remove": "Supprimer",
+    "quantity": "Quantité"
+  },
   "language": {
     "fr": "Français",
     "en": "English",

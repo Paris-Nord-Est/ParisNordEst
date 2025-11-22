@@ -135,13 +135,30 @@ export const useBigCartel = () => {
 
   /**
    * Format price according to store currency settings
-   * @param {number} cents - Price in cents
+   * @param {number} cents - Price in cents (or raw amount if already in currency units)
    * @returns {string} Formatted price string
    */
   const formatPrice = (cents) => {
     const format = window.BIGCARTEL_DATA?.store?.moneyFormat || '{{amount}} EUR'
-    const amount = (cents / 100).toFixed(2)
-    return format.replace('{{amount}}', amount)
+    const currency = window.BIGCARTEL_DATA?.store?.currency || 'EUR'
+
+    // Cart API returns prices in currency units (not cents), so check if value seems like cents
+    // BigCartel uses cents for some APIs and currency units for others
+    const isCents = cents > 1000 // Heuristic: if > 1000, probably cents
+    const amount = isCents ? (cents / 100).toFixed(2) : Number(cents).toFixed(2)
+
+    // Handle different format types
+    if (format === 'sign') {
+      // Use currency symbol
+      const symbols = { EUR: '€', USD: '$', GBP: '£', CAD: 'C$', AUD: 'A$' }
+      const symbol = symbols[currency] || currency + ' '
+      return `${amount}${symbol}`
+    } else if (format.includes('{{amount}}')) {
+      return format.replace('{{amount}}', amount)
+    } else {
+      // Default format
+      return `${amount} ${currency}`
+    }
   }
 
   /**
