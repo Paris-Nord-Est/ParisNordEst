@@ -15,6 +15,9 @@
 {% if page.full_url contains '/product/' %}
   {% assign is_vue_page = true %}
 {% endif %}
+{% if page.permalink == 'cart' %}
+  {% assign is_vue_page = true %}
+{% endif %}
 
 {% comment %} Determine if this page uses the new Vue-first architecture (AppShell) {% endcomment %}
 {% assign is_vue_first_page = false %}
@@ -25,6 +28,9 @@
   {% assign is_vue_first_page = true %}
 {% endif %}
 {% if page.full_url contains '/product/' %}
+  {% assign is_vue_first_page = true %}
+{% endif %}
+{% if page.permalink == 'cart' %}
   {% assign is_vue_first_page = true %}
 {% endif %}
 
@@ -40,17 +46,142 @@
 {% endif %}
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <title>{{ page_title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% comment %} SEO Meta Tags {% endcomment %}
+    {% if page.full_url contains '/product/' %}
+      {% comment %} Product Page SEO {% endcomment %}
+      <meta name="description" content="{{ product.description | strip_html | truncate: 160 }}">
+      <link rel="canonical" href="{{ store.url }}{{ product.url }}">
+
+      {% comment %} Open Graph Tags for Social Sharing {% endcomment %}
+      <meta property="og:type" content="product">
+      <meta property="og:title" content="{{ product.name }} | {{ store.name }}">
+      <meta property="og:description" content="{{ product.description | strip_html | truncate: 200 }}">
+      <meta property="og:url" content="{{ store.url }}{{ product.url }}">
+      {% if product.images != blank and product.images.size > 0 %}
+        <meta property="og:image" content="{{ product.images.first.url }}">
+        <meta property="og:image:alt" content="{{ product.name }}">
+      {% endif %}
+      <meta property="og:site_name" content="{{ store.name }}">
+      <meta property="product:price:amount" content="{{ product.default_price | money_without_currency }}">
+      <meta property="product:price:currency" content="{{ store.currency.code }}">
+      {% if product.status == 'active' %}
+        <meta property="product:availability" content="in stock">
+      {% elsif product.status == 'sold-out' %}
+        <meta property="product:availability" content="out of stock">
+      {% endif %}
+
+      {% comment %} Twitter Card Tags {% endcomment %}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="{{ product.name }} | {{ store.name }}">
+      <meta name="twitter:description" content="{{ product.description | strip_html | truncate: 200 }}">
+      {% if product.images != blank and product.images.size > 0 %}
+        <meta name="twitter:image" content="{{ product.images.first.url }}">
+      {% endif %}
+    {% elsif page.full_url contains '/products' %}
+      {% comment %} Products Listing Page SEO {% endcomment %}
+      <meta name="description" content="Découvrez notre collection de produits Paris Nord-Est. Casquettes et accessoires fabriqués à Saint-Denis.">
+      <link rel="canonical" href="{{ store.url }}/products">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="Boutique | {{ store.name }}">
+      <meta property="og:description" content="Découvrez notre collection de produits Paris Nord-Est.">
+      <meta property="og:url" content="{{ store.url }}/products">
+      <meta property="og:site_name" content="{{ store.name }}">
+    {% elsif page.permalink == 'home' %}
+      {% comment %} Homepage SEO {% endcomment %}
+      <meta name="description" content="Paris Nord-Est - Casquettes et accessoires fabriqués à Saint-Denis. Style urbain authentique.">
+      <link rel="canonical" href="{{ store.url }}">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="{{ store.name }}">
+      <meta property="og:description" content="Paris Nord-Est - Casquettes et accessoires fabriqués à Saint-Denis.">
+      <meta property="og:url" content="{{ store.url }}">
+      <meta property="og:site_name" content="{{ store.name }}">
+    {% else %}
+      {% comment %} Default SEO for other pages {% endcomment %}
+      <meta name="description" content="{{ page.name }} - {{ store.name }}">
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="{{ page.name }} | {{ store.name }}">
+      <meta property="og:site_name" content="{{ store.name }}">
+    {% endif %}
+
     {% unless is_vue_page %}
     <!-- BigCartel theme CSS (non-Vue pages only) -->
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
     {% endunless %}
     {{ head_content }}
     <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
+
+    {% comment %} JSON-LD Structured Data for SEO {% endcomment %}
+    {% if page.full_url contains '/product/' %}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "{{ product.name | escape }}",
+        "description": "{{ product.description | strip_html | escape }}",
+        {% if product.images != blank and product.images.size > 0 %}
+        "image": "{{ product.images.first.url }}",
+        {% endif %}
+        "url": "{{ store.url }}{{ product.url }}",
+        "brand": {
+          "@type": "Brand",
+          "name": "{{ store.name | escape }}"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "{{ product.default_price | money_without_currency }}",
+          "priceCurrency": "{{ store.currency.code }}",
+          "url": "{{ store.url }}{{ product.url }}",
+          {% if product.status == 'active' %}
+          "availability": "https://schema.org/InStock"
+          {% elsif product.status == 'sold-out' %}
+          "availability": "https://schema.org/OutOfStock"
+          {% elsif product.status == 'coming-soon' %}
+          "availability": "https://schema.org/PreOrder"
+          {% else %}
+          "availability": "https://schema.org/InStock"
+          {% endif %}
+        }
+      }
+      </script>
+    {% elsif page.permalink == 'home' %}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ store.name | escape }}",
+        "url": "{{ store.url }}",
+        "description": "Paris Nord-Est - Casquettes et accessoires fabriqués à Saint-Denis",
+        {% if theme.instagram_url != blank or theme.facebook_url != blank or theme.tiktok_url != blank %}
+        "sameAs": [
+          {% if theme.instagram_url != blank %}"{{ theme.instagram_url }}"{% endif %}
+          {% if theme.instagram_url != blank and theme.facebook_url != blank %},{% endif %}
+          {% if theme.facebook_url != blank %}"{{ theme.facebook_url }}"{% endif %}
+          {% if theme.tiktok_url != blank and (theme.instagram_url != blank or theme.facebook_url != blank) %},{% endif %}
+          {% if theme.tiktok_url != blank %}"{{ theme.tiktok_url }}"{% endif %}
+        ]
+        {% endif %}
+      }
+      </script>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ store.name | escape }}",
+        "url": "{{ store.url }}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ store.url }}/products?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+      </script>
+    {% endif %}
   </head>
 
   <body id="{{ page.permalink }}_page" class="{{ page.category }} preloader transition-preloader" data-bc-page-type="{% if page.category == 'custom' %}custom{% else %}{{ page.permalink }}{% endif %}" style="{% if theme.announcement_message_scroll %}--scroll-duration: {{ theme.announcement_scroll_speed }};{% endif %}">
