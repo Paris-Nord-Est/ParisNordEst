@@ -85,22 +85,35 @@
       {% endif %}
     {% elsif page.full_url contains '/products' %}
       {% comment %} Products Listing Page SEO {% endcomment %}
-      <meta name="description" content="Découvrez notre collection de produits Paris Nord-Est. Casquettes et accessoires fabriqués à Saint-Denis.">
+      <meta name="description" content="Découvrez notre collection Casquette. Casquettes et accessoires fabriqués à Saint-Denis.">
       <link rel="canonical" href="{{ store.url }}/products">
       <meta property="og:type" content="website">
       <meta property="og:title" content="Boutique | {{ store.name }}">
-      <meta property="og:description" content="Découvrez notre collection de produits Paris Nord-Est.">
+      <meta property="og:description" content="Découvrez notre collection Casquette. Casquettes et accessoires fabriqués à Saint-Denis.">
       <meta property="og:url" content="{{ store.url }}/products">
       <meta property="og:site_name" content="{{ store.name }}">
     {% elsif page.permalink == 'home' %}
       {% comment %} Homepage SEO {% endcomment %}
-      <meta name="description" content="Paris Nord-Est - Casquettes et accessoires fabriqués à Saint-Denis. Style urbain authentique.">
+      <meta name="description" content="Casquette - Casquettes et accessoires fabriqués à Saint-Denis. Style urbain authentique.">
       <link rel="canonical" href="{{ store.url }}">
+
+      {% comment %} Open Graph Tags {% endcomment %}
       <meta property="og:type" content="website">
       <meta property="og:title" content="{{ store.name }}">
-      <meta property="og:description" content="Paris Nord-Est - Casquettes et accessoires fabriqués à Saint-Denis.">
+      <meta property="og:description" content="Casquette - Casquettes et accessoires fabriqués à Saint-Denis. Style urbain authentique.">
       <meta property="og:url" content="{{ store.url }}">
       <meta property="og:site_name" content="{{ store.name }}">
+      <meta property="og:image" content="{{ store.url }}/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp">
+      <meta property="og:image:alt" content="Casquette - Collection de casquettes">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+
+      {% comment %} Twitter Card Tags {% endcomment %}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="{{ store.name }}">
+      <meta name="twitter:description" content="Casquette - Casquettes et accessoires fabriqués à Saint-Denis. Style urbain authentique.">
+      <meta name="twitter:image" content="{{ store.url }}/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp">
+      <meta name="twitter:image:alt" content="Casquette - Collection de casquettes">
     {% else %}
       {% comment %} Default SEO for other pages {% endcomment %}
       <meta name="description" content="{{ page.name }} - {{ store.name }}">
@@ -125,18 +138,26 @@
         "name": "{{ product.name | escape }}",
         "description": "{{ product.description | strip_html | escape }}",
         {% if product.images != blank and product.images.size > 0 %}
-        "image": "{{ product.images.first.url }}",
+        "image": [
+          {% for image in product.images %}
+          "{{ image.url }}"{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
         {% endif %}
         "url": "{{ store.url }}{{ product.url }}",
+        "sku": "{{ product.id }}",
+        "mpn": "{{ product.id }}",
         "brand": {
           "@type": "Brand",
-          "name": "{{ store.name | escape }}"
+          "name": "Casquette"
         },
         "offers": {
           "@type": "Offer",
           "price": "{{ product.default_price | money_without_currency }}",
           "priceCurrency": "{{ store.currency.code }}",
           "url": "{{ store.url }}{{ product.url }}",
+          "itemCondition": "https://schema.org/NewCondition",
+          "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' }}",
           {% if product.status == 'active' %}
           "availability": "https://schema.org/InStock"
           {% elsif product.status == 'sold-out' %}
@@ -149,6 +170,32 @@
         }
       }
       </script>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "{{ store.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Boutique",
+            "item": "{{ store.url }}/products"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ product.name | escape }}",
+            "item": "{{ store.url }}{{ product.url }}"
+          }
+        ]
+      }
+      </script>
     {% elsif page.permalink == 'home' %}
       <script type="application/ld+json">
       {
@@ -156,7 +203,8 @@
         "@type": "Organization",
         "name": "{{ store.name | escape }}",
         "url": "{{ store.url }}",
-        "description": "Paris Nord-Est - Casquettes et accessoires fabriqués à Saint-Denis",
+        "description": "Casquette - Casquettes et accessoires fabriqués à Saint-Denis",
+        "logo": "{{ store.url }}/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp",
         {% if theme.instagram_url != blank or theme.facebook_url != blank or theme.tiktok_url != blank %}
         "sameAs": [
           {% if theme.instagram_url != blank %}"{{ theme.instagram_url }}"{% endif %}
@@ -166,6 +214,53 @@
           {% if theme.tiktok_url != blank %}"{{ theme.tiktok_url }}"{% endif %}
         ]
         {% endif %}
+      }
+      </script>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "{{ store.name | escape }}",
+        "description": "Casquette - Casquettes et accessoires fabriqués à Saint-Denis",
+        "url": "{{ store.url }}",
+        "telephone": "",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "",
+          "addressLocality": "Saint-Denis",
+          "addressRegion": "Île-de-France",
+          "postalCode": "",
+          "addressCountry": "FR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "48.9362",
+          "longitude": "2.3574"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        },
+        {% if theme.instagram_url != blank or theme.facebook_url != blank or theme.tiktok_url != blank %}
+        "sameAs": [
+          {% if theme.instagram_url != blank %}"{{ theme.instagram_url }}"{% endif %}
+          {% if theme.instagram_url != blank and theme.facebook_url != blank %},{% endif %}
+          {% if theme.facebook_url != blank %}"{{ theme.facebook_url }}"{% endif %}
+          {% if theme.tiktok_url != blank and (theme.instagram_url != blank or theme.facebook_url != blank) %},{% endif %}
+          {% if theme.tiktok_url != blank %}"{{ theme.tiktok_url }}"{% endif %}
+        ],
+        {% endif %}
+        "priceRange": "€€"
       }
       </script>
       <script type="application/ld+json">

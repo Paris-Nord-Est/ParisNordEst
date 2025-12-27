@@ -12,14 +12,14 @@
     "about-us": "À propos",
     "faq": "FAQ",
     "cgv": "CGV",
-    "paris-nord-est": "Paris Nord-Est"
+    "paris-nord-est": "Casquette"
   },
   "hero": {
     "title": "Get your drama!",
     "cta": "SHOP NOW"
   },
   "banner": {
-    "title": "On a mis Paris Nord-Est<br>dans une casquette.",
+    "title": "On a mis Saint-Denis<br>dans une casquette.",
     "cta": "SHOP NOW"
   },
   "productGrid": {
@@ -54,14 +54,14 @@
     "lowInventory": "Plus que {count} en stock"
   },
   "collection": {
-    "title": "COLLECTION PARIS NORD-EST"
+    "title": "COLLECTION CASQUETTE"
   },
   "productsListing": {
     "title": "BOUTIQUE"
   },
   "footer": {
     "title": "Ici on habille votre tête",
-    "description": "Production limitée, pièces qui nous ressemblent. Du style qui dure, des matières qui tiennent. On met Paris Nord-Est sur votre tête.",
+    "description": "Production limitée, pièces qui nous ressemblent. Du style qui dure, des matières qui tiennent. On met Saint-Denis sur votre tête.",
     "links": {
       "home": "ACCUEIL",
       "products": "PRODUITS",

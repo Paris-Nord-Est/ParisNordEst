@@ -2,6 +2,29 @@
 
 All notable changes to Paris Nord-Est theme will be documented in this file.
 
+## [2025-12-27]
+
+### SEO Improvements
+- **Homepage Social Media Optimization**: Added Open Graph image, Twitter Card tags, and image dimensions for better social sharing previews
+- **LocalBusiness Structured Data**: Added comprehensive local business schema with Saint-Denis location, geo-coordinates, opening hours, and price range
+- **Product Page Enhancement**: Enhanced product structured data with all product images (not just first), SKU/MPN identifiers, item condition (NewCondition), and price validity dates
+- **Breadcrumb Navigation**: Added BreadcrumbList structured data to product pages for better search engine navigation (Accueil → Boutique → Product)
+- **Enhanced Meta Descriptions**: Improved homepage and products listing page descriptions for better SEO
+- **Twitter Cards**: Added complete Twitter Card implementation for homepage with large image previews
+
+### Rebranding
+- **Brand Update**: Changed brand name from "Paris Nord-Est" to "Casquette" across all pages and structured data
+- **Translation Updates**: Updated all language files (French and English) to reflect new brand identity while maintaining "Saint-Denis" as location reference
+- **Banner Updates**: Updated homepage banner text to reference "Saint-Denis" instead of "Paris Nord-Est"
+- **Collection Names**: Updated collection titles from "PARIS NORD-EST COLLECTION" to "CASQUETTE COLLECTION"
+- **Footer Updates**: Updated footer descriptions to reference "Saint-Denis" as the geographic identifier
+
+### Files Modified
+- `source/layout.html` - Added complete SEO meta tags, Open Graph tags, Twitter Cards, LocalBusiness schema, enhanced Product schema, and BreadcrumbList
+- `src/components/Homepage.vue` - Updated banner alt text and code comments
+- `src/locales/en.json` - Updated brand references, banner text, collection titles, and footer description
+- `src/locales/fr.json` - Updated brand references, banner text, collection titles, and footer description
+
 ## [2025-11-22]
 
 ### Architecture

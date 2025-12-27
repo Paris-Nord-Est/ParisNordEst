@@ -61,21 +61,21 @@ const config = reactive({
   },
   firstGrid: {
     title: "",
-    productIds: [115392261, 102294355, 103866085], // Non Paris Nord-Est products
+    productIds: [115392261, 102294355, 103866085], // Non Casquette products
     desktopLimit: 3,
     mobileLimit: 2,
   },
   banner: {
     title: t("banner.title"),
     image: "/images/home/banner/paris-nord-est-banner.jpg",
-    alt: "Paris Nord-Est Banner",
+    alt: "Casquette Banner",
     showCta: true,
     ctaText: t("banner.cta"),
     ctaLink: "/products",
   },
   secondGrid: {
-    excludeIds: [115392261, 102294355, 103866085], // Exclude non-PNE products
-    limit: 100, // Show all Paris Nord-Est products
+    excludeIds: [115392261, 102294355, 103866085], // Exclude non-Casquette products
+    limit: 100, // Show all Casquette products
   },
 });
 </script>
