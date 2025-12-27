@@ -19,6 +19,15 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - **Collection Names**: Updated collection titles from "PARIS NORD-EST COLLECTION" to "CASQUETTE COLLECTION"
 - **Footer Updates**: Updated footer descriptions to reference "Saint-Denis" as the geographic identifier
 
+### Documentation
+- **Domain Migration Guide**: Complete step-by-step guide for migrating from parisnordest.com to casquette.com using Cloudflare 301 redirects
+- **Cloudflare Quick Setup**: Quick reference card for Cloudflare Page Rule configuration
+- **SEO Preservation Strategy**: Documentation on maintaining 90-95% SEO authority during domain migration
+
+### Files Created
+- `docs/DOMAIN_MIGRATION_GUIDE.md` - Comprehensive migration guide with testing, monitoring, and troubleshooting
+- `docs/CLOUDFLARE_QUICK_SETUP.md` - Quick reference for Cloudflare redirect configuration
+
 ### Files Modified
 - `source/layout.html` - Added complete SEO meta tags, Open Graph tags, Twitter Cards, LocalBusiness schema, enhanced Product schema, and BreadcrumbList
 - `src/components/Homepage.vue` - Updated banner alt text and code comments
