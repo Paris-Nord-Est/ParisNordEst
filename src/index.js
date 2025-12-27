@@ -30,6 +30,7 @@ import CartPage from "./components/pages/CartPage.vue";
 import ContactPage from "./components/pages/ContactPage.vue";
 import LookbookPage from "./components/pages/LookbookPage.vue";
 import FAQPage from "./components/pages/FAQPage.vue";
+import CGVPage from "./components/pages/CGVPage.vue";
 import CustomPage from "./components/pages/CustomPage.vue";
 
 // Legacy components (for backward compatibility during migration)
@@ -45,6 +46,7 @@ const pageComponents = {
   contact: ContactPage,
   lookbook: LookbookPage,
   faq: FAQPage,
+  cgv: CGVPage,
   custom: CustomPage,
 };
 

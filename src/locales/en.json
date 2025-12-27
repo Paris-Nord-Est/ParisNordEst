@@ -139,5 +139,74 @@
         }
       }
     }
+  },
+  "cgv": {
+    "title": "Terms & Conditions",
+    "subtitle": "Last updated: July 7, 2022",
+    "backToShop": "Back to shop",
+    "company": {
+      "name": "TEDDY WOLFE Self-employed",
+      "address": "Headquarters: 36B Rue Hoche, 93500 PANTIN",
+      "rcs": "RCS (Paris) n°53765929400046"
+    },
+    "intro": "General terms and conditions of sale for products sold on Casquette",
+    "sections": {
+      "objet": {
+        "title": "Article 1 - Purpose",
+        "content": "These conditions govern sales by TEDDY WOLFE company specializing in wholesale and retail sales of clothing, fashion accessories and jewelry."
+      },
+      "prix": {
+        "title": "Article 2 - Prices",
+        "content": "Product prices are indicated in euros including all taxes (VAT and other applicable taxes on the order date), unless otherwise stated and excluding processing and shipping costs.<br><br>For orders outside metropolitan France, you are the importer of the product(s). Customs duties or other local taxes or import duties may apply. These duties are not the responsibility of TEDDY WOLFE.<br><br>They will be your responsibility in terms of declarations and payments to the competent authorities and organizations in your country. We advise you to inquire about these aspects with your local authorities.<br><br>All orders are payable in euros.<br><br>TEDDY WOLFE reserves the right to modify its prices at any time, but the product will be invoiced based on the rate in effect at the time of order validation and subject to availability.<br><br>Products remain the property of TEDDY WOLFE until full payment.<br><br><strong>Attention:</strong> as soon as you take physical possession of ordered products, risks of loss or damage are transferred to you."
+      },
+      "commandes": {
+        "title": "Article 3 - Orders",
+        "content": "You can place orders on our website. Contractual information is presented in French and will be confirmed no later than order validation.<br><br>TEDDY WOLFE reserves the right not to register payment and not to confirm an order for any reason, particularly in case of supply problems or difficulties with the received order."
+      },
+      "validation": {
+        "title": "Article 4 - Order Validation",
+        "content": "Any order on the Casquette website implies acceptance of these General Conditions. Any order confirmation implies your full and complete acceptance of these general terms of sale, without exception or reservation.<br><br>All data provided and recorded confirmation will serve as proof of the transaction.<br><br>You declare full knowledge thereof.<br><br>Order confirmation will serve as signature and acceptance of operations performed.<br><br>A summary of your order information and these General Conditions will be sent to you in PDF format via the order confirmation email address."
+      },
+      "paiement": {
+        "title": "Article 5 - Payment",
+        "content": "Validating your order implies an obligation to pay the indicated price.<br><br>Payment for your purchases is made by credit card through the secure STRIPE system.<br><br>The card is debited immediately."
+      },
+      "retractation": {
+        "title": "Article 6 - Withdrawal",
+        "content": "In accordance with Article L.121-21 of the Consumer Code, you have a withdrawal period of 14 days from receipt of your products to exercise your right of withdrawal without justification or penalty.<br><br>Returns must be in original condition and complete (packaging, accessories, instructions). Your responsibility is engaged. Any damage to the product may prevent exercise of the withdrawal right.<br><br>Return costs are your responsibility.<br><br>Upon exercise of withdrawal right, TEDDY WOLFE will refund amounts paid within 14 days of notification via the same payment method used for the order.<br><br><strong>EXCEPTIONS TO WITHDRAWAL RIGHT</strong><br><br>In accordance with Article L.121-21-8 of the Consumer Code, withdrawal right does not apply to:<br><br>• Fully executed services before withdrawal period end with prior express consumer consent and express waiver of withdrawal right.<br>• Goods or services whose price depends on financial market fluctuations beyond professional control occurring during withdrawal period.<br>• Custom-made or clearly personalized goods.<br>• Goods likely to deteriorate or expire rapidly.<br>• Unsealed goods after delivery that cannot be returned for hygiene or health protection reasons.<br>• Goods that, after delivery by their nature, are inseparably mixed with other items."
+      },
+      "disponibilite": {
+        "title": "Article 7 - Availability",
+        "content": "Products are offered while visible on the Casquette site and within available stock limits. For non-stocked products, offers are subject to supplier availability.<br><br>In case of product unavailability after order placement, we will inform you by email. Your order will be automatically cancelled with no bank debit.<br><br>The Casquette website is not intended to sell products in large quantities. Therefore TEDDY WOLFE reserves the right to refuse orders of 10 identical items."
+      },
+      "livraison": {
+        "title": "Article 8 - Delivery",
+        "content": "Products are delivered to the delivery address indicated during the order process, within the timeframe shown on the order validation page.<br><br>In case of shipping delay, you will receive an email informing you of potential impact on the indicated delivery time.<br><br>In accordance with legal provisions, in case of delivery delay, you may cancel the order under conditions defined in Article L 138-2 of the Consumer Code. If you receive the product in the meantime, we will refund it and shipping costs under conditions of Article L 138-3 of the Consumer Code.<br><br>For carrier deliveries, TEDDY WOLFE cannot be held responsible for delivery delays due exclusively to customer unavailability after multiple appointment proposals."
+      },
+      "garantie": {
+        "title": "Article 9 - Warranty",
+        "content": "All our products benefit from legal conformity warranty and hidden defects warranty, provided by Articles 1641 and following of the Civil Code. In case of non-conformity of a sold product, it may be returned, exchanged or refunded.<br><br>All claims, exchange or refund requests must be made by email to <a href='mailto:panam.nord.est@gmail.com'>panam.nord.est@gmail.com</a> within 30 days of delivery.<br><br>Products must be returned to us in the condition you received them with all elements (accessories, packaging, instructions...). Shipping costs will be refunded based on invoiced rate and return costs will be refunded upon presentation of proof.<br><br>This Article does not prevent you from benefiting from the withdrawal right provided in Article 6."
+      },
+      "responsabilite": {
+        "title": "Article 10 - Liability",
+        "content": "Offered products comply with current French legislation. TEDDY WOLFE liability cannot be engaged for non-compliance with legislation of the country where the product is delivered. It is your responsibility to verify with local authorities the import or use possibilities of products or services you plan to order.<br><br>Furthermore, TEDDY WOLFE cannot be held responsible for damages resulting from improper use of the purchased product.<br><br>Finally, TEDDY WOLFE liability cannot be engaged for any inconvenience or damage inherent to Internet use, including service interruption, external intrusion or presence of computer viruses."
+      },
+      "litiges": {
+        "title": "Article 11 - Applicable Law in Case of Disputes",
+        "content": "The language of this contract is French. These terms of sale are subject to French law. In case of dispute, French courts will have sole jurisdiction."
+      },
+      "propriete": {
+        "title": "Article 12 - Intellectual Property",
+        "content": "All elements of the Casquette site are and remain the intellectual and exclusive property of TEDDY WOLFE. No one is authorized to reproduce, exploit, redistribute, or use in any way, even partially, site elements whether software, visual or audio. Any simple or hypertext link is strictly prohibited without express written agreement from TEDDY WOLFE."
+      },
+      "donnees": {
+        "title": "Article 13 - Personal Data",
+        "content": "TEDDY WOLFE reserves the right to collect personal information and data concerning you. They are necessary for managing your order and improving services and information we send you.<br><br>They may also be transmitted to companies contributing to these relationships, such as those responsible for executing services and orders for management, execution, processing and payment.<br><br>This information and data is also kept for security purposes to comply with legal and regulatory obligations.<br><br>In accordance with the law of January 6, 1978, you have the right to access, rectify and object to personal information and data concerning you, directly on the website."
+      },
+      "archivage": {
+        "title": "Article 14 - Archiving Proof",
+        "content": "TEDDY WOLFE will archive order forms and invoices on reliable and durable media constituting a faithful copy in accordance with Article 1348 of the Civil Code.<br><br>TEDDY WOLFE computerized registers will be considered by all parties concerned as proof of communications, orders, payments and transactions between the parties."
+      }
+    }
   }
 }
