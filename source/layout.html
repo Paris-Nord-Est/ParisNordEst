@@ -6,7 +6,7 @@
 
 {% comment %} Determine if this is a Vue-powered page (needs Tailwind CSS) {% endcomment %}
 {% assign is_vue_page = false %}
-{% if page.permalink == 'home' or page.permalink == 'lookbook' %}
+{% if page.permalink == 'home' or page.permalink == 'lookbook' or page.permalink == 'faq' %}
   {% assign is_vue_page = true %}
 {% endif %}
 {% if page.full_url contains '/products' %}
@@ -31,6 +31,9 @@
   {% assign is_vue_first_page = true %}
 {% endif %}
 {% if page.permalink == 'cart' %}
+  {% assign is_vue_first_page = true %}
+{% endif %}
+{% if page.permalink == 'faq' %}
   {% assign is_vue_first_page = true %}
 {% endif %}
 

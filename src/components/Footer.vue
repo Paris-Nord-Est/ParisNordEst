@@ -48,6 +48,18 @@
               >-</span
             >
           </li>
+          <li class="separator">-</li>
+          <li>
+            <a href="/cgv" class="footer-link">{{
+              t("pages.cgv")
+            }}</a>
+          </li>
+          <li class="separator">-</li>
+          <li>
+            <a href="/faq" class="footer-link">{{
+              t("pages.faq")
+            }}</a>
+          </li>
           <li v-if="navigation.contact" class="separator">-</li>
           <li v-if="navigation.contact">
             <a :href="navigation.contact" class="footer-link">{{

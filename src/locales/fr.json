@@ -88,5 +88,56 @@
     "fr": "Français",
     "en": "English",
     "switchTo": "Passer en {lang}"
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Trouvez rapidement les réponses à vos questions",
+    "searchPlaceholder": "Rechercher une question...",
+    "clearSearch": "Effacer la recherche",
+    "noResults": "Aucune question ne correspond à votre recherche",
+    "sections": {
+      "payment": {
+        "title": "Paiement",
+        "questions": {
+          "methods": {
+            "question": "Quels sont les modes de paiement acceptés sur le site Casquette ?",
+            "answer": "Nous acceptons les paiements par <strong>Visa, MasterCard et American Express</strong>. Toutes les transactions sont sécurisées via notre plateforme de paiement Stripe. Vous n'avez pas besoin de compte Stripe pour effectuer un achat - vous pouvez payer directement avec votre carte bancaire en toute sécurité."
+          },
+          "when": {
+            "question": "Quand suis-je débité de mon achat ?",
+            "answer": "Si votre carte est en cours de validité et que le paiement est autorisé par votre établissement bancaire, <strong>votre achat sera débité immédiatement</strong> après validation de la commande.<br><br>Vous recevrez instantanément :<br>• Un email de confirmation de commande<br>• Un récapitulatif détaillé des produits achetés<br>• La confirmation du mode de paiement utilisé<br>• Votre numéro de commande pour le suivi"
+          },
+          "issues": {
+            "question": "Je n'arrive pas à payer sur le site, que faire ?",
+            "answer": "Si vous rencontrez des difficultés lors du paiement, voici les points à vérifier :<br><br><strong>Vérifications courantes :</strong><br>• L'adresse de facturation correspond à celle de votre carte<br>• Le code CVV (3 chiffres au dos de la carte) est correct<br>• Le type de carte (Visa/MasterCard/Amex) est bien sélectionné<br>• La date d'expiration de votre carte est valide<br>• Votre plafond de carte n'est pas atteint<br><br>Si le problème persiste après ces vérifications, n'hésitez pas à nous contacter à <a href='mailto:panam.nord.est@gmail.com'>panam.nord.est@gmail.com</a> en précisant le message d'erreur rencontré."
+          },
+          "security": {
+            "question": "Puis-je acheter en toute sécurité sur Casquette ?",
+            "answer": "Absolument ! La sécurité de vos paiements est notre priorité.<br><br><strong>Casquette</strong> utilise <strong>Stripe</strong>, l'une des plateformes de paiement les plus sécurisées au monde, utilisée par des millions d'entreprises.<br><br><strong>Sécurité garantie :</strong><br>• Chiffrement SSL/TLS de toutes les transactions<br>• Certification PCI-DSS niveau 1 (norme bancaire maximale)<br>• Aucune donnée bancaire n'est stockée sur nos serveurs<br>• Protection 3D Secure pour une sécurité renforcée<br>• Vos informations sont protégées par les protocoles bancaires les plus stricts<br><br>Vous n'avez pas besoin de compte Stripe - payez directement avec votre carte en toute confiance."
+          }
+        }
+      },
+      "shipping": {
+        "title": "Livraison",
+        "questions": {
+          "time": {
+            "question": "En combien de temps je reçois ma commande ?",
+            "answer": "<strong>Pour les produits en stock :</strong><br><br><strong>Délais de traitement :</strong><br>• Préparation : 1 à 2 jours ouvrés<br>• Expédition du lundi au vendredi<br>• Envoi via <strong>Colissimo</strong> avec livraison garantie en 48h<br><br><strong>Délai total estimé :</strong> 4 à 5 jours ouvrés (préparation + livraison)<br><br><em>Note : Des imprévus peuvent occasionnellement rallonger le délai d'un ou deux jours.</em><br><br><strong>Produits en rupture de stock :</strong><br>Si votre commande contient un article en rupture, nous vous contactons dans les plus brefs délais pour :<br>• Vous proposer une date de livraison ultérieure<br>• Ou vous proposer un remboursement intégral"
+          },
+          "missing": {
+            "question": "Je n'ai pas reçu ma commande, que se passe-t-il ?",
+            "answer": "Si votre commande n'est pas arrivée dans un délai de <strong>6-7 jours ouvrés</strong> après l'expédition, voici la marche à suivre :<br><br><strong>1. Vérifiez votre numéro de suivi</strong><br>Consultez le statut de votre colis avec le numéro fourni par email<br><br><strong>2. Contactez-nous</strong><br>Envoyez-nous un email à <a href='mailto:panam.nord.est@gmail.com'>panam.nord.est@gmail.com</a> en indiquant :<br>• Votre numéro de commande<br>• Le numéro de suivi<br>• Votre adresse de livraison<br><br><strong>Notre engagement :</strong><br>Notre équipe vous répondra dans les plus brefs délais et lancera une enquête auprès de Colissimo pour localiser votre colis. Nous trouverons une solution rapidement (réexpédition ou remboursement)."
+          },
+          "international": {
+            "question": "Effectuez-vous des envois à l'international ?",
+            "answer": "Oui ! Nous livrons dans de nombreux pays.<br><br><strong>Frais de port internationaux :</strong><br>• Variable selon le pays de destination<br>• En moyenne : <strong>20€</strong><br>• Calculés automatiquement lors du passage de commande<br><br><strong>Délais de livraison :</strong><br>• Europe : 5-10 jours ouvrés<br>• Reste du monde : 10-20 jours ouvrés<br><br><em>Note : Les frais de douane et taxes locales (si applicables) sont à la charge du destinataire.</em>"
+          },
+          "tracking": {
+            "question": "Comment suivre mon colis ?",
+            "answer": "Le suivi de votre commande est simple et transparent :<br><br><strong>1. Email de confirmation d'expédition</strong><br>Dès l'expédition de votre commande, vous recevez un email contenant :<br>• Votre numéro de suivi Colissimo<br>• Un lien direct vers le suivi<br><br><strong>2. Suivi en temps réel</strong><br>Cliquez sur le lien ou rendez-vous sur <a href='https://www.laposte.fr/outils/suivre-vos-envois' target='_blank'>laposte.fr</a> pour :<br>• Voir la position de votre colis en temps réel<br>• Connaître la date de livraison prévue<br>• Recevoir des notifications SMS (optionnel)<br><br><strong>Astuce :</strong> Ajoutez le numéro de suivi à votre compte La Poste pour un suivi encore plus pratique !"
+          }
+        }
+      }
+    }
   }
 }

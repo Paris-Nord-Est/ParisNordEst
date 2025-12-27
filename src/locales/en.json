@@ -88,5 +88,56 @@
     "fr": "Français",
     "en": "English",
     "switchTo": "Switch to {lang}"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to your questions quickly",
+    "searchPlaceholder": "Search for a question...",
+    "clearSearch": "Clear search",
+    "noResults": "No questions match your search",
+    "sections": {
+      "payment": {
+        "title": "Payment",
+        "questions": {
+          "methods": {
+            "question": "What payment methods are accepted on the Casquette website?",
+            "answer": "We accept payments via <strong>Visa, MasterCard, and American Express</strong>. All transactions are secured through our Stripe payment platform. You don't need a Stripe account to make a purchase - you can pay directly with your credit card securely."
+          },
+          "when": {
+            "question": "When will my purchase be charged?",
+            "answer": "If your card is valid and the payment is authorized by your bank, <strong>your purchase will be charged immediately</strong> after order confirmation.<br><br>You will instantly receive:<br>• An order confirmation email<br>• A detailed summary of purchased items<br>• Confirmation of the payment method used<br>• Your order number for tracking"
+          },
+          "issues": {
+            "question": "I can't complete my payment, what should I do?",
+            "answer": "If you're experiencing payment difficulties, here's what to check:<br><br><strong>Common verifications:</strong><br>• The billing address matches your card<br>• The CVV code (3 digits on the back) is correct<br>• The card type (Visa/MasterCard/Amex) is properly selected<br>• Your card's expiration date is valid<br>• Your card limit hasn't been reached<br><br>If the problem persists after these checks, please contact us at <a href='mailto:panam.nord.est@gmail.com'>panam.nord.est@gmail.com</a> mentioning the error message you received."
+          },
+          "security": {
+            "question": "Can I shop safely on Casquette?",
+            "answer": "Absolutely! Your payment security is our priority.<br><br><strong>Casquette</strong> uses <strong>Stripe</strong>, one of the world's most secure payment platforms, trusted by millions of businesses.<br><br><strong>Guaranteed security:</strong><br>• SSL/TLS encryption for all transactions<br>• PCI-DSS Level 1 certification (highest banking standard)<br>• No banking data stored on our servers<br>• 3D Secure protection for enhanced security<br>• Your information protected by the strictest banking protocols<br><br>You don't need a Stripe account - pay directly with your card with confidence."
+          }
+        }
+      },
+      "shipping": {
+        "title": "Shipping",
+        "questions": {
+          "time": {
+            "question": "How long until I receive my order?",
+            "answer": "<strong>For in-stock products:</strong><br><br><strong>Processing times:</strong><br>• Preparation: 1-2 business days<br>• Shipping Monday through Friday<br>• Sent via <strong>Colissimo</strong> with guaranteed 48h delivery<br><br><strong>Estimated total time:</strong> 4-5 business days (preparation + delivery)<br><br><em>Note: Unforeseen circumstances may occasionally extend delivery by a day or two.</em><br><br><strong>Out-of-stock products:</strong><br>If your order contains an out-of-stock item, we'll contact you ASAP to:<br>• Offer a later delivery date<br>• Or provide a full refund"
+          },
+          "missing": {
+            "question": "I haven't received my order, what's happening?",
+            "answer": "If your order hasn't arrived within <strong>6-7 business days</strong> after shipping, here's what to do:<br><br><strong>1. Check your tracking number</strong><br>Review your package status with the number provided by email<br><br><strong>2. Contact us</strong><br>Email us at <a href='mailto:panam.nord.est@gmail.com'>panam.nord.est@gmail.com</a> including:<br>• Your order number<br>• The tracking number<br>• Your delivery address<br><br><strong>Our commitment:</strong><br>Our team will respond ASAP and launch an investigation with Colissimo to locate your package. We'll find a quick solution (reshipping or refund)."
+          },
+          "international": {
+            "question": "Do you ship internationally?",
+            "answer": "Yes! We deliver to many countries worldwide.<br><br><strong>International shipping costs:</strong><br>• Variable depending on destination country<br>• Average: <strong>€20</strong><br>• Automatically calculated at checkout<br><br><strong>Delivery times:</strong><br>• Europe: 5-10 business days<br>• Rest of world: 10-20 business days<br><br><em>Note: Customs fees and local taxes (if applicable) are the recipient's responsibility.</em>"
+          },
+          "tracking": {
+            "question": "How do I track my package?",
+            "answer": "Tracking your order is simple and transparent:<br><br><strong>1. Shipping confirmation email</strong><br>Once your order ships, you'll receive an email containing:<br>• Your Colissimo tracking number<br>• A direct link to tracking<br><br><strong>2. Real-time tracking</strong><br>Click the link or visit <a href='https://www.laposte.fr/outils/suivre-vos-envois' target='_blank'>laposte.fr</a> to:<br>• See your package location in real-time<br>• Know the expected delivery date<br>• Receive SMS notifications (optional)<br><br><strong>Tip:</strong> Add the tracking number to your La Poste account for even easier tracking!"
+          }
+        }
+      }
+    }
   }
 }
