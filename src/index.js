@@ -14,10 +14,39 @@
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import * as Sentry from "@sentry/vue";
 import i18n from "./i18n";
+import { sentryConfig } from "./config/sentry";
 
 // Styles - loaded for all Vue pages
 import "./style.css";
+
+let sentryInitialized = false;
+
+/**
+ * Initialize Sentry error tracking with Vue app
+ */
+function initSentry(app) {
+  if (sentryConfig.dsn && !sentryInitialized && app) {
+    Sentry.init({
+      app,
+      dsn: sentryConfig.dsn,
+      environment: sentryConfig.environment,
+      integrations: [
+        Sentry.browserTracingIntegration(),
+        Sentry.replayIntegration({
+          maskAllText: false,
+          blockAllMedia: false,
+        }),
+      ],
+      tracesSampleRate: sentryConfig.tracesSampleRate,
+      replaysSessionSampleRate: sentryConfig.replaysSessionSampleRate,
+      replaysOnErrorSampleRate: sentryConfig.replaysOnErrorSampleRate,
+    });
+    sentryInitialized = true;
+    console.log("[PNE] Sentry initialized");
+  }
+}
 
 // Layout
 import AppShell from "./components/layout/AppShell.vue";
@@ -99,6 +128,9 @@ function mountApp() {
       app.use(createPinia());
       app.use(i18n);
 
+      // Initialize Sentry with this app
+      initSentry(app);
+
       // Mount the app
       app.mount("#app");
       removePreloader();
@@ -125,6 +157,7 @@ function mountLegacyApps() {
     const app = createApp(Homepage);
     app.use(createPinia());
     app.use(i18n);
+    initSentry(app);
     app.mount("#homepage-app");
     mounted = true;
     console.log("[PNE] Legacy mount: homepage-app");
@@ -141,6 +174,7 @@ function mountLegacyApps() {
     });
     app.use(createPinia());
     app.use(i18n);
+    initSentry(app);
     app.mount("#lookbook");
     lookbookEl.style.position = "relative";
     mounted = true;
@@ -154,6 +188,7 @@ function mountLegacyApps() {
     const app = createApp(ProductsListing);
     app.use(createPinia());
     app.use(i18n);
+    initSentry(app);
     app.mount("#products-app");
     mounted = true;
     console.log("[PNE] Legacy mount: products-app");
@@ -166,6 +201,7 @@ function mountLegacyApps() {
     const app = createApp(App);
     app.use(createPinia());
     app.use(i18n);
+    initSentry(app);
     app.mount("#vue");
     mounted = true;
     console.log("[PNE] Legacy mount: vue (product)");
@@ -177,6 +213,7 @@ function mountLegacyApps() {
     const app = createApp(Navigation);
     app.use(createPinia());
     app.use(i18n);
+    initSentry(app);
     app.mount("#navigation-app");
     console.log("[PNE] Legacy mount: navigation-app");
   }
@@ -187,6 +224,7 @@ function mountLegacyApps() {
     const app = createApp(Footer);
     app.use(createPinia());
     app.use(i18n);
+    initSentry(app);
     app.mount("#footer-app");
     console.log("[PNE] Legacy mount: footer-app");
   }
