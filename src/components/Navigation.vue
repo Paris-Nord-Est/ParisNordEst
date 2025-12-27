@@ -23,9 +23,6 @@
               {{ t(`pages.${page.permalink}`, page.name) }}
             </a>
           </li>
-          <li v-if="navigation.lookbook">
-            <a :href="navigation.lookbook">{{ t("nav.lookbook") }}</a>
-          </li>
           <li v-if="navigation.contact">
             <a :href="navigation.contact">{{ t("nav.contact") }}</a>
           </li>
