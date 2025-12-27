@@ -51,7 +51,8 @@
     "selectVariant": "Choisir une option",
     "reset": "Réinitialiser",
     "noImage": "Pas d'image",
-    "lowInventory": "Plus que {count} en stock"
+    "lowInventory": "Plus que {count} en stock",
+    "klarnaPayment": "Payez en 3x sans frais"
   },
   "collection": {
     "title": "COLLECTION CASQUETTE"

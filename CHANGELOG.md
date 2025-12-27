@@ -4,6 +4,17 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 
 ## [2025-12-27]
 
+### Product Page UX Enhancements
+- **Interactive Image Gallery**: Added hover zoom effect (1.5x magnification) that follows mouse movement for detailed product viewing
+- **Lightbox Mode**: Click any product image to view full-screen with keyboard navigation (arrow keys, ESC), image counter, and smooth animations
+- **Larger Thumbnails**: Increased thumbnail size from 60px to 80px with hover effects that lift thumbnails slightly for better visibility
+- **Zoom Indicator**: Animated badge appears on hover showing "Cliquer pour agrandir" (Click to enlarge) with pulsing animation
+- **Enhanced Add to Cart Button**: Added shopping cart icon with subtle bounce animation, ripple hover effect, improved padding and rounded corners (8px)
+- **Button Micro-animations**: Cart icon shakes playfully on hover, button lifts with shadow effect for tactile feedback
+- **Typography Improvements**: Increased product title size (2rem → 2.75rem on desktop) with improved letter spacing and fade-in animation on page load
+- **Klarna Payment Option**: Added Klarna logo and payment text below Add to Cart button showing "Pay in 3 interest-free installments" with i18n support
+- **Inventory Warnings**: Enhanced stock warnings with icon and colored left border for better visibility
+
 ### SEO Improvements
 - **Homepage Social Media Optimization**: Added Open Graph image, Twitter Card tags, and image dimensions for better social sharing previews
 - **LocalBusiness Structured Data**: Added comprehensive local business schema with Saint-Denis location, geo-coordinates, opening hours, and price range
@@ -29,10 +40,13 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - `docs/CLOUDFLARE_QUICK_SETUP.md` - Quick reference for Cloudflare redirect configuration
 
 ### Files Modified
+- `src/components/products/ProductGallery.vue` - Added zoom functionality, lightbox mode, keyboard navigation, larger thumbnails, and zoom indicator
+- `src/components/products/AddToCart.vue` - Added shopping cart icon, ripple effect, micro-animations, and enhanced button styling
+- `src/components/pages/ProductPage.vue` - Added Klarna payment section, improved title typography with animations
+- `src/locales/fr.json` - Added "Payez en 3x sans frais" (klarnaPayment) translation
+- `src/locales/en.json` - Added "Pay in 3 interest-free installments" (klarnaPayment) translation
 - `source/layout.html` - Added complete SEO meta tags, Open Graph tags, Twitter Cards, LocalBusiness schema, enhanced Product schema, and BreadcrumbList
 - `src/components/Homepage.vue` - Updated banner alt text and code comments
-- `src/locales/en.json` - Updated brand references, banner text, collection titles, and footer description
-- `src/locales/fr.json` - Updated brand references, banner text, collection titles, and footer description
 
 ## [2025-11-22]
 

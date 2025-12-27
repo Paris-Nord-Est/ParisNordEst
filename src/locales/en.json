@@ -51,7 +51,8 @@
     "selectVariant": "Select an option",
     "reset": "Reset",
     "noImage": "No image",
-    "lowInventory": "Only {count} left in stock"
+    "lowInventory": "Only {count} left in stock",
+    "klarnaPayment": "Pay in 3 interest-free installments"
   },
   "collection": {
     "title": "CASQUETTE COLLECTION"
