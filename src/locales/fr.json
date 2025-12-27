@@ -39,7 +39,8 @@
     "soldOut": "Épuisé",
     "comingSoon": "Bientôt disponible",
     "onSale": "En promo",
-    "variants": "variantes"
+    "variants": "variantes",
+    "relatedProducts": "VOUS AIMEREZ AUSSI"
   },
   "product": {
     "loading": "Chargement du produit...",
@@ -59,8 +60,8 @@
     "title": "BOUTIQUE"
   },
   "footer": {
-    "title": "Ici on fait des trucs cool pour ta tête",
-    "description": "Pas des discours, pas des promesses, juste des trucs bien fichus pour ta tête. On les a conçues pour qu'elles te suivent dans tes pires et meilleurs moments - parce qu'une casquette c'est stylé. C'est fun, mais aussi sérieux. Pas un truc d'humour. Pas de blabla, juste du style qui détrône, des matières qui dureront longtemps. Et tout ça on le fabrique à Saint-Denis, parce que même les casquettes ont besoin d'un peu d'énergie parisienne.",
+    "title": "Ici on habille votre tête",
+    "description": "Production limitée, pièces qui nous ressemblent. Du style qui dure, des matières qui tiennent. On met Paris Nord-Est sur votre tête.",
     "links": {
       "home": "ACCUEIL",
       "products": "PRODUITS",

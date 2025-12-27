@@ -239,7 +239,8 @@
       </div>
     </main>
     {% endif %}
-    {% if page.full_url contains '/product/' %}
+    {% comment %} Related products - only for non-Vue-first pages (Vue handles this in ProductPage.vue) {% endcomment %}
+    {% if page.full_url contains '/product/' and is_vue_first_page == false %}
       {% if theme.show_similar_products %}
         {% assign related_products_header = t['products.related_products'] %}
         {% assign related_products_collection = product.related_products %}
@@ -557,6 +558,7 @@
         homeFeaturedVideoUrl: "{{ theme.home_featured_video_url }}",
         homeFeaturedVideoSize: "{{ theme.home_featured_video_size }}",
         homeFeaturedVideoBorder: "{{ theme.home_featured_video_border }}",
+        showSimilarProducts: {{ theme.show_similar_products }},
       };
       const themeTranslations = {
         cart: {

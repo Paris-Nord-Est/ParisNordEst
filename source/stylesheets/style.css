@@ -1036,7 +1036,7 @@ header.has-background {
 }
 
 .store-logo {
-  display: block;
+  display: flex;
   margin: 0 auto;
   max-width: 100%;
   object-fit: contain;

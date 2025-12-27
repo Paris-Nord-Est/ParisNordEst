@@ -201,6 +201,7 @@ function closeMobileMenu() {
 .modern-header .store-logo {
   height: 40px;
   width: auto;
+  display: flex;
 }
 
 /* Desktop Navigation */

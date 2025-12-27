@@ -53,17 +53,17 @@
 
           <!-- Product Options -->
           <ProductOptions
-            v-if="!product.has_default_option"
+            v-if="!hasDefaultOption"
             :options="product.options"
             :option-groups="product.option_groups"
-            :has-default-option="product.has_default_option"
+            :has-default-option="hasDefaultOption"
             :show-sold-out-options="showSoldOutOptions"
             @option-change="onOptionChange"
           />
 
           <!-- Hidden option input for default option -->
           <input
-            v-if="product.has_default_option && product.options.length === 1"
+            v-if="hasDefaultOption && product.options.length === 1"
             type="hidden"
             name="cart[add][id]"
             :value="product.options[0].id"
@@ -96,6 +96,13 @@
       <p>{{ t("product.notFound") }}</p>
       <a href="/products" class="back-link">{{ t("product.backToProducts") }}</a>
     </div>
+
+    <!-- Related Products -->
+    <RelatedProducts
+      v-if="product && showRelatedProducts"
+      :current-product-id="product.id"
+      :limit="4"
+    />
   </div>
 </template>
 
@@ -107,6 +114,7 @@ import ProductGallery from "../products/ProductGallery.vue";
 import ProductOptions from "../products/ProductOptions.vue";
 import ProductPrice from "../products/ProductPrice.vue";
 import AddToCart from "../products/AddToCart.vue";
+import RelatedProducts from "../products/RelatedProducts.vue";
 
 const { t } = useI18n();
 const { findProduct } = useBigCartel();
@@ -131,6 +139,13 @@ const showSoldOutOptions = computed(() => window.themeOptions?.showSoldOutOption
 const showLowInventoryMessages = computed(() => window.themeOptions?.showLowInventoryMessages ?? false);
 const hideSoldOutPrices = computed(() => !window.themeOptions?.showSoldOutPrices);
 const hideComingSoonPrices = computed(() => !window.themeOptions?.showComingSoonProductPrices);
+const showRelatedProducts = computed(() => window.themeOptions?.showSimilarProducts ?? true);
+
+// Check if product has a default option (single option, no option groups)
+const hasDefaultOption = computed(() => {
+  if (!product.value) return false;
+  return product.value.options?.length === 1 && !product.value.has_option_groups;
+});
 
 // Current price (may change with option selection)
 const currentPrice = computed(() => {
@@ -146,7 +161,7 @@ const canAddToCart = computed(() => {
     return false;
   }
   // If has default option, always can add
-  if (product.value.has_default_option) {
+  if (hasDefaultOption.value) {
     return true;
   }
   // Otherwise need a selected option that's not sold out
@@ -198,7 +213,7 @@ onMounted(async () => {
     product.value = fetchedProduct;
 
     // If has default option, pre-select it
-    if (fetchedProduct.has_default_option && fetchedProduct.options?.length === 1) {
+    if (fetchedProduct.options?.length === 1 && !fetchedProduct.has_option_groups) {
       selectedOption.value = fetchedProduct.options[0];
     }
   } catch (err) {
