@@ -23,13 +23,27 @@ export const CDN_BASE_URL =
 /**
  * Get the full CDN path for a relative asset path
  * @param {string} relativePath - Relative path to the asset (e.g., '/images/logo.svg' or 'images/logo.svg')
- * @returns {string} Full CDN URL
+ * @returns {string} Full CDN URL in production, relative path in development
  *
  * @example
  * getCdnPath('/images/home/slider/hero.jpg')
- * // Returns: 'https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/hero.jpg'
+ * // Production: 'https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/hero.jpg'
+ * // Development: '/images/home/slider/hero.jpg'
  */
 export function getCdnPath(relativePath) {
+  // Check if we're in development (localhost)
+  const isDevelopment =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
+
+  // In development, return relative path
+  if (isDevelopment) {
+    // Ensure path starts with /
+    return relativePath.startsWith("/") ? relativePath : `/${relativePath}`;
+  }
+
+  // In production, use CDN
   // Remove leading slash if present
   const cleanPath = relativePath.startsWith("/")
     ? relativePath.slice(1)

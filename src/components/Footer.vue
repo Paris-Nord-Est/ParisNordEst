@@ -24,23 +24,6 @@
         <p class="footer-description">
           {{ t("footer.description") }}
         </p>
-
-        <!-- Social Media Links -->
-        <div v-if="social.instagram" class="footer-social">
-          <a
-            :href="social.instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-            aria-label="Instagram"
-          >
-            <img
-              :src="getCdnPath('/images/casquette/vectoriel/instagram-icon.svg')"
-              alt="Instagram"
-              style="width: 36px; height: 36px; display: block"
-            />
-          </a>
-        </div>
       </div>
     </div>
     <div class="footer-links-container">
@@ -91,6 +74,23 @@
           </li>
         </ul>
       </nav>
+
+      <!-- Social Media Links -->
+      <div v-if="social.instagram" class="footer-social">
+        <a
+          :href="social.instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Instagram"
+        >
+          <img
+            :src="getCdnPath('/images/casquette/vectoriel/instagram-icon.svg')"
+            alt="Instagram"
+            style="width: 36px; height: 36px; display: block"
+          />
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -129,7 +129,6 @@ const limitedPages = computed(() => {
 .footer-content *,
 .footer-content *::before,
 .footer-content *::after {
-  all: revert;
   box-sizing: border-box;
 }
 
@@ -139,10 +138,9 @@ const limitedPages = computed(() => {
   padding: 2rem 1rem;
 }
 
-
 @media (min-width: 768px) {
   .footer-content {
-    padding: 4rem 1rem;
+    padding: 2rem 4rem 1rem;
   }
 }
 
@@ -248,7 +246,6 @@ const limitedPages = computed(() => {
 .social-link:hover {
   opacity: 0.7 !important;
 }
-
 
 .footer-nav ul {
   list-style: none;
