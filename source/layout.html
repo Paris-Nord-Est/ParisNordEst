@@ -749,6 +749,9 @@
           permalink: "{{ page.permalink }}",
           category: "{{ page.category }}",
           fullUrl: "{{ page.full_url }}"
+        },
+        social: {
+          instagram: "{% if theme.instagram_url != blank %}{{ theme.instagram_url }}{% else %}https://www.instagram.com/parisnord.est/{% endif %}"
         }
       };
     </script>

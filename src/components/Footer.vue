@@ -5,7 +5,9 @@
       <div class="footer-logo">
         <div class="logo-container">
           <img
-            :src="getCdnPath('/images/casquette/vectoriel/logo-round-white.svg')"
+            :src="
+              getCdnPath('/images/casquette/vectoriel/logo-round-white.svg')
+            "
             alt="Casquette Logo"
             class="logo-img"
           />
@@ -22,6 +24,23 @@
         <p class="footer-description">
           {{ t("footer.description") }}
         </p>
+
+        <!-- Social Media Links -->
+        <div v-if="social.instagram" class="footer-social">
+          <a
+            :href="social.instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Instagram"
+          >
+            <img
+              :src="getCdnPath('/images/casquette/vectoriel/instagram-icon.svg')"
+              alt="Instagram"
+              style="width: 36px; height: 36px; display: block"
+            />
+          </a>
+        </div>
       </div>
     </div>
     <div class="footer-links-container">
@@ -88,11 +107,13 @@ const bigcartelData = window.BIGCARTEL_DATA || {
   pages: [],
   cart: { count: 0, url: "/cart" },
   navigation: { products: "/products", contact: "/contact", home: "/" },
+  social: { instagram: "" },
 };
 
 const pages = ref(bigcartelData.pages);
 const cart = ref(bigcartelData.cart);
 const navigation = ref(bigcartelData.navigation);
+const social = ref(bigcartelData.social);
 
 // Show main pages in footer (lookbook and ou-nous-trouver)
 const limitedPages = computed(() => {
@@ -117,6 +138,7 @@ const limitedPages = computed(() => {
   color: white !important;
   padding: 2rem 1rem;
 }
+
 
 @media (min-width: 768px) {
   .footer-content {
@@ -203,6 +225,30 @@ const limitedPages = computed(() => {
     margin: 0 auto 2.5rem;
   }
 }
+
+.footer-social {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 1.5rem !important;
+  min-height: 50px !important;
+}
+
+@media (min-width: 768px) {
+  .footer-social {
+    margin-top: 2rem !important;
+  }
+}
+
+.social-link {
+  display: inline-block !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.social-link:hover {
+  opacity: 0.7 !important;
+}
+
 
 .footer-nav ul {
   list-style: none;
