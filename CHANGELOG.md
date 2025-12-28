@@ -23,14 +23,23 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - **Commit Convention Guide**: Comprehensive documentation for conventional commits and semantic versioning
 - **Version Injection**: Version numbers are automatically read from git tags at build time and injected into the app via webpack
 - **Version Verification**: Global variables (window.PNE_VERSION, window.PNE_BUILD) and styled console logging for easy version checking
+- **Custom Product Descriptions**: Added elegant system to display special descriptions on specific product pages (e.g., collaboration details, new model announcements)
+- **Product SEO Optimization**: Dynamic meta tags injection for product pages including meta description, keywords, Open Graph tags, and Twitter Cards
+- **Breadcrumb Navigation**: Added breadcrumb trail to product pages (Home → Products → Product Name) with full i18n support
+
+### Bug Fixes
+- **Homepage Hero Link**: Fixed incorrect hero slider link from `/collection/le-bar` to `/product/poulette-club`
+- **Legacy Code Conflicts**: Removed legacy `processProduct` call that was causing ReferenceError on product pages
 
 ### Files Created
 - `src/config/cdn.js` - CDN configuration with automatic latest tag detection and helper function
 - `.github/workflows/auto-deploy.yml` - Unified GitHub Action for automatic tagging and cache purging
 - `.github/COMMIT_CONVENTION.md` - Comprehensive guide for conventional commits and semantic versioning
+- `src/config/productContent.js` - Product custom content configuration with i18n support and SEO metadata
+- `src/composables/useSEO.js` - Composable for dynamic SEO meta tag injection
 
 ### Files Modified
-- `src/components/Homepage.vue` - Updated 3 image paths (hero slider images and banner) to use CDN URLs
+- `src/components/Homepage.vue` - Updated 3 image paths (hero slider images and banner) to use CDN URLs, fixed hero slider link from `/collection/le-bar` to `/product/poulette-club`
 - `src/components/Navigation.vue` - Updated logo path to use CDN URL
 - `src/components/Footer.vue` - Updated logo path to use CDN URL
 - `webpack.config.js` - Added git version extraction and webpack DefinePlugin to inject version at build time
@@ -38,6 +47,13 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - `.github/workflows/auto-deploy.yml` - Added automatic production build steps (Node.js setup, npm install, build, commit)
 - `README.md` - Updated deployment documentation to reflect fully automated workflow with production builds
 - `CHANGELOG.md` - Added CDN infrastructure improvements and build automation features
+- `src/components/pages/ProductPage.vue` - Added custom product descriptions, SEO optimization, and breadcrumb navigation with i18n support
+- `src/locales/fr.json` - Added product details translations for poulette-club and i-love-drama with SEO metadata
+- `src/locales/en.json` - Added product details translations for poulette-club and i-love-drama with SEO metadata
+- `source/layout.html` - Removed legacy processProduct call that was causing conflicts with new Vue architecture
+
+### Files Deleted
+- `source/javascripts/product-option-groups.js` - Legacy file removed to fix conflicts with Vue-first architecture
 
 ## [2025-12-27]
 

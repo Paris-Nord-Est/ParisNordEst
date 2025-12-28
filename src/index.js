@@ -208,19 +208,6 @@ function mountLegacyApps() {
     console.log("[PNE] Legacy mount: products-app");
   }
 
-  // Legacy: Product detail (old mount point)
-  const productEl = document.getElementById("vue");
-  if (productEl) {
-    const App = require("./App.vue").default;
-    const app = createApp(App);
-    app.use(createPinia());
-    app.use(i18n);
-    initSentry(app);
-    app.mount("#vue");
-    mounted = true;
-    console.log("[PNE] Legacy mount: vue (product)");
-  }
-
   // Legacy: Standalone Navigation
   const navEl = document.getElementById("navigation-app");
   if (navEl && !lookbookEl) {

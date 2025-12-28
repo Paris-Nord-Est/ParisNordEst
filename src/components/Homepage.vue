@@ -56,7 +56,7 @@ const config = reactive({
         alt: t("homepage.heroSlide2Alt"),
         title: t("homepage.heroSlide2Title"),
         ctaText: t("homepage.heroSlide2Cta"),
-        ctaLink: "/collection/le-bar",
+        ctaLink: "/product/poulette-club",
       },
     ],
   },

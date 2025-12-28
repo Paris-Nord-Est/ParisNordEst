@@ -26,7 +26,7 @@ Then access: `http://127.0.0.1:9292`
 
 <!-- Before </body> tag -->
 <script src="http://localhost:8080/app.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js"></script> -->
 ```
 
 **Why?**

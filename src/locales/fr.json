@@ -230,5 +230,30 @@
         "content": "La société TEDDY WOLFE archivera les bons de commandes et les factures sur un support fiable et durable constituant une copie fidèle conformément aux dispositions de l'article 1348 du Code civil.<br><br>Les registres informatisés de la société TEDDY WOLFE seront considérés par toutes les parties concernées comme preuve des communications, commandes, paiements et transactions intervenus entre les parties."
       }
     }
+  },
+  "productDetails": {
+    "pouletteClub": {
+      "title": "🍷 Collaboration Poulette x Paris Nord-Est",
+      "p1": "Une collaboration exclusive avec <a href='https://www.pouletterestaurant.com/' target='_blank' rel='noopener noreferrer'><strong>Poulette</strong></a>, la table bistronomique qui fait vibrer le cœur de Paris. Cette casquette célèbre l'art de vivre parisien où gastronomie et convivialité se rencontrent.",
+      "p2": "Arborant fièrement l'inscription \"Poulette Dining Club\" accompagnée d'une bouteille de vin, cette pièce unique incarne l'esprit des belles tables et des moments partagés. Un clin d'œil à ceux qui savent apprécier les bonnes choses, de l'assiette à l'accessoire.",
+      "p3": "📍 Retrouvez Poulette au 3 Rue Étienne Marcel, 75001 Paris",
+      "seo": {
+        "metaDescription": "Casquette Poulette Dining Club - Collaboration exclusive avec le restaurant bistronomique Poulette Paris. Casquette velours côtelé 100% coton, fabriquée à Saint-Denis.",
+        "keywords": "casquette poulette, poulette dining club, collaboration restaurant, casquette bistronomie, casquette paris",
+        "ogTitle": "Casquette Poulette Dining Club - Collaboration Paris Nord-Est x Poulette",
+        "ogDescription": "Une collaboration exclusive avec Poulette, la table bistronomique parisienne. Casquette premium en velours côtelé 100% coton."
+      }
+    },
+    "iLoveDrama": {
+      "title": "✨ Nouveau Modèle : I Love Drama",
+      "p1": "<strong>Notre dernière création !</strong> Pour celles et ceux qui assument pleinement leur côté intense. Cette casquette noire minimaliste affiche un message clair : vous n'êtes pas là pour passer inaperçu·e.",
+      "p2": "Parce que la vie est trop courte pour être ennuyeuse, arborez fièrement votre amour des émotions fortes et des rebondissements. Attention, effet garanti – portez-la uniquement si vous êtes prêt·e à assumer.",
+      "seo": {
+        "metaDescription": "Casquette I Love Drama - Nouveau modèle Paris Nord-Est. Casquette noire minimaliste 100% coton pour drama queens & kings. Fabriquée à Saint-Denis.",
+        "keywords": "casquette i love drama, casquette drama queen, casquette noire statement, nouveau modèle casquette, casquette paris",
+        "ogTitle": "Casquette I Love Drama - Nouveau Modèle Paris Nord-Est",
+        "ogDescription": "Notre dernière création ! Casquette noire minimaliste pour celles et ceux qui assument leur côté intense. Pour drama queens & kings assumé·e·s."
+      }
+    }
   }
 }

@@ -13,11 +13,21 @@
     </div>
 
     <!-- Product Content -->
-    <div v-else-if="product" class="product-container">
-      <!-- Product Images -->
-      <div class="product-images">
-        <ProductGallery :images="product.images" :product-name="product.name" />
-      </div>
+    <div v-else-if="product" class="product-content">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{{ t('nav.home') }}</a>
+        <span class="separator">/</span>
+        <a href="/products">{{ t('nav.products') }}</a>
+        <span class="separator">/</span>
+        <span class="current">{{ product.name }}</span>
+      </nav>
+
+      <div class="product-container">
+        <!-- Product Images -->
+        <div class="product-images">
+          <ProductGallery :images="product.images" :product-name="product.name" />
+        </div>
 
       <!-- Product Details -->
       <div class="product-details">
@@ -97,9 +107,17 @@
           </p>
         </div>
 
+        <!-- Custom Product Content (if exists) -->
+        <div
+          v-if="customContent?.customDescription"
+          class="custom-product-content"
+          v-html="customContent.customDescription"
+        ></div>
+
         <!-- Description -->
         <div v-if="product.description" class="product-description" v-html="product.description"></div>
       </div>
+    </div>
     </div>
 
     <!-- Not Found -->
@@ -121,6 +139,8 @@
 import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useBigCartel } from "../../composables/useBigCartel";
+import { useSEO } from "../../composables/useSEO";
+import { getProductCustomContent } from "../../config/productContent.js";
 import ProductGallery from "../products/ProductGallery.vue";
 import ProductOptions from "../products/ProductOptions.vue";
 import ProductPrice from "../products/ProductPrice.vue";
@@ -129,6 +149,7 @@ import RelatedProducts from "../products/RelatedProducts.vue";
 
 const { t } = useI18n();
 const { findProduct } = useBigCartel();
+const { setProductSEO } = useSEO();
 
 // Props from data-* attributes
 const props = defineProps({
@@ -144,6 +165,7 @@ const error = ref(null);
 const product = ref(null);
 const selectedOption = ref(null);
 const addingToCart = ref(false);
+const customContent = ref(null);
 
 // Theme options
 const showSoldOutOptions = computed(() => window.themeOptions?.showSoldOutOptions ?? true);
@@ -223,6 +245,14 @@ onMounted(async () => {
     const fetchedProduct = await findProduct(props.product);
     product.value = fetchedProduct;
 
+    // Load custom content for this product if it exists
+    customContent.value = getProductCustomContent(props.product);
+
+    // Apply SEO metadata if custom content has SEO data
+    if (customContent.value) {
+      setProductSEO(fetchedProduct.name, customContent.value);
+    }
+
     // If has default option, pre-select it
     if (fetchedProduct.options?.length === 1 && !fetchedProduct.has_option_groups) {
       selectedOption.value = fetchedProduct.options[0];
@@ -240,6 +270,38 @@ onMounted(async () => {
 .product-page {
   min-height: 60vh;
   background-color: #fff;
+}
+
+.product-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.breadcrumbs a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+  color: #000;
+}
+
+.breadcrumbs .separator {
+  margin: 0 0.5rem;
+}
+
+.breadcrumbs .current {
+  color: #000;
+  font-weight: 500;
 }
 
 /* Loading */
@@ -289,7 +351,6 @@ onMounted(async () => {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  padding: 1rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -297,7 +358,6 @@ onMounted(async () => {
 @media (min-width: 768px) {
   .product-container {
     grid-template-columns: 1fr 1fr;
-    padding: 2rem;
     gap: 3rem;
   }
 }
@@ -416,6 +476,45 @@ onMounted(async () => {
   font-weight: 600;
   color: #666;
   margin: 0;
+}
+
+/* Custom Product Content */
+.custom-product-content {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-left: 4px solid #000;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  animation: slideIn 0.6s ease;
+}
+
+.custom-product-content :deep(h3) {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #000;
+}
+
+.custom-product-content :deep(p) {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0.75rem 0;
+}
+
+.custom-product-content :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Description */

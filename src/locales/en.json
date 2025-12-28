@@ -230,5 +230,30 @@
         "content": "TEDDY WOLFE will archive order forms and invoices on reliable and durable media constituting a faithful copy in accordance with Article 1348 of the Civil Code.<br><br>TEDDY WOLFE computerized registers will be considered by all parties concerned as proof of communications, orders, payments and transactions between the parties."
       }
     }
+  },
+  "productDetails": {
+    "pouletteClub": {
+      "title": "🍷 Poulette x Paris Nord-Est Collaboration",
+      "p1": "An exclusive collaboration with <a href='https://www.pouletterestaurant.com/' target='_blank' rel='noopener noreferrer'><strong>Poulette</strong></a>, the bistronomic table that makes the heart of Paris vibrate. This cap celebrates the Parisian way of life where gastronomy and conviviality meet.",
+      "p2": "Proudly displaying the inscription \"Poulette Dining Club\" accompanied by a wine bottle, this unique piece embodies the spirit of fine dining and shared moments. A nod to those who know how to appreciate the finer things, from plate to accessory.",
+      "p3": "📍 Find Poulette at 3 Rue Étienne Marcel, 75001 Paris",
+      "seo": {
+        "metaDescription": "Poulette Dining Club Cap - Exclusive collaboration with Poulette bistronomic restaurant Paris. Corduroy cap 100% cotton, made in Saint-Denis.",
+        "keywords": "poulette cap, poulette dining club, restaurant collaboration, bistronomy cap, paris cap",
+        "ogTitle": "Poulette Dining Club Cap - Paris Nord-Est x Poulette Collaboration",
+        "ogDescription": "An exclusive collaboration with Poulette, the Parisian bistronomic table. Premium corduroy cap 100% cotton."
+      }
+    },
+    "iLoveDrama": {
+      "title": "✨ New Model: I Love Drama",
+      "p1": "<strong>Our latest creation!</strong> For those who fully embrace their intense side. This minimalist black cap displays a clear message: you're not here to go unnoticed.",
+      "p2": "Because life is too short to be boring, proudly wear your love of strong emotions and plot twists. Warning, guaranteed impact – wear it only if you're ready to own it.",
+      "seo": {
+        "metaDescription": "I Love Drama Cap - New Paris Nord-Est model. Minimalist black cap 100% cotton for drama queens & kings. Made in Saint-Denis.",
+        "keywords": "i love drama cap, drama queen cap, black statement cap, new cap model, paris cap",
+        "ogTitle": "I Love Drama Cap - New Paris Nord-Est Model",
+        "ogDescription": "Our latest creation! Minimalist black cap for those who embrace their intense side. For unapologetic drama queens & kings."
+      }
+    }
   }
 }

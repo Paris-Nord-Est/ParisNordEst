@@ -5,7 +5,11 @@
         <a :href="navigation.home" :title="t('nav.home')">
           <div class="store-header">
             <img
-              :src="getCdnPath('/images/casquette/vectoriel/logo-horizontal-white.svg')"
+              :src="
+                getCdnPath(
+                  '/images/casquette/vectoriel/logo-horizontal-white.svg'
+                )
+              "
               alt="Casquette"
               class="store-logo"
             />
