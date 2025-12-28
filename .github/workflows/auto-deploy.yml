@@ -144,7 +144,7 @@ jobs:
 
           # Check if there are changes to commit
           if [ -n "$(git status --porcelain source/dist/)" ]; then
-            git add source/dist/
+            git add -f source/dist/
             git commit -m "build: compile assets for ${{ steps.new_version.outputs.new_version }}"
             git push origin main
             echo "✅ Built assets committed and pushed"
