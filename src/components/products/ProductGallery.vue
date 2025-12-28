@@ -478,7 +478,7 @@ watch(
 
 .zoom-indicator {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 8rem;
   right: 1.5rem;
   background: rgba(0, 0, 0, 0.75);
   color: white;

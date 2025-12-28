@@ -44,21 +44,19 @@
             <a :href="page.url" class="footer-link">
               {{ t(`pages.${page.permalink}`, page.name) }}
             </a>
-            <span v-if="index < limitedPages.length - 1" class="separator-inline"
+            <span
+              v-if="index < limitedPages.length - 1"
+              class="separator-inline"
               >-</span
             >
           </li>
           <li class="separator">-</li>
           <li>
-            <a href="/cgv" class="footer-link">{{
-              t("pages.cgv")
-            }}</a>
+            <a href="/cgv" class="footer-link">{{ t("pages.cgv") }}</a>
           </li>
           <li class="separator">-</li>
           <li>
-            <a href="/faq" class="footer-link">{{
-              t("pages.faq")
-            }}</a>
+            <a href="/faq" class="footer-link">{{ t("pages.faq") }}</a>
           </li>
           <li v-if="navigation.contact" class="separator">-</li>
           <li v-if="navigation.contact">
@@ -116,7 +114,13 @@ const limitedPages = computed(() => {
 .footer-content {
   background-color: #1a1a1a !important;
   color: white !important;
-  padding: 4rem 1rem;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    padding: 4rem 1rem;
+  }
 }
 
 .footer-main {
@@ -126,17 +130,18 @@ const limitedPages = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
   .footer-main {
     flex-direction: row;
+    gap: 4rem;
   }
 }
 
 .footer-logo {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -145,8 +150,15 @@ const limitedPages = computed(() => {
 }
 
 .logo-container {
-  width: 20rem;
-  height: 20rem;
+  width: 12rem;
+  height: 12rem;
+}
+
+@media (min-width: 768px) {
+  .logo-container {
+    width: 20rem;
+    height: 20rem;
+  }
 }
 
 .logo-img {
@@ -161,6 +173,7 @@ const limitedPages = computed(() => {
 .footer-title {
   font-size: 3rem;
   font-weight: 700;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
   font-family: "Sharpie", ui-sans-serif, system-ui, sans-serif;
   color: white !important;
@@ -178,7 +191,7 @@ const limitedPages = computed(() => {
   font-size: 1rem;
   line-height: 1.8;
   max-width: 48rem;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 1.5rem;
   opacity: 0.95;
   color: white !important;
 }
@@ -186,6 +199,7 @@ const limitedPages = computed(() => {
 @media (min-width: 768px) {
   .footer-description {
     font-size: 1.125rem;
+    margin: 0 auto 2.5rem;
   }
 }
 
@@ -206,12 +220,15 @@ const limitedPages = computed(() => {
   font-weight: 500;
   text-transform: uppercase;
   color: white !important;
+  margin: 0 auto;
+  padding: 0;
 }
 
 @media (min-width: 768px) {
   .footer-nav-list {
     gap: 1.5rem;
     font-size: 1rem;
+    margin-top: 2rem;
   }
 }
 
