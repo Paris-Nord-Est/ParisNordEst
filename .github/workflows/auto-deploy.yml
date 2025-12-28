@@ -109,6 +109,49 @@ jobs:
             echo "✅ Tag $NEW_VERSION does not exist, will create and deploy it"
           fi
 
+      - name: Setup Node.js
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: npm ci
+
+      - name: Build production assets
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          echo "Building production assets with version ${{ steps.new_version.outputs.new_version }}..."
+          npm run build
+
+          # Verify build output exists
+          if [ ! -f "source/dist/app.js" ]; then
+            echo "❌ Build failed - app.js not found!"
+            exit 1
+          fi
+
+          echo "✅ Build completed successfully"
+          ls -lh source/dist/
+
+      - name: Commit built assets
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Check if there are changes to commit
+          if [ -n "$(git status --porcelain source/dist/)" ]; then
+            git add source/dist/
+            git commit -m "build: compile assets for ${{ steps.new_version.outputs.new_version }}"
+            git push origin main
+            echo "✅ Built assets committed and pushed"
+          else
+            echo "ℹ️ No changes to built assets"
+          fi
+
       - name: Create and push tag
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
@@ -153,9 +196,11 @@ jobs:
           echo "**Bump type:** \`${{ steps.analyze_commits.outputs.bump_type }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### ✅ Completed:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Created tag \`${{ steps.new_version.outputs.new_version }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "2. Purged jsDelivr cache (JS & CSS only)" >> $GITHUB_STEP_SUMMARY
-          echo "3. Changes should be live within ~30 seconds" >> $GITHUB_STEP_SUMMARY
+          echo "1. Built production assets with version injected" >> $GITHUB_STEP_SUMMARY
+          echo "2. Committed built assets to main branch" >> $GITHUB_STEP_SUMMARY
+          echo "3. Created tag \`${{ steps.new_version.outputs.new_version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "4. Purged jsDelivr cache (JS & CSS)" >> $GITHUB_STEP_SUMMARY
+          echo "5. Changes should be live within ~30 seconds" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### ⏰ If changes don't appear:" >> $GITHUB_STEP_SUMMARY
           echo "- **Wait 12 hours** for \`@latest\` cache to expire naturally, OR" >> $GITHUB_STEP_SUMMARY

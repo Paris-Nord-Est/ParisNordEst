@@ -45,28 +45,36 @@ The theme uses **fully automated deployment** with jsDelivr CDN, semantic versio
 
 #### Deployment Steps (Fully Automated):
 
-1. **Build and commit your changes:**
+1. **Commit your changes:**
    ```bash
-   npm run watch
    git add .
    git commit -m "feat: add new hero section"
    git push origin main
    ```
 
-**That's it!** 🎉 Your changes are now live!
+**That's it!** 🎉
+
+The workflow automatically:
+- Builds production assets
+- Injects the version from git tag
+- Commits built files
+- Creates version tag
+- Purges CDN cache
+- Your changes are live in ~30 seconds!
 
 #### What Happens Automatically:
 
-1. ✅ **Auto-Tagging:** GitHub Action analyzes your commit message and creates a version tag
-   - `feat:` → minor version (v3.0.0 → v3.1.0)
-   - `fix:` → patch version (v3.0.0 → v3.0.1)
-   - `BREAKING CHANGE:` → major version (v3.0.0 → v4.0.0)
+1. ✅ **Auto-Versioning:** Analyzes commit messages (feat/fix/BREAKING CHANGE)
+2. ✅ **Production Build:** Runs `npm run build` with version injection
+3. ✅ **Commit Build:** Commits built assets to main branch
+4. ✅ **Tag Creation:** Creates git tag with new version
+5. ✅ **Cache Purge:** Purges jsDelivr cache for JS & CSS
+6. ✅ **Live in 30s:** Changes appear on your store
 
-2. ✅ **Cache Purge:** Same workflow automatically purges jsDelivr cache (JS, CSS, images)
-
-3. ✅ **Live Deployment:** Your changes are live within ~30 seconds
-
-All of this happens in a **single workflow** - no separate steps needed!
+**Version bumps:**
+- `feat:` → minor (v3.0.0 → v3.1.0)
+- `fix:` → patch (v3.0.0 → v3.0.1)
+- `BREAKING CHANGE:` → major (v3.0.0 → v4.0.0)
 
 #### CSS Updates (Only When Needed)
 

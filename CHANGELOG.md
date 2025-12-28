@@ -14,12 +14,15 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 
 ### Features
 - **Fully Automated Deployment**: Complete CI/CD pipeline - just push code and changes go live automatically
+- **Automatic Production Builds**: Deployment workflow now builds production assets automatically before creating tags, ensuring all version tags point to fresh compiled code with correct version injection
 - **Semantic Versioning**: Automatic version bumping based on conventional commit messages (feat:, fix:, BREAKING CHANGE:)
 - **Auto-Tagging Workflow**: GitHub Action analyzes commits and creates version tags automatically
 - **Automated Cache Purge**: GitHub Action automatically purges JavaScript, CSS, and image assets from jsDelivr cache
 - **Zero-Touch Deployment**: Deploy JavaScript and image changes without accessing BigCartel (CSS still requires manual upload)
 - **Deployment Summary**: GitHub Actions provide detailed summary of version bumps, purged assets, and next steps
 - **Commit Convention Guide**: Comprehensive documentation for conventional commits and semantic versioning
+- **Version Injection**: Version numbers are automatically read from git tags at build time and injected into the app via webpack
+- **Version Verification**: Global variables (window.PNE_VERSION, window.PNE_BUILD) and styled console logging for easy version checking
 
 ### Files Created
 - `src/config/cdn.js` - CDN configuration with automatic latest tag detection and helper function
@@ -30,8 +33,11 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - `src/components/Homepage.vue` - Updated 3 image paths (hero slider images and banner) to use CDN URLs
 - `src/components/Navigation.vue` - Updated logo path to use CDN URL
 - `src/components/Footer.vue` - Updated logo path to use CDN URL
-- `README.md` - Updated deployment documentation with automated cache purge workflow
-- `CHANGELOG.md` - Added CDN infrastructure improvements
+- `webpack.config.js` - Added git version extraction and webpack DefinePlugin to inject version at build time
+- `src/index.js` - Added styled console logging and global version variables for easy verification
+- `.github/workflows/auto-deploy.yml` - Added automatic production build steps (Node.js setup, npm install, build, commit)
+- `README.md` - Updated deployment documentation to reflect fully automated workflow with production builds
+- `CHANGELOG.md` - Added CDN infrastructure improvements and build automation features
 
 ## [2025-12-27]
 
