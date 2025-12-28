@@ -136,26 +136,26 @@ jobs:
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
           echo "Purging app.js from jsDelivr cache..."
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js"
 
       - name: Purge CSS bundle
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
           echo "Purging main.css from jsDelivr cache..."
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/main.css"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/main.css"
 
       - name: Purge image assets
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
           echo "Purging image assets from jsDelivr cache..."
           # Purge hero slider images
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp"
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/le-bar.jpg"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/le-bar.jpg"
           # Purge banner image
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/banner/paris-nord-est-banner.jpg"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/banner/paris-nord-est-banner.jpg"
           # Purge logos
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-horizontal-white.svg"
-          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-round-white.svg"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-horizontal-white.svg"
+          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-round-white.svg"
 
       - name: Deployment summary
         if: steps.check_tag.outputs.tag_exists == 'false'
