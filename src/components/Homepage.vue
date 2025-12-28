@@ -46,16 +46,16 @@ const config = reactive({
     slides: [
       {
         url: getCdnPath("/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp"),
-        alt: "Hero image 1 - Casquette Collection",
+        alt: t("homepage.heroSlide1Alt"),
         title: t("hero.title"),
         ctaText: t("hero.cta"),
         ctaLink: "/products",
       },
       {
         url: getCdnPath("/images/home/slider/le-bar.jpg"),
-        alt: "Hero image 2 - Le Bar Collection",
-        title: "Discover Le Bar",
-        ctaText: "EXPLORE",
+        alt: t("homepage.heroSlide2Alt"),
+        title: t("homepage.heroSlide2Title"),
+        ctaText: t("homepage.heroSlide2Cta"),
         ctaLink: "/collection/le-bar",
       },
     ],
@@ -69,7 +69,7 @@ const config = reactive({
   banner: {
     title: t("banner.title"),
     image: getCdnPath("/images/home/banner/paris-nord-est-banner.jpg"),
-    alt: "Casquette Banner",
+    alt: t("homepage.bannerAlt"),
     showCta: true,
     ctaText: t("banner.cta"),
     ctaLink: "/products",

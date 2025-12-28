@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed, nextTick } from "vue";
+import { useI18n } from "vue-i18n";
 
 // Components
 import LoaderItem from "./LoaderItem.vue";
+
+const { t } = useI18n();
 
 const photos = ref([]);
 const loading = ref(true);
@@ -250,8 +253,8 @@ onBeforeUnmount(() => {
 
     <!-- Error State -->
     <div v-else-if="error" class="lookbook-error">
-      <p>Failed to load lookbook images</p>
-      <button class="retry-button" @click="retryLoad">Retry</button>
+      <p>{{ t("lookbook.error") }}</p>
+      <button class="retry-button" @click="retryLoad">{{ t("lookbook.retry") }}</button>
     </div>
 
     <!-- Photos Masonry Grid -->
@@ -269,7 +272,7 @@ onBeforeUnmount(() => {
           :data-width="photo.width"
           :data-height="photo.height"
           sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 400px"
-          alt="Paris Nord-Est lookbook"
+          :alt="t('lookbook.alt')"
           @load="(e) => e.target.classList.add('loaded')"
           @error="handleImageError(photo.url)"
         />
@@ -278,7 +281,7 @@ onBeforeUnmount(() => {
 
     <!-- Empty State -->
     <div v-else class="lookbook-empty">
-      <p>No images to display</p>
+      <p>{{ t("lookbook.empty") }}</p>
     </div>
   </div>
 </template>

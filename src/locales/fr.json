@@ -90,6 +90,27 @@
     "en": "English",
     "switchTo": "Passer en {lang}"
   },
+  "homepage": {
+    "heroSlide1Alt": "Image héro 1 - Collection Casquette",
+    "heroSlide2Alt": "Image héro 2 - Collection Le Bar",
+    "heroSlide2Title": "Découvrez Le Bar",
+    "heroSlide2Cta": "EXPLORER",
+    "bannerAlt": "Bannière Casquette"
+  },
+  "lookbook": {
+    "loading": "Chargement du lookbook...",
+    "error": "Impossible de charger les images du lookbook",
+    "retry": "Réessayer",
+    "empty": "Aucune image à afficher",
+    "alt": "Paris Nord-Est lookbook"
+  },
+  "contact": {
+    "comingSoon": "Page de contact - Bientôt disponible"
+  },
+  "customPage": {
+    "comingSoon": "Page personnalisée - Bientôt disponible",
+    "contentPlaceholder": "Le contenu sera affiché ici"
+  },
   "faq": {
     "title": "Questions Fréquentes",
     "subtitle": "Trouvez rapidement les réponses à vos questions",

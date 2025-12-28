@@ -3,12 +3,16 @@
     <!-- Placeholder for contact page -->
     <!-- Will be implemented in Phase 5 -->
     <div class="contact-placeholder">
-      <p>Contact page Vue component - Coming soon</p>
+      <p>{{ t("contact.comingSoon") }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 /**
  * ContactPage - Contact form page
  * Will include: HTML form for BigCartel contact submission

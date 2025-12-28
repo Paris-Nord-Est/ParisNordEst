@@ -90,6 +90,27 @@
     "en": "English",
     "switchTo": "Switch to {lang}"
   },
+  "homepage": {
+    "heroSlide1Alt": "Hero image 1 - Casquette Collection",
+    "heroSlide2Alt": "Hero image 2 - Le Bar Collection",
+    "heroSlide2Title": "Discover Le Bar",
+    "heroSlide2Cta": "EXPLORE",
+    "bannerAlt": "Casquette Banner"
+  },
+  "lookbook": {
+    "loading": "Loading lookbook...",
+    "error": "Failed to load lookbook images",
+    "retry": "Retry",
+    "empty": "No images to display",
+    "alt": "Paris Nord-Est lookbook"
+  },
+  "contact": {
+    "comingSoon": "Contact page - Coming soon"
+  },
+  "customPage": {
+    "comingSoon": "Custom page - Coming soon",
+    "contentPlaceholder": "Content will be rendered here"
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to your questions quickly",

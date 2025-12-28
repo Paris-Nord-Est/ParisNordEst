@@ -3,13 +3,17 @@
     <!-- Placeholder for custom/generic pages -->
     <!-- Will be implemented in Phase 5 -->
     <div class="custom-placeholder">
-      <p>Custom page Vue component - Coming soon</p>
-      <p v-if="content">Content will be rendered here</p>
+      <p>{{ t("customPage.comingSoon") }}</p>
+      <p v-if="content">{{ t("customPage.contentPlaceholder") }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 /**
  * CustomPage - Generic page renderer for custom BigCartel pages
  * (CGV, FAQ, About, etc.)

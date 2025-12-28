@@ -3,7 +3,7 @@
     <!-- Banner Image -->
     <div class="banner-image-container relative">
       <img
-        :src="bannerImage"
+        :src="props.bannerImage"
         :alt="bannerAlt"
         class="w-full h-auto object-cover"
       />
@@ -19,8 +19,8 @@
             v-html="bannerTitle"
           ></h2>
           <a
-            v-if="showCta"
-            :href="ctaLink"
+            v-if="props.showCta"
+            :href="props.ctaLink"
             class="banner-cta inline-block bg-white text-black font-bold px-8 py-3 text-base uppercase tracking-wider hover:bg-gray-100 transition-colors"
           >
             {{ ctaText }}
@@ -32,10 +32,15 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 const props = defineProps({
   bannerTitle: {
     type: String,
-    default: "On a mis Paris Nord-Est<br>dans une casquette.",
+    default: "",
   },
   bannerImage: {
     type: String,
@@ -43,7 +48,7 @@ const props = defineProps({
   },
   bannerAlt: {
     type: String,
-    default: "Banner",
+    default: "",
   },
   showCta: {
     type: Boolean,
@@ -51,13 +56,18 @@ const props = defineProps({
   },
   ctaText: {
     type: String,
-    default: "SHOP NOW",
+    default: "",
   },
   ctaLink: {
     type: String,
     default: "/products",
   },
 });
+
+// Use i18n fallbacks if props are not provided
+const bannerTitle = computed(() => props.bannerTitle || t("banner.title"));
+const bannerAlt = computed(() => props.bannerAlt || t("homepage.bannerAlt"));
+const ctaText = computed(() => props.ctaText || t("banner.cta"));
 </script>
 
 <style scoped>
