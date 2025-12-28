@@ -36,6 +36,7 @@ import { useI18n } from "vue-i18n";
 import HeroSection from "./HeroSection.vue";
 import ProductGrid from "./ProductGrid.vue";
 import BannerSection from "./BannerSection.vue";
+import { getCdnPath } from "../config/cdn.js";
 
 const { t } = useI18n();
 
@@ -44,14 +45,14 @@ const config = reactive({
   hero: {
     slides: [
       {
-        url: "/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp",
+        url: getCdnPath("/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp"),
         alt: "Hero image 1 - Casquette Collection",
         title: t("hero.title"),
         ctaText: t("hero.cta"),
         ctaLink: "/products",
       },
       {
-        url: "/images/home/slider/le-bar.jpg",
+        url: getCdnPath("/images/home/slider/le-bar.jpg"),
         alt: "Hero image 2 - Le Bar Collection",
         title: "Discover Le Bar",
         ctaText: "EXPLORE",
@@ -67,7 +68,7 @@ const config = reactive({
   },
   banner: {
     title: t("banner.title"),
-    image: "/images/home/banner/paris-nord-est-banner.jpg",
+    image: getCdnPath("/images/home/banner/paris-nord-est-banner.jpg"),
     alt: "Casquette Banner",
     showCta: true,
     ctaText: t("banner.cta"),

@@ -5,7 +5,7 @@
         <a :href="navigation.home" :title="t('nav.home')">
           <div class="store-header">
             <img
-              src="/images/casquette/vectoriel/logo-horizontal-white.svg"
+              :src="getCdnPath('/images/casquette/vectoriel/logo-horizontal-white.svg')"
               alt="Casquette"
               class="store-logo"
             />
@@ -107,6 +107,7 @@
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { setLanguage } from "../i18n";
+import { getCdnPath } from "../config/cdn.js";
 
 const { t, locale } = useI18n();
 

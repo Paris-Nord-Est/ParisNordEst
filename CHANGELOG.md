@@ -2,6 +2,22 @@
 
 All notable changes to Paris Nord-Est theme will be documented in this file.
 
+## [2025-12-28]
+
+### Infrastructure
+- **CDN Asset Delivery**: Implemented automatic CDN path resolution for all static images using jsDelivr with `@latest` tag
+- **Automatic Version Updates**: Images now automatically serve from the latest git tag without manual version updates
+- **Centralized CDN Configuration**: Created single configuration file for managing CDN base URL and asset paths
+- **Improved Deployment**: Simplified deployment workflow - just create git tags and jsDelivr automatically serves the latest version
+
+### Files Created
+- `src/config/cdn.js` - CDN configuration with automatic latest tag detection and helper function
+
+### Files Modified
+- `src/components/Homepage.vue` - Updated 3 image paths (hero slider images and banner) to use CDN URLs
+- `src/components/Navigation.vue` - Updated logo path to use CDN URL
+- `src/components/Footer.vue` - Updated logo path to use CDN URL
+
 ## [2025-12-27]
 
 ### Product Page UX Enhancements

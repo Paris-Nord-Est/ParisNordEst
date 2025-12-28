@@ -5,7 +5,7 @@
       <div class="footer-logo">
         <div class="logo-container">
           <img
-            src="/images/casquette/vectoriel/logo-round-white.svg"
+            :src="getCdnPath('/images/casquette/vectoriel/logo-round-white.svg')"
             alt="Casquette Logo"
             class="logo-img"
           />
@@ -79,6 +79,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { getCdnPath } from "../config/cdn.js";
 
 const { t } = useI18n();
 

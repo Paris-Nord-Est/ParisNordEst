@@ -39,16 +39,64 @@ Then access: `http://127.0.0.1:9292`
 
 ## This is Paris Nord-Est Theme
 
-How to deploy :
+### How to Deploy
 
-Run `npm run watch`
-Push to master and create a new tag. (v1.3)
-Change CDN in layout. `<script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.3/source/dist/app.js"></script>`
-Change CSS also : ` <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.3/source/dist/main.css">` 
+The theme uses jsDelivr CDN with automatic `@latest` tag resolution, which means you **no longer need to manually update version numbers** in your code!
 
-DON'T FORGET TO CHANGE THE TAG
+#### Deployment Steps:
 
-Then in theme.js remove the line `// = require dist/app` (only used on dev).
-Run `dugway build` extract the CSS file and upload it on bigcartel.
+1. **Build assets:**
+   ```bash
+   npm run watch
+   ```
 
-Change the differents files.
+2. **Commit and push your changes:**
+   ```bash
+   git add .
+   git commit -m "Your commit message"
+   git push origin main
+   ```
+
+3. **Create and push a new git tag:**
+   ```bash
+   git tag v3.0.1
+   git push origin v3.0.1
+   ```
+
+4. **Update theme files:**
+   - In `theme.js`, remove the line `// = require dist/app` (only used in dev)
+   - Run `dugway build` to extract the CSS file
+   - Upload the CSS to BigCartel
+
+That's it! The CDN automatically serves from your latest tag.
+
+#### How CDN Auto-Update Works
+
+- The `layout.html` file references: `https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js`
+- All images use the `@latest` tag via the `getCdnPath()` helper in `src/config/cdn.js`
+- When you create a new git tag, jsDelivr automatically resolves `@latest` to that tag
+- **Cache duration:** jsDelivr caches `@latest` for approximately 12 hours
+
+#### Force Immediate Updates (Cache Purge)
+
+If you need your changes to appear immediately without waiting for cache expiration:
+
+1. Visit the jsDelivr Purge Tool: https://www.jsdelivr.com/tools/purge
+2. Enter your CDN URL (e.g., `https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js`)
+3. Click "Purge" to clear the cache
+4. Your latest version will be served immediately
+
+#### Emergency: Use Specific Version
+
+If you need to temporarily bypass `@latest` and use a specific version:
+
+1. Open `src/config/cdn.js`
+2. Change:
+   ```javascript
+   export const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source';
+   ```
+   to:
+   ```javascript
+   export const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v3.0.1/source';
+   ```
+3. Rebuild and redeploy
