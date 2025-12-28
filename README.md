@@ -63,12 +63,17 @@ The theme uses jsDelivr CDN with automatic `@latest` tag resolution, which means
    git push origin v3.0.1
    ```
 
-4. **Update theme files:**
+4. **(Optional) Update BigCartel CSS:**
    - In `theme.js`, remove the line `// = require dist/app` (only used in dev)
    - Run `dugway build` to extract the CSS file
-   - Upload the CSS to BigCartel
+   - Upload the CSS to BigCartel (only needed if CSS changes)
 
-That's it! The CDN automatically serves from your latest tag.
+**That's it!** 🎉
+
+- The CDN automatically serves from your latest tag
+- GitHub Action automatically purges the jsDelivr cache
+- Your changes go live immediately without accessing BigCartel
+- You only need to upload CSS to BigCartel if you've made CSS changes
 
 #### How CDN Auto-Update Works
 
@@ -77,9 +82,23 @@ That's it! The CDN automatically serves from your latest tag.
 - When you create a new git tag, jsDelivr automatically resolves `@latest` to that tag
 - **Cache duration:** jsDelivr caches `@latest` for approximately 12 hours
 
-#### Force Immediate Updates (Cache Purge)
+#### Automated Cache Purge (GitHub Action)
 
-If you need your changes to appear immediately without waiting for cache expiration:
+A GitHub Action automatically purges the jsDelivr cache when you push a new tag:
+
+- **Triggers:** Automatically when you push any tag starting with `v` (e.g., `v3.0.1`)
+- **What it purges:**
+  - JavaScript bundle (`app.js`)
+  - CSS bundle (`main.css`)
+  - All static images (hero slider, banner, logos)
+- **Timing:** Waits 30 seconds for jsDelivr to index the new tag, then purges
+- **Result:** Your changes go live immediately without manual cache clearing
+
+You can view the purge status in the "Actions" tab on GitHub after pushing a tag.
+
+#### Manual Cache Purge (If Needed)
+
+If you need to manually purge the cache for any reason:
 
 1. Visit the jsDelivr Purge Tool: https://www.jsdelivr.com/tools/purge
 2. Enter your CDN URL (e.g., `https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js`)

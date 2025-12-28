@@ -9,14 +9,24 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - **Automatic Version Updates**: Images now automatically serve from the latest git tag without manual version updates
 - **Centralized CDN Configuration**: Created single configuration file for managing CDN base URL and asset paths
 - **Improved Deployment**: Simplified deployment workflow - just create git tags and jsDelivr automatically serves the latest version
+- **Automated Cache Purge**: GitHub Action automatically purges jsDelivr cache when new tags are pushed, making deployments instant
+- **Zero-Touch Deployment**: Deploy new versions without accessing BigCartel directly (except for CSS uploads)
+
+### Features
+- **GitHub Action Workflow**: Automatically purges JavaScript, CSS, and image assets from jsDelivr cache on tag creation
+- **Deployment Automation**: Changes go live immediately after pushing a tag with automated cache invalidation
+- **Deployment Summary**: GitHub Action provides detailed summary of purged assets and next steps
 
 ### Files Created
 - `src/config/cdn.js` - CDN configuration with automatic latest tag detection and helper function
+- `.github/workflows/purge-cdn.yml` - GitHub Action for automatic jsDelivr cache purge on tag creation
 
 ### Files Modified
 - `src/components/Homepage.vue` - Updated 3 image paths (hero slider images and banner) to use CDN URLs
 - `src/components/Navigation.vue` - Updated logo path to use CDN URL
 - `src/components/Footer.vue` - Updated logo path to use CDN URL
+- `README.md` - Updated deployment documentation with automated cache purge workflow
+- `CHANGELOG.md` - Added CDN infrastructure improvements
 
 ## [2025-12-27]
 
