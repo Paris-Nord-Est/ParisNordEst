@@ -132,30 +132,16 @@ jobs:
           echo "Waiting 30 seconds for jsDelivr to index the new tag..."
           sleep 30
 
-      - name: Purge JavaScript bundle
+      - name: Purge CDN cache (only essential files)
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
-          echo "Purging app.js from jsDelivr cache..."
+          echo "Purging essential assets from jsDelivr cache..."
+          # Only purge JS and CSS - images can wait for natural cache expiry
+          # This reduces rate limit issues with jsDelivr
           curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js"
-
-      - name: Purge CSS bundle
-        if: steps.check_tag.outputs.tag_exists == 'false'
-        run: |
-          echo "Purging main.css from jsDelivr cache..."
+          sleep 2  # Add delay to avoid rate limiting
           curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/main.css"
-
-      - name: Purge image assets
-        if: steps.check_tag.outputs.tag_exists == 'false'
-        run: |
-          echo "Purging image assets from jsDelivr cache..."
-          # Purge hero slider images
-          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp"
-          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/le-bar.jpg"
-          # Purge banner image
-          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/banner/paris-nord-est-banner.jpg"
-          # Purge logos
-          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-horizontal-white.svg"
-          curl "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-round-white.svg"
+          echo "✅ Cache purge completed for JS and CSS"
 
       - name: Deployment summary
         if: steps.check_tag.outputs.tag_exists == 'false'
@@ -168,8 +154,16 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### ✅ Completed:" >> $GITHUB_STEP_SUMMARY
           echo "1. Created tag \`${{ steps.new_version.outputs.new_version }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "2. Purged jsDelivr cache (JS, CSS, images)" >> $GITHUB_STEP_SUMMARY
-          echo "3. Changes are now live on your store!" >> $GITHUB_STEP_SUMMARY
+          echo "2. Purged jsDelivr cache (JS & CSS only)" >> $GITHUB_STEP_SUMMARY
+          echo "3. Changes should be live within ~30 seconds" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ⏰ If changes don't appear:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Wait 12 hours** for \`@latest\` cache to expire naturally, OR" >> $GITHUB_STEP_SUMMARY
+          echo "- **Use specific version** in \`src/config/cdn.js\`:" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`js" >> $GITHUB_STEP_SUMMARY
+          echo "  export const CDN_BASE_URL =" >> $GITHUB_STEP_SUMMARY
+          echo "    'https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@${{ steps.new_version.outputs.new_version }}/source';" >> $GITHUB_STEP_SUMMARY
+          echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📝 Commit Message Guide:" >> $GITHUB_STEP_SUMMARY
           echo "- \`feat:\` → minor version bump (v3.0.0 → v3.1.0)" >> $GITHUB_STEP_SUMMARY
