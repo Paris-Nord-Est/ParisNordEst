@@ -41,39 +41,55 @@ Then access: `http://127.0.0.1:9292`
 
 ### How to Deploy
 
-The theme uses jsDelivr CDN with automatic `@latest` tag resolution, which means you **no longer need to manually update version numbers** in your code!
+The theme uses **fully automated deployment** with jsDelivr CDN, semantic versioning, and automatic cache purging. You just push your code and everything else happens automatically!
 
-#### Deployment Steps:
+#### Deployment Steps (Fully Automated):
 
-1. **Build assets:**
+1. **Build and commit your changes:**
    ```bash
    npm run watch
-   ```
-
-2. **Commit and push your changes:**
-   ```bash
    git add .
-   git commit -m "Your commit message"
+   git commit -m "feat: add new hero section"
    git push origin main
    ```
 
-3. **Create and push a new git tag:**
-   ```bash
-   git tag v3.0.1
-   git push origin v3.0.1
-   ```
+**That's it!** 🎉 Your changes are now live!
 
-4. **(Optional) Update BigCartel CSS:**
-   - In `theme.js`, remove the line `// = require dist/app` (only used in dev)
-   - Run `dugway build` to extract the CSS file
-   - Upload the CSS to BigCartel (only needed if CSS changes)
+#### What Happens Automatically:
 
-**That's it!** 🎉
+1. ✅ **Auto-Tagging:** GitHub Action analyzes your commit message and creates a version tag
+   - `feat:` → minor version (v3.0.0 → v3.1.0)
+   - `fix:` → patch version (v3.0.0 → v3.0.1)
+   - `BREAKING CHANGE:` → major version (v3.0.0 → v4.0.0)
 
-- The CDN automatically serves from your latest tag
-- GitHub Action automatically purges the jsDelivr cache
-- Your changes go live immediately without accessing BigCartel
-- You only need to upload CSS to BigCartel if you've made CSS changes
+2. ✅ **Cache Purge:** Another GitHub Action automatically purges jsDelivr cache
+
+3. ✅ **Live Deployment:** Your changes are live within ~30 seconds
+
+#### CSS Updates (Only When Needed)
+
+If you made CSS changes, you still need to upload CSS to BigCartel:
+
+1. In `theme.js`, remove the line `// = require dist/app` (only used in dev)
+2. Run `dugway build` to extract the CSS file
+3. Upload the CSS to BigCartel
+
+#### Commit Message Format
+
+Use [Conventional Commits](/.github/COMMIT_CONVENTION.md) for automatic versioning:
+
+```bash
+# Feature (minor version bump)
+git commit -m "feat: add language switcher"
+
+# Bug fix (patch version bump)
+git commit -m "fix: resolve navigation overlap"
+
+# Breaking change (major version bump)
+git commit -m "feat!: redesign homepage layout"
+```
+
+See [Commit Convention Guide](/.github/COMMIT_CONVENTION.md) for detailed examples.
 
 #### How CDN Auto-Update Works
 

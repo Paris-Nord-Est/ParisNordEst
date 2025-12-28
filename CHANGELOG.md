@@ -13,13 +13,19 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 - **Zero-Touch Deployment**: Deploy new versions without accessing BigCartel directly (except for CSS uploads)
 
 ### Features
-- **GitHub Action Workflow**: Automatically purges JavaScript, CSS, and image assets from jsDelivr cache on tag creation
-- **Deployment Automation**: Changes go live immediately after pushing a tag with automated cache invalidation
-- **Deployment Summary**: GitHub Action provides detailed summary of purged assets and next steps
+- **Fully Automated Deployment**: Complete CI/CD pipeline - just push code and changes go live automatically
+- **Semantic Versioning**: Automatic version bumping based on conventional commit messages (feat:, fix:, BREAKING CHANGE:)
+- **Auto-Tagging Workflow**: GitHub Action analyzes commits and creates version tags automatically
+- **Automated Cache Purge**: GitHub Action automatically purges JavaScript, CSS, and image assets from jsDelivr cache
+- **Zero-Touch Deployment**: Deploy JavaScript and image changes without accessing BigCartel (CSS still requires manual upload)
+- **Deployment Summary**: GitHub Actions provide detailed summary of version bumps, purged assets, and next steps
+- **Commit Convention Guide**: Comprehensive documentation for conventional commits and semantic versioning
 
 ### Files Created
 - `src/config/cdn.js` - CDN configuration with automatic latest tag detection and helper function
 - `.github/workflows/purge-cdn.yml` - GitHub Action for automatic jsDelivr cache purge on tag creation
+- `.github/workflows/auto-tag.yml` - GitHub Action for automatic semantic versioning based on commit messages
+- `.github/COMMIT_CONVENTION.md` - Comprehensive guide for conventional commits and semantic versioning
 
 ### Files Modified
 - `src/components/Homepage.vue` - Updated 3 image paths (hero slider images and banner) to use CDN URLs
