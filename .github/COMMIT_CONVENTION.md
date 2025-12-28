@@ -84,8 +84,17 @@ Priority order: **Major > Minor > Patch**
    - ✅ GitHub Action analyzes your commit messages
    - ✅ Determines version bump type (major/minor/patch)
    - ✅ Creates and pushes new version tag
+   - ✅ Webpack reads git tag and injects version into build
    - ✅ CDN cache purge workflow triggers automatically
    - ✅ Your changes go live within ~30 seconds
+
+4. **Verify deployment:**
+   ```javascript
+   // Open your store and check the console:
+   window.PNE_VERSION  // Shows current deployed version
+   ```
+
+   The version is automatically injected from git tags at build time - no manual updates needed!
 
 ## Best Practices
 

@@ -17,9 +17,23 @@ import { createPinia } from "pinia";
 import * as Sentry from "@sentry/vue";
 import i18n from "./i18n";
 import { sentryConfig } from "./config/sentry";
+import { APP_VERSION, BUILD_TIMESTAMP } from "./config/cdn";
 
 // Styles - loaded for all Vue pages
 import "./style.css";
+
+// Log version info on app load
+console.log(
+  `%c🧢 Paris Nord-Est %c${APP_VERSION}`,
+  "color: #fff; background: #000; padding: 4px 8px; border-radius: 3px; font-weight: bold;",
+  "color: #4ade80; background: #052e16; padding: 4px 8px; border-radius: 3px; font-weight: bold;"
+);
+console.log(`📦 Build: ${BUILD_TIMESTAMP}`);
+console.log(`🌐 CDN: @latest → ${APP_VERSION}`);
+
+// Make version available globally for easy checking
+window.PNE_VERSION = APP_VERSION;
+window.PNE_BUILD = BUILD_TIMESTAMP;
 
 let sentryInitialized = false;
 

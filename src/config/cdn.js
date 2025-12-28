@@ -8,6 +8,13 @@
  * @see https://www.jsdelivr.com/features#github
  */
 
+// Current app version - injected at build time from git tags
+// These are defined by webpack.DefinePlugin
+export const APP_VERSION = __APP_VERSION__;
+
+// Build timestamp - injected at build time
+export const BUILD_TIMESTAMP = __BUILD_TIMESTAMP__;
+
 // CDN base URL for production assets
 // Using @latest automatically resolves to the most recent git tag
 export const CDN_BASE_URL =

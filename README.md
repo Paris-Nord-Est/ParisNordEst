@@ -118,6 +118,33 @@ A single GitHub Action handles everything when you push to main:
 
 You can view the deployment status in the "Actions" tab on GitHub.
 
+#### Verify Deployed Version
+
+Check which version is currently deployed:
+
+**Method 1: Browser Console (Easiest)**
+```javascript
+// Open DevTools Console on your store
+window.PNE_VERSION  // e.g., "v3.0.2"
+window.PNE_BUILD    // e.g., "2025-12-28T10:15:30.123Z"
+```
+
+**Method 2: Console Log (On Page Load)**
+- Open DevTools Console
+- Refresh the page
+- Look for the styled version banner: `🧢 Paris Nord-Est v3.0.2`
+
+**Method 3: Check jsDelivr Headers**
+```bash
+curl -I https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js
+# Look for "x-served-by" header
+```
+
+**Method 4: Network Tab**
+- DevTools → Network tab
+- Find `app.js` request
+- Check Response Headers for version info
+
 #### Manual Cache Purge (If Needed)
 
 If you need to manually purge the cache for any reason:

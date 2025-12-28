@@ -1,9 +1,26 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
+const { execSync } = require("child_process");
+
+// Get current git tag/version
+function getGitVersion() {
+  try {
+    // Try to get the latest git tag
+    return execSync("git describe --tags --abbrev=0", { encoding: "utf8" }).trim();
+  } catch (error) {
+    // If no tags exist, use default version
+    return "v0.0.0-dev";
+  }
+}
 
 module.exports = (env, argv) => {
   const isDev = argv.mode === "development";
+  const version = getGitVersion();
+  const buildTime = new Date().toISOString();
+
+  console.log(`\n📦 Building Paris Nord-Est ${version}`);
+  console.log(`⏰ Build time: ${buildTime}\n`);
 
   return {
     mode: argv.mode || "production",
@@ -77,6 +94,9 @@ module.exports = (env, argv) => {
         __VUE_OPTIONS_API__: JSON.stringify(true),
         __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
         __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false),
+        // Inject version info at build time
+        __APP_VERSION__: JSON.stringify(version),
+        __BUILD_TIMESTAMP__: JSON.stringify(buildTime),
       }),
     ],
     devServer: {
