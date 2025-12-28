@@ -1,4 +1,4 @@
-name: Auto Tag on Push
+name: Auto Deploy (Tag + Purge CDN)
 
 on:
   push:
@@ -10,9 +10,9 @@ on:
       - 'docs/**'
 
 jobs:
-  auto-tag:
+  auto-deploy:
     runs-on: ubuntu-latest
-    name: Create Version Tag from Commits
+    name: Auto Tag and Purge CDN
 
     steps:
       - name: Checkout code
@@ -103,10 +103,10 @@ jobs:
 
           if git rev-parse "$NEW_VERSION" >/dev/null 2>&1; then
             echo "tag_exists=true" >> $GITHUB_OUTPUT
-            echo "⚠️ Tag $NEW_VERSION already exists, skipping tag creation"
+            echo "⚠️ Tag $NEW_VERSION already exists, skipping deployment"
           else
             echo "tag_exists=false" >> $GITHUB_OUTPUT
-            echo "✅ Tag $NEW_VERSION does not exist, will create it"
+            echo "✅ Tag $NEW_VERSION does not exist, will create and deploy it"
           fi
 
       - name: Create and push tag
@@ -126,21 +126,52 @@ jobs:
 
           echo "✅ Created and pushed tag: $NEW_VERSION"
 
-      - name: Summary
+      - name: Wait for jsDelivr to index new tag
         if: steps.check_tag.outputs.tag_exists == 'false'
         run: |
-          echo "## 🚀 Auto-Tag Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Waiting 30 seconds for jsDelivr to index the new tag..."
+          sleep 30
+
+      - name: Purge JavaScript bundle
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          echo "Purging app.js from jsDelivr cache..."
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/app.js"
+
+      - name: Purge CSS bundle
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          echo "Purging main.css from jsDelivr cache..."
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/dist/main.css"
+
+      - name: Purge image assets
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          echo "Purging image assets from jsDelivr cache..."
+          # Purge hero slider images
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/542599450_17854130469531086_412195545774409256_n.webp"
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/slider/le-bar.jpg"
+          # Purge banner image
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/home/banner/paris-nord-est-banner.jpg"
+          # Purge logos
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-horizontal-white.svg"
+          curl -X POST "https://purge.jsdelivr.net/gh/Baldrani/ParisNordEst@latest/source/images/casquette/vectoriel/logo-round-white.svg"
+
+      - name: Deployment summary
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          echo "## 🚀 Auto-Deploy Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Previous version:** \`${{ steps.get_latest_tag.outputs.latest_tag }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**New version:** \`${{ steps.new_version.outputs.new_version }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Bump type:** \`${{ steps.analyze_commits.outputs.bump_type }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### What happens next:" >> $GITHUB_STEP_SUMMARY
-          echo "1. ✅ Tag \`${{ steps.new_version.outputs.new_version }}\` has been created" >> $GITHUB_STEP_SUMMARY
-          echo "2. 🔄 CDN cache purge workflow will trigger automatically" >> $GITHUB_STEP_SUMMARY
-          echo "3. 🌐 Changes will be live on your store within ~30 seconds" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Completed:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Created tag \`${{ steps.new_version.outputs.new_version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "2. Purged jsDelivr cache (JS, CSS, images)" >> $GITHUB_STEP_SUMMARY
+          echo "3. Changes are now live on your store!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Commit Message Guide:" >> $GITHUB_STEP_SUMMARY
+          echo "### 📝 Commit Message Guide:" >> $GITHUB_STEP_SUMMARY
           echo "- \`feat:\` → minor version bump (v3.0.0 → v3.1.0)" >> $GITHUB_STEP_SUMMARY
           echo "- \`fix:\` → patch version bump (v3.0.0 → v3.0.1)" >> $GITHUB_STEP_SUMMARY
           echo "- \`BREAKING CHANGE:\` → major version bump (v3.0.0 → v4.0.0)" >> $GITHUB_STEP_SUMMARY
@@ -151,4 +182,4 @@ jobs:
           echo "## ⚠️ Tag Already Exists" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Tag \`${{ steps.new_version.outputs.new_version }}\` already exists." >> $GITHUB_STEP_SUMMARY
-          echo "No new tag was created." >> $GITHUB_STEP_SUMMARY
+          echo "No deployment was performed." >> $GITHUB_STEP_SUMMARY

@@ -62,9 +62,11 @@ The theme uses **fully automated deployment** with jsDelivr CDN, semantic versio
    - `fix:` → patch version (v3.0.0 → v3.0.1)
    - `BREAKING CHANGE:` → major version (v3.0.0 → v4.0.0)
 
-2. ✅ **Cache Purge:** Another GitHub Action automatically purges jsDelivr cache
+2. ✅ **Cache Purge:** Same workflow automatically purges jsDelivr cache (JS, CSS, images)
 
 3. ✅ **Live Deployment:** Your changes are live within ~30 seconds
+
+All of this happens in a **single workflow** - no separate steps needed!
 
 #### CSS Updates (Only When Needed)
 
@@ -98,19 +100,23 @@ See [Commit Convention Guide](/.github/COMMIT_CONVENTION.md) for detailed exampl
 - When you create a new git tag, jsDelivr automatically resolves `@latest` to that tag
 - **Cache duration:** jsDelivr caches `@latest` for approximately 12 hours
 
-#### Automated Cache Purge (GitHub Action)
+#### Automated Deployment Workflow
 
-A GitHub Action automatically purges the jsDelivr cache when you push a new tag:
+A single GitHub Action handles everything when you push to main:
 
-- **Triggers:** Automatically when you push any tag starting with `v` (e.g., `v3.0.1`)
-- **What it purges:**
-  - JavaScript bundle (`app.js`)
-  - CSS bundle (`main.css`)
-  - All static images (hero slider, banner, logos)
-- **Timing:** Waits 30 seconds for jsDelivr to index the new tag, then purges
-- **Result:** Your changes go live immediately without manual cache clearing
+- **Triggers:** Automatically on every push to `main`
+- **What it does:**
+  1. Analyzes your commit messages (conventional commits)
+  2. Calculates new version number (major/minor/patch)
+  3. Creates and pushes a git tag
+  4. Waits 30 seconds for jsDelivr to index the tag
+  5. Purges all assets from jsDelivr cache:
+     - JavaScript bundle (`app.js`)
+     - CSS bundle (`main.css`)
+     - All static images (hero slider, banner, logos)
+- **Result:** Your changes go live within ~30 seconds
 
-You can view the purge status in the "Actions" tab on GitHub after pushing a tag.
+You can view the deployment status in the "Actions" tab on GitHub.
 
 #### Manual Cache Purge (If Needed)
 

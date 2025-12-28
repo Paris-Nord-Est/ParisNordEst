@@ -23,8 +23,7 @@ All notable changes to Paris Nord-Est theme will be documented in this file.
 
 ### Files Created
 - `src/config/cdn.js` - CDN configuration with automatic latest tag detection and helper function
-- `.github/workflows/purge-cdn.yml` - GitHub Action for automatic jsDelivr cache purge on tag creation
-- `.github/workflows/auto-tag.yml` - GitHub Action for automatic semantic versioning based on commit messages
+- `.github/workflows/auto-deploy.yml` - Unified GitHub Action for automatic tagging and cache purging
 - `.github/COMMIT_CONVENTION.md` - Comprehensive guide for conventional commits and semantic versioning
 
 ### Files Modified
