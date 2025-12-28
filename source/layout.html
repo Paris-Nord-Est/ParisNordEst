@@ -757,15 +757,10 @@
     </script>
     <!-- Vue JavaScript Bundle (Navigation/Footer components) - Loaded on ALL pages -->
     <script src="http://localhost:8080/app.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@v1.4.4/source/dist/app.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Baldrani/ParisNordEst@vlatest/source/dist/app.js"></script> -->
     {% unless is_vue_page %}
     <!-- BigCartel theme JS for non-Vue pages -->
     <script src="{{ theme | theme_js_url }}"></script>
     {% endunless %}
-    {% if page.full_url contains '/product/' %}
-      <script>
-        Product.find('{{ product.permalink }}', processProduct)
-      </script>
-    {% endif %}
   </body>
 </html>
