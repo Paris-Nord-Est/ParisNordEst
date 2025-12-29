@@ -1,6 +1,6 @@
 # Documentation
 
-This folder contains local documentation for the Paris Nord-Est BigCartel theme.
+This folder contains local documentation for the Casquette BigCartel theme.
 
 ## Contents
 

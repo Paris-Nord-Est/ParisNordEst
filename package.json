@@ -1,13 +1,13 @@
 {
   "name": "paris-nord-est",
   "version": "1.0.0",
-  "description": "Overloading for BigCartel theme for Paris Nord-Est© brand",
+  "description": "Overloading for BigCartel theme for Casquette brand",
   "main": "theme.js",
   "author": "WellDon <11664211+Baldrani@users.noreply.github.com>",
   "keywords": [
     "BigCartel",
     "theme",
-    "Paris Nord-Est"
+    "Casquette"
   ],
   "license": "ISC",
   "engines": {

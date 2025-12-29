@@ -1,4 +1,4 @@
-# Paris Nord-Est 🧢
+# Casquette 🧢
 
 **We've made this theme code public so that other [theme developers](https://help.bigcartel.com/developers/themes/) can learn from it.** 
 
@@ -37,7 +37,7 @@ Then access: `http://127.0.0.1:9292`
 
 ---
 
-## This is Paris Nord-Est Theme
+## This is Casquette Theme
 
 ### How to Deploy
 

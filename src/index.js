@@ -24,7 +24,7 @@ import "./style.css";
 
 // Log version info on app load
 console.log(
-  `%c🧢 Paris Nord-Est %c${APP_VERSION}`,
+  `%c🧢 Casquette %c${APP_VERSION}`,
   "color: #fff; background: #000; padding: 4px 8px; border-radius: 3px; font-weight: bold;",
   "color: #4ade80; background: #052e16; padding: 4px 8px; border-radius: 3px; font-weight: bold;"
 );

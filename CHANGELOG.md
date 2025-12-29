@@ -1,6 +1,46 @@
 # Changelog
 
-All notable changes to Paris Nord-Est theme will be documented in this file.
+All notable changes to Casquette theme will be documented in this file.
+
+## [2025-12-29]
+
+### Branding
+- **Brand Name Updates**: Completed rebranding by updating all remaining "Paris Nord-Est" references to "Casquette" in documentation and code
+- **Console Branding**: Updated browser console welcome message from "🧢 Paris Nord-Est" to "🧢 Casquette"
+- **Documentation Alignment**: Synchronized all documentation files (README, package.json, CHANGELOG) with new Casquette brand identity
+
+### Assets
+- **Favicon Modernization**: Replaced all favicon files with new Casquette-branded icons
+- **Modern Icon Set**: Updated to streamlined 7-file favicon system (favicon.ico, favicon.svg, apple-touch-icon.png, web-app-manifest icons)
+- **Web Manifest Update**: Updated site.webmanifest with "Casquette" brand name for PWA support
+- **Legacy Icon Cleanup**: Removed 26+ outdated icon files (android-icon-*, apple-icon-*, ms-icon-*) no longer needed with modern favicon approach
+
+### Files Modified
+- `package.json` - Updated description and keywords from "Paris Nord-Est" to "Casquette"
+- `src/index.js` - Changed console log branding from "Paris Nord-Est" to "Casquette"
+- `README.md` - Updated title and main heading to "Casquette 🧢"
+- `CHANGELOG.md` - Updated header to reference "Casquette theme"
+- `docs/README.md` - Updated documentation description to "Casquette BigCartel theme"
+- `source/images/icons/site.webmanifest` - Updated app name and short_name to "Casquette"
+- `source/images/icons/favicon.ico` - Replaced with Casquette-branded favicon
+- `source/images/icons/favicon-96x96.png` - Replaced with Casquette-branded favicon
+
+### Files Created
+- `source/images/icons/favicon.svg` - Modern scalable vector favicon
+- `source/images/icons/apple-touch-icon.png` - iOS home screen icon
+- `source/images/icons/web-app-manifest-192x192.png` - PWA icon (small)
+- `source/images/icons/web-app-manifest-512x512.png` - PWA icon (large)
+- `source/images/casquette/favicons/` - Source directory for new Casquette-branded favicon files
+
+### Files Deleted
+- `source/images/icons/android-icon-*.png` (6 files) - Legacy Android icons
+- `source/images/icons/apple-icon-*.png` (10 files) - Legacy Apple icons
+- `source/images/icons/ms-icon-*.png` (4 files) - Legacy Microsoft tile icons
+- `source/images/icons/favicon-16x16.png` - Replaced with modern favicon set
+- `source/images/icons/favicon-32x32.png` - Replaced with modern favicon set
+- `source/images/icons/manifest.json` - Replaced with site.webmanifest
+- `source/images/icons/browserconfig.xml` - No longer needed with modern icon approach
+- `source/images/casquette/favicon-16x16/favicon.png` - Consolidated into main favicons directory
 
 ## [2025-12-28]
 
