@@ -184,11 +184,10 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 400px;
+    max-height: 500px;
   }
 
   .hero-slideshow img {
-    min-height: 400px;
     max-height: 500px;
   }
 
