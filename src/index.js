@@ -242,12 +242,9 @@ function init() {
 
   // Fall back to legacy mounting if new arch didn't mount
   if (!newArchMounted) {
-    const legacyMounted = mountLegacyApps();
-
-    // If nothing mounted, just remove preloader
-    if (!legacyMounted) {
-      removePreloader();
-    }
+    mountLegacyApps();
+    // Legacy apps (e.g. lookbook) never clear the preloader themselves
+    removePreloader();
   }
 }
 
