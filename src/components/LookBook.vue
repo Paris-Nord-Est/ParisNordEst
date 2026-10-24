@@ -48,7 +48,7 @@ const getBlurPlaceholder = (url) => {
 const fetchDataFromCloudinary = async () => {
   try {
     const startTime = performance.now();
-    const data = await fetch("https://contentful-security.herokuapp.com");
+    const data = await fetch("https://cs-gold.vercel.app/api");
     const res = await data.json();
     const endTime = performance.now();
     console.log(`Fetch and parse took ${Math.round(endTime - startTime)} ms`);
